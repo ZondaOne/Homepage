@@ -5,391 +5,309 @@
   overflow: visible;
 }
 
-/* Liquid Metal Waves */
-.liquid-waves {
+/* Liquid Metal Container */
+.liquid-container {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 120%;
-  height: 120%;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-  z-index: 0;
-}
-
-.liquid-wave {
-  position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: visible;
+}
+
+/* Liquid Metal Particles */
+.liquid-particle {
+  position: absolute;
   border-radius: 50%;
-  opacity: 0.04;
-  filter: blur(12px);
-  transition: all 0.4s ease-out;
+  filter: blur(8px);
+  mix-blend-mode: screen;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform, opacity;
 }
 
-.wave-primary {
-  background: radial-gradient(circle, var(--accent-primary) 0%, transparent 70%);
-  animation: liquidFlow1 8s ease-in-out infinite;
+.particle-primary {
+  width: 40px;
+  height: 40px;
+  background: radial-gradient(
+    circle,
+    var(--accent-primary) 0%,
+    transparent 70%
+  );
+  top: 30%;
+  left: 20%;
 }
 
-.wave-secondary {
-  background: radial-gradient(circle, var(--accent-secondary) 0%, transparent 80%);
-  animation: liquidFlow2 10s ease-in-out infinite reverse;
-  transform: translate(-50%, -50%) scale(0.8);
+.particle-secondary {
+  width: 30px;
+  height: 30px;
+  background: radial-gradient(
+    circle,
+    var(--accent-secondary) 0%,
+    transparent 70%
+  );
+  top: 60%;
+  left: 70%;
 }
 
-.wave-cyan {
-  background: radial-gradient(circle, var(--accent-cyan) 0%, transparent 90%);
-  animation: liquidFlow3 12s ease-in-out infinite;
-  transform: translate(-50%, -50%) scale(0.6);
+.particle-accent {
+  width: 25px;
+  height: 25px;
+  background: radial-gradient(
+    circle,
+    var(--accent-orange) 0%,
+    transparent 70%
+  );
+  top: 80%;
+  left: 40%;
 }
 
-.wave-pink {
-  background: radial-gradient(circle, var(--accent-pink) 0%, transparent 85%);
-  animation: liquidFlow4 14s ease-in-out infinite;
-  transform: translate(-50%, -50%) scale(0.4);
-  opacity: 0.03;
+.particle-pink {
+  width: 35px;
+  height: 35px;
+  background: radial-gradient(
+    circle,
+    var(--accent-pink) 0%,
+    transparent 70%
+  );
+  top: 20%;
+  left: 80%;
 }
 
-.wave-orange {
-  background: radial-gradient(circle, var(--accent-orange) 0%, transparent 95%);
-  animation: liquidFlow5 16s ease-in-out infinite reverse;
-  transform: translate(-50%, -50%) scale(0.7);
-  opacity: 0.02;
+.particle-extra-1 {
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(
+    circle,
+    var(--accent-primary) 0%,
+    transparent 80%
+  );
+  top: 45%;
+  left: 15%;
 }
 
-/* Main Logo Container */
-.logo-main {
-  position: relative;
-  z-index: 3;
-  transition: transform 0.3s ease;
-}
-
-.main-path {
-  transition: all 0.4s ease;
-  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.1));
+.particle-extra-2 {
+  width: 28px;
+  height: 28px;
+  background: radial-gradient(
+    circle,
+    var(--accent-secondary) 0%,
+    transparent 75%
+  );
+  top: 70%;
+  left: 25%;
 }
 
 /* Individual Logo Pieces */
-.logo-piece-1 {
-  transform-origin: center;
-  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  animation: pieceFloat1 8s ease-in-out infinite;
+.logo-piece {
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.05));
+  animation-fill-mode: both;
 }
 
-.logo-piece-2 {
+.logo-piece.piece-1 {
+  animation: subtleFloat1 8s ease-in-out infinite;
   transform-origin: center;
-  transition: transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  animation: pieceFloat2 10s ease-in-out infinite;
 }
 
-.logo-piece-3 {
+.logo-piece.piece-2 {
+  animation: subtleFloat2 10s ease-in-out infinite;
+  animation-delay: -1s;
   transform-origin: center;
-  transition: transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  animation: pieceFloat3 12s ease-in-out infinite;
 }
 
-.logo-piece-4 {
+.logo-piece.piece-3 {
+  animation: subtleFloat3 12s ease-in-out infinite;
+  animation-delay: -2s;
   transform-origin: center;
-  transition: transform 0.85s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  animation: pieceFloat4 9s ease-in-out infinite;
+}
+
+.logo-piece.piece-4 {
+  animation: subtleFloat4 9s ease-in-out infinite;
+  animation-delay: -1.5s;
+  transform-origin: center;
+}
+
+/* Liquid Metal Split Layers */
+.liquid-split-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+  mix-blend-mode: screen;
+}
+
+.liquid-split-particle {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(3px);
+  opacity: 0.7;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 /* RGB Split Layers */
-.logo-split {
+.split-layer {
   position: absolute;
   top: 0;
   left: 0;
   z-index: 1;
-  mix-blend-mode: screen;
   pointer-events: none;
-  transition: all 0.2s ease-out;
+  transition: all 0.4s ease-out;
+  mix-blend-mode: screen;
 }
 
-.split-path {
-  filter: blur(0.5px);
+.split-piece {
+  filter: blur(0.8px);
+  opacity: 0.6;
 }
 
-.logo-split-red {
+.split-red {
   z-index: 1;
 }
 
-.logo-split-cyan {
-  z-index: 2;
-}
-
-.logo-split-secondary {
+.split-secondary {
   z-index: 1;
 }
 
-/* Hover Effects */
-.glitch-logo:hover .logo-main {
-  transform: scale(1.02);
+.split-accent {
+  z-index: 1;
 }
 
-.glitch-logo:hover .main-path {
-  filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.2));
+/* Logo Pieces Container */
+.logo-pieces {
+  position: relative;
+  z-index: 5;
 }
 
-.glitch-logo:hover .liquid-wave {
-  opacity: 0.08;
-  filter: blur(10px);
+.main-logo-svg {
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.1));
+  transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.glitch-logo:hover .wave-primary {
-  animation-duration: 4s;
+/* Hover Effects - Simplified */
+.glitch-logo:hover .main-logo-svg {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 25px rgba(255, 255, 255, 0.4));
 }
 
-.glitch-logo:hover .wave-secondary {
-  animation-duration: 5s;
+.glitch-logo:hover .logo-piece {
+  filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
 }
 
-.glitch-logo:hover .wave-cyan {
-  animation-duration: 6s;
+.glitch-logo:hover .liquid-particle {
+  filter: blur(6px);
+  opacity: 0.8;
+  transform: scale(1.2);
 }
 
-.glitch-logo:hover .wave-pink {
-  opacity: 0.06;
-  animation-duration: 7s;
-}
+/* Keyframe Animations */
 
-.glitch-logo:hover .wave-orange {
-  opacity: 0.05;
-  animation-duration: 8s;
-}
-
-/* Logo Piece Hover Rotations - SMOOTH VERSION */
-.glitch-logo:hover .logo-piece-1 {
-  animation: pieceFloat1Hover 8s ease-in-out infinite;
-  transition-delay: 0s;
-}
-
-.glitch-logo:hover .logo-piece-2 {
-  animation: pieceFloat2Hover 10s ease-in-out infinite;
-  transition-delay: 0.1s;
-}
-
-.glitch-logo:hover .logo-piece-3 {
-  animation: pieceFloat3Hover 12s ease-in-out infinite;
-  transition-delay: 0.2s;
-}
-
-.glitch-logo:hover .logo-piece-4 {
-  animation: pieceFloat4Hover 9s ease-in-out infinite;
-  transition-delay: 0.15s;
-}
-
-/* Liquid Flow Animations */
-@keyframes liquidFlow1 {
+@keyframes subtleFloat1 {
   0%, 100% {
-    transform: translate(-50%, -50%) scale(1) rotate(0deg);
-    opacity: 0.1;
+    transform: translate(0, 0) rotate(0deg) scale(1);
   }
   25% {
-    transform: translate(-45%, -55%) scale(1.1) rotate(90deg);
-    opacity: 0.15;
+    transform: translate(0.5px, -0.3px) rotate(0.2deg) scale(1.001);
   }
   50% {
-    transform: translate(-55%, -50%) scale(0.9) rotate(180deg);
-    opacity: 0.12;
+    transform: translate(-0.3px, 0.2px) rotate(-0.1deg) scale(1);
   }
   75% {
-    transform: translate(-50%, -45%) scale(1.05) rotate(270deg);
-    opacity: 0.18;
+    transform: translate(0.2px, 0.4px) rotate(0.15deg) scale(1.001);
   }
 }
 
-@keyframes liquidFlow2 {
+@keyframes subtleFloat2 {
   0%, 100% {
-    transform: translate(-50%, -50%) scale(0.8) rotate(0deg);
-    opacity: 0.08;
-  }
-  33% {
-    transform: translate(-52%, -48%) scale(0.9) rotate(120deg);
-    opacity: 0.12;
-  }
-  66% {
-    transform: translate(-48%, -52%) scale(0.75) rotate(240deg);
-    opacity: 0.1;
-  }
-}
-
-@keyframes liquidFlow3 {
-  0%, 100% {
-    transform: translate(-50%, -50%) scale(0.6) rotate(0deg);
-    opacity: 0.06;
-  }
-  40% {
-    transform: translate(-53%, -47%) scale(0.7) rotate(144deg);
-    opacity: 0.1;
-  }
-  80% {
-    transform: translate(-47%, -53%) scale(0.55) rotate(288deg);
-    opacity: 0.08;
-  }
-}
-
-@keyframes liquidFlow4 {
-  0%, 100% {
-    transform: translate(-50%, -50%) scale(0.4) rotate(0deg);
-    opacity: 0.03;
+    transform: translate(0, 0) rotate(0deg) scale(1);
   }
   30% {
-    transform: translate(-48%, -52%) scale(0.5) rotate(108deg);
-    opacity: 0.05;
-  }
-  70% {
-    transform: translate(-52%, -48%) scale(0.35) rotate(252deg);
-    opacity: 0.04;
-  }
-}
-
-@keyframes liquidFlow5 {
-  0%, 100% {
-    transform: translate(-50%, -50%) scale(0.7) rotate(0deg);
-    opacity: 0.02;
-  }
-  50% {
-    transform: translate(-45%, -55%) scale(0.8) rotate(180deg);
-    opacity: 0.04;
-  }
-}
-
-/* Individual Piece Float Animations */
-@keyframes pieceFloat1 {
-  0%, 100% {
-    transform: rotate(0deg) scale(1);
-  }
-  25% {
-    transform: rotate(0.5deg) scale(1.002);
-  }
-  50% {
-    transform: rotate(-0.3deg) scale(1);
-  }
-  75% {
-    transform: rotate(0.4deg) scale(1.001);
-  }
-}
-
-@keyframes pieceFloat2 {
-  0%, 100% {
-    transform: rotate(0deg) scale(1);
-  }
-  30% {
-    transform: rotate(-0.4deg) scale(1.001);
+    transform: translate(-0.4px, 0.3px) rotate(-0.15deg) scale(1.001);
   }
   60% {
-    transform: rotate(0.6deg) scale(1.002);
+    transform: translate(0.3px, -0.2px) rotate(0.1deg) scale(1);
   }
   90% {
-    transform: rotate(-0.2deg) scale(1);
+    transform: translate(-0.2px, 0.5px) rotate(-0.2deg) scale(1.001);
   }
 }
 
-@keyframes pieceFloat3 {
+@keyframes subtleFloat3 {
   0%, 100% {
-    transform: rotate(0deg) scale(1);
+    transform: translate(0, 0) rotate(0deg) scale(1);
   }
   40% {
-    transform: rotate(0.3deg) scale(1.001);
+    transform: translate(0.3px, 0.4px) rotate(0.1deg) scale(1.001);
   }
   80% {
-    transform: rotate(-0.5deg) scale(1.002);
+    transform: translate(-0.5px, -0.2px) rotate(-0.15deg) scale(1);
   }
 }
 
-@keyframes pieceFloat4 {
+@keyframes subtleFloat4 {
   0%, 100% {
-    transform: rotate(0deg) scale(1);
+    transform: translate(0, 0) rotate(0deg) scale(1);
   }
   35% {
-    transform: rotate(-0.6deg) scale(1.002);
+    transform: translate(-0.3px, -0.4px) rotate(-0.1deg) scale(1.001);
   }
   70% {
-    transform: rotate(0.2deg) scale(1.001);
-  }
-}
-
-/* Smooth Hover Animations - Keep floating while adding rotation */
-@keyframes pieceFloat1Hover {
-  0%, 100% {
-    transform: rotate(3deg) scale(1.01);
-  }
-  25% {
-    transform: rotate(3.5deg) scale(1.012);
-  }
-  50% {
-    transform: rotate(2.7deg) scale(1.01);
-  }
-  75% {
-    transform: rotate(3.4deg) scale(1.011);
-  }
-}
-
-@keyframes pieceFloat2Hover {
-  0%, 100% {
-    transform: rotate(-2deg) scale(1.01);
-  }
-  30% {
-    transform: rotate(-2.4deg) scale(1.011);
-  }
-  60% {
-    transform: rotate(-1.4deg) scale(1.012);
-  }
-  90% {
-    transform: rotate(-2.2deg) scale(1.01);
-  }
-}
-
-@keyframes pieceFloat3Hover {
-  0%, 100% {
-    transform: rotate(4deg) scale(1.01);
-  }
-  40% {
-    transform: rotate(4.3deg) scale(1.011);
-  }
-  80% {
-    transform: rotate(3.5deg) scale(1.012);
-  }
-}
-
-@keyframes pieceFloat4Hover {
-  0%, 100% {
-    transform: rotate(-3deg) scale(1.01);
-  }
-  35% {
-    transform: rotate(-3.6deg) scale(1.012);
-  }
-  70% {
-    transform: rotate(-2.8deg) scale(1.011);
+    transform: translate(0.4px, 0.3px) rotate(0.2deg) scale(1);
   }
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .liquid-waves {
-    width: 110%;
-    height: 110%;
+  .liquid-container {
+    width: 120%;
+    height: 120%;
   }
   
-  .liquid-wave {
-    filter: blur(6px);
+  .liquid-stream {
+    filter: blur(10px);
   }
   
-  .glitch-logo:hover .liquid-wave {
-    filter: blur(4px);
+  .glitch-logo:hover .liquid-stream {
+    filter: blur(8px);
+  }
+  
+  .split-piece {
+    filter: blur(0.5px);
   }
 }
 
 @media (max-width: 480px) {
-  .liquid-waves {
-    width: 105%;
-    height: 105%;
+  .liquid-container {
+    width: 110%;
+    height: 110%;
   }
   
-  .split-path {
+  .liquid-stream {
+    filter: blur(8px);
+  }
+  
+  .split-piece {
     filter: blur(0.3px);
   }
+}
+
+/* Clean and Modern Aesthetic */
+.glitch-logo * {
+  will-change: transform, opacity;
+}
+
+.logo-piece,
+.split-piece {
+  vector-effect: non-scaling-stroke;
+}
+
+/* Performance Optimizations */
+.liquid-stream,
+.split-layer {
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
 }

@@ -10,6 +10,7 @@ interface GlitchLogoProps {
 const GlitchLogo: React.FC<GlitchLogoProps> = ({ size = 200, className = '' }) => {
   const logoRef = useRef<HTMLDivElement>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -18,29 +19,21 @@ const GlitchLogo: React.FC<GlitchLogoProps> = ({ size = 200, className = '' }) =
         const centerX = rect.left + rect.width / 2;
         const centerY = rect.top + rect.height / 2;
         
-        // Calculate global mouse influence - no distance limitation
-        const viewportWidth = window.innerWidth;
-        const viewportHeight = window.innerHeight;
+        // Calculate direction and distance from logo center to mouse
+        const deltaX = e.clientX - centerX;
+        const deltaY = e.clientY - centerY;
+        const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
         
-        // Normalize mouse position relative to viewport
-        const normalizedX = (e.clientX / viewportWidth) * 2 - 1; // -1 to 1
-        const normalizedY = (e.clientY / viewportHeight) * 2 - 1; // -1 to 1
+        // Normalize and scale the influence
+        const viewportDiagonal = Math.sqrt(window.innerWidth ** 2 + window.innerHeight ** 2);
+        const intensity = Math.max(0.1, 1 - (distance / viewportDiagonal));
         
-        // Calculate direction vector from logo center to mouse
-        const directionX = (e.clientX - centerX) / viewportWidth;
-        const directionY = (e.clientY - centerY) / viewportHeight;
+        // Create smooth directional influence
+        const influence = 3;
+        const normalizedX = (deltaX / window.innerWidth) * intensity * influence;
+        const normalizedY = (deltaY / window.innerHeight) * intensity * influence;
         
-        // Calculate distance for intensity
-        const distance = Math.sqrt(
-          Math.pow(e.clientX - centerX, 2) + Math.pow(e.clientY - centerY, 2)
-        );
-        const maxDistance = Math.sqrt(viewportWidth * viewportWidth + viewportHeight * viewportHeight);
-        const intensity = 1 - (distance / maxDistance); // 0 to 1
-        
-        setMousePosition({ 
-          x: normalizedX * intensity * 2, 
-          y: normalizedY * intensity * 2 
-        });
+        setMousePosition({ x: normalizedX, y: normalizedY });
       }
     };
 
@@ -48,21 +41,51 @@ const GlitchLogo: React.FC<GlitchLogoProps> = ({ size = 200, className = '' }) =
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  const logoVariants = {
+  // Entrance animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        duration: 0.8,
+        staggerChildren: 0.15,
+        delayChildren: 0.2
+      }
+    }
+  };
+
+  const pieceVariants = {
     hidden: { 
-      opacity: 0, 
-      scale: 0.8,
-      rotateY: -90 
+      opacity: 0,
+      scale: 0.6,
+      x: Math.random() * 200 - 100,
+      y: Math.random() * 200 - 100,
+      rotate: Math.random() * 60 - 30
     },
     visible: {
       opacity: 1,
       scale: 1,
-      rotateY: 0,
+      x: 0,
+      y: 0,
+      rotate: 0,
       transition: {
         type: "spring" as const,
-        damping: 15,
+        damping: 20,
         stiffness: 100,
-        duration: 1.2
+        duration: 1.5
+      }
+    }
+  };
+
+  const liquidVariants = {
+    hidden: { opacity: 0, scale: 0 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        delay: 1.2,
+        duration: 1,
+        ease: "easeOut" as const
       }
     }
   };
@@ -71,113 +94,161 @@ const GlitchLogo: React.FC<GlitchLogoProps> = ({ size = 200, className = '' }) =
     <motion.div
       ref={logoRef}
       className={`glitch-logo ${className}`}
-      variants={logoVariants}
+      variants={containerVariants}
       initial="hidden"
       animate="visible"
+      onHoverStart={() => setIsHovered(true)}
+      onHoverEnd={() => setIsHovered(false)}
       style={{ 
         width: size, 
-        height: size,
-        '--mouse-x': mousePosition.x,
-        '--mouse-y': mousePosition.y
-      } as React.CSSProperties}
+        height: size
+      }}
     >
-      {/* Liquid Metal Waves */}
-      <div className="liquid-waves">
+      {/* Liquid Metal Particles */}
+      <motion.div 
+        className="liquid-container"
+        variants={liquidVariants}
+      >
+        {/* Main particles */}
         <div 
-          className="liquid-wave wave-primary"
+          className="liquid-particle particle-primary"
           style={{
-            transform: `translate(${mousePosition.x * 25}px, ${mousePosition.y * 25}px) scale(${1 + Math.abs(mousePosition.x) * 0.2})`,
-            opacity: Math.max(0.04, Math.abs(mousePosition.x) * 0.15 + Math.abs(mousePosition.y) * 0.15)
+            transform: `translate(${mousePosition.x * 20}px, ${mousePosition.y * 15}px)`,
+            opacity: Math.max(0.3, Math.abs(mousePosition.x) * 0.4 + Math.abs(mousePosition.y) * 0.3)
           }}
         />
         <div 
-          className="liquid-wave wave-secondary"
+          className="liquid-particle particle-secondary"
           style={{
-            transform: `translate(${mousePosition.x * 20}px, ${mousePosition.y * 18}px) scale(${1 + Math.abs(mousePosition.y) * 0.15})`,
-            opacity: Math.max(0.03, Math.abs(mousePosition.y) * 0.12 + Math.abs(mousePosition.x) * 0.08)
+            transform: `translate(${mousePosition.x * -15}px, ${mousePosition.y * 20}px)`,
+            opacity: Math.max(0.25, Math.abs(mousePosition.y) * 0.35 + Math.abs(mousePosition.x) * 0.25)
           }}
         />
         <div 
-          className="liquid-wave wave-cyan"
+          className="liquid-particle particle-accent"
           style={{
-            transform: `translate(${mousePosition.x * 15}px, ${mousePosition.y * 22}px) scale(${1 + Math.abs(mousePosition.x + mousePosition.y) * 0.1})`,
-            opacity: Math.max(0.02, Math.abs(mousePosition.x + mousePosition.y) * 0.1)
+            transform: `translate(${mousePosition.x * 25}px, ${mousePosition.y * -10}px)`,
+            opacity: Math.max(0.2, Math.abs(mousePosition.x + mousePosition.y) * 0.3)
           }}
         />
         <div 
-          className="liquid-wave wave-pink"
+          className="liquid-particle particle-pink"
           style={{
-            transform: `translate(${mousePosition.x * 12}px, ${mousePosition.y * 8}px) rotate(${mousePosition.x * 15}deg)`,
-            opacity: Math.max(0.02, Math.abs(mousePosition.x) * 0.08)
+            transform: `translate(${mousePosition.x * -10}px, ${mousePosition.y * -18}px)`,
+            opacity: Math.max(0.15, Math.abs(mousePosition.x) * 0.25 + Math.abs(mousePosition.y) * 0.2)
           }}
         />
         <div 
-          className="liquid-wave wave-orange"
+          className="liquid-particle particle-extra-1"
           style={{
-            transform: `translate(${mousePosition.x * 18}px, ${mousePosition.y * -12}px) scale(${1 + Math.abs(mousePosition.y) * 0.12})`,
-            opacity: Math.max(0.01, Math.abs(mousePosition.y) * 0.06)
+            transform: `translate(${mousePosition.x * 12}px, ${mousePosition.y * 8}px)`,
+            opacity: Math.max(0.1, Math.abs(mousePosition.y) * 0.2)
           }}
         />
+        <div 
+          className="liquid-particle particle-extra-2"
+          style={{
+            transform: `translate(${mousePosition.x * -8}px, ${mousePosition.y * 12}px)`,
+            opacity: Math.max(0.12, Math.abs(mousePosition.x) * 0.18)
+          }}
+        />
+      </motion.div>
+
+      {/* Liquid Metal RGB Split Layers */}
+      <div 
+        className="liquid-split-layer"
+        style={{
+          transform: `translate(${mousePosition.x * 3}px, ${mousePosition.y * 2}px)`,
+          opacity: Math.max(0.4, Math.min(0.8, Math.abs(mousePosition.x) * 0.5 + Math.abs(mousePosition.y) * 0.4))
+        }}
+      >
+        <div className="liquid-split-particle particle-primary" style={{top: '30%', left: '20%', width: '35px', height: '35px', background: 'radial-gradient(circle, var(--accent-primary) 0%, transparent 60%)'}} />
+        <div className="liquid-split-particle particle-secondary" style={{top: '60%', left: '70%', width: '25px', height: '25px', background: 'radial-gradient(circle, var(--accent-primary) 0%, transparent 60%)'}} />
+        <div className="liquid-split-particle particle-accent" style={{top: '80%', left: '40%', width: '20px', height: '20px', background: 'radial-gradient(circle, var(--accent-primary) 0%, transparent 60%)'}} />
+        <div className="liquid-split-particle particle-pink" style={{top: '20%', left: '80%', width: '30px', height: '30px', background: 'radial-gradient(circle, var(--accent-primary) 0%, transparent 60%)'}} />
       </div>
 
-      {/* Main Logo */}
-      <div className="logo-main">
+      <div 
+        className="liquid-split-layer"
+        style={{
+          transform: `translate(${mousePosition.x * -2}px, ${mousePosition.y * -2.5}px)`,
+          opacity: Math.max(0.3, Math.min(0.7, Math.abs(mousePosition.x) * 0.4 + Math.abs(mousePosition.y) * 0.3))
+        }}
+      >
+        <div className="liquid-split-particle particle-primary" style={{top: '30%', left: '20%', width: '35px', height: '35px', background: 'radial-gradient(circle, var(--accent-secondary) 0%, transparent 60%)'}} />
+        <div className="liquid-split-particle particle-secondary" style={{top: '60%', left: '70%', width: '25px', height: '25px', background: 'radial-gradient(circle, var(--accent-secondary) 0%, transparent 60%)'}} />
+        <div className="liquid-split-particle particle-accent" style={{top: '80%', left: '40%', width: '20px', height: '20px', background: 'radial-gradient(circle, var(--accent-secondary) 0%, transparent 60%)'}} />
+        <div className="liquid-split-particle particle-pink" style={{top: '20%', left: '80%', width: '30px', height: '30px', background: 'radial-gradient(circle, var(--accent-secondary) 0%, transparent 60%)'}} />
+      </div>
+
+      {/* Main Logo Pieces */}
+      <div className="logo-pieces">
         <svg 
           xmlns="http://www.w3.org/2000/svg" 
           viewBox="0 0 500 500" 
           width={size} 
           height={size}
-          className="zonda-logo"
+          className="main-logo-svg"
         >
           <defs>
-            <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#ffffff"/>
-              <stop offset="50%" stopColor="#f8f9fa"/>
-              <stop offset="100%" stopColor="#e9ecef"/>
+            <linearGradient id="mainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#ffffff" stopOpacity="0.95"/>
+              <stop offset="50%" stopColor="#f8f9fa" stopOpacity="0.9"/>
+              <stop offset="100%" stopColor="#e9ecef" stopOpacity="0.85"/>
             </linearGradient>
-            <filter id="subtleGlow">
-              <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+            <filter id="logoGlow">
+              <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
               <feMerge> 
                 <feMergeNode in="coloredBlur"/>
                 <feMergeNode in="SourceGraphic"/>
               </feMerge>
             </filter>
           </defs>
-          <g filter="url(#subtleGlow)">
-            <path 
-              d="M 88.478 186.141 L 147.278 101.441 L 257.616 101.606 L 316.242 186.175 L 88.478 186.141 Z" 
-              fill="url(#logoGradient)"
-              className="logo-path main-path logo-piece-1"
-              style={{ transformOrigin: '202px 144px' }}
-            />
-            <path 
-              d="M 151.162 214.519 L 254.816 214.785 L 123.855 401.854 L 88.385 304.265 L 151.162 214.519 Z" 
-              fill="url(#logoGradient)"
-              className="logo-path main-path logo-piece-2"
-              style={{ transformOrigin: '171px 308px' }}
-            />
-            <path 
-              d="M 375.69 100 L 412.058 198.385 L 348.108 288.629 L 243.925 288.629 L 375.69 100 Z" 
-              fill="url(#logoGradient)"
-              className="logo-path main-path logo-piece-3"
-              style={{ transformOrigin: '328px 194px' }}
-            />
-            <path 
-              d="M 183.137 316.443 L 410.625 316.222 L 353.087 400.362 L 241.446 400.15 L 183.137 316.443 Z" 
-              fill="url(#logoGradient)"
-              className="logo-path main-path logo-piece-4"
-              style={{ transformOrigin: '296px 358px' }}
-            />
-          </g>
+          
+          {/* Logo Piece 1 - Top */}
+          <motion.path 
+            d="M 88.478 186.141 L 147.278 101.441 L 257.616 101.606 L 316.242 186.175 L 88.478 186.141 Z" 
+            fill="url(#mainGradient)"
+            filter="url(#logoGlow)"
+            className={`logo-piece piece-1 ${isHovered ? 'hovered' : ''}`}
+            variants={pieceVariants}
+          />
+          
+          {/* Logo Piece 2 - Bottom Left */}
+          <motion.path 
+            d="M 151.162 214.519 L 254.816 214.785 L 123.855 401.854 L 88.385 304.265 L 151.162 214.519 Z" 
+            fill="url(#mainGradient)"
+            filter="url(#logoGlow)"
+            className={`logo-piece piece-2 ${isHovered ? 'hovered' : ''}`}
+            variants={pieceVariants}
+          />
+          
+          {/* Logo Piece 3 - Right */}
+          <motion.path 
+            d="M 375.69 100 L 412.058 198.385 L 348.108 288.629 L 243.925 288.629 L 375.69 100 Z" 
+            fill="url(#mainGradient)"
+            filter="url(#logoGlow)"
+            className={`logo-piece piece-3 ${isHovered ? 'hovered' : ''}`}
+            variants={pieceVariants}
+          />
+          
+          {/* Logo Piece 4 - Bottom */}
+          <motion.path 
+            d="M 183.137 316.443 L 410.625 316.222 L 353.087 400.362 L 241.446 400.15 L 183.137 316.443 Z" 
+            fill="url(#mainGradient)"
+            filter="url(#logoGlow)"
+            className={`logo-piece piece-4 ${isHovered ? 'hovered' : ''}`}
+            variants={pieceVariants}
+          />
         </svg>
       </div>
-      
-      {/* RGB Split Layers */}
+
+      {/* RGB Split Layers - More Sophisticated */}
       <div 
-        className="logo-split logo-split-red"
+        className="split-layer split-red"
         style={{
-          transform: `translate(${mousePosition.x * 1}px, ${mousePosition.y * 0.8}px)`,
-          opacity: Math.min(0.15, Math.abs(mousePosition.x) * 0.1 + Math.abs(mousePosition.y) * 0.1)
+          transform: `translate(${mousePosition.x * 2}px, ${mousePosition.y * 1.5}px)`,
+          opacity: Math.min(0.2, Math.abs(mousePosition.x) * 0.4 + Math.abs(mousePosition.y) * 0.3)
         }}
       >
         <svg 
@@ -185,42 +256,21 @@ const GlitchLogo: React.FC<GlitchLogoProps> = ({ size = 200, className = '' }) =
           viewBox="0 0 500 500" 
           width={size} 
           height={size}
-          className="zonda-logo"
         >
-          <g>
-            <path 
-              d="M 88.478 186.141 L 147.278 101.441 L 257.616 101.606 L 316.242 186.175 L 88.478 186.141 Z" 
-              fill="var(--accent-primary)"
-              className="logo-path split-path logo-piece-1"
-              style={{ transformOrigin: '202px 144px' }}
-            />
-            <path 
-              d="M 151.162 214.519 L 254.816 214.785 L 123.855 401.854 L 88.385 304.265 L 151.162 214.519 Z" 
-              fill="var(--accent-primary)"
-              className="logo-path split-path logo-piece-2"
-              style={{ transformOrigin: '171px 308px' }}
-            />
-            <path 
-              d="M 375.69 100 L 412.058 198.385 L 348.108 288.629 L 243.925 288.629 L 375.69 100 Z" 
-              fill="var(--accent-primary)"
-              className="logo-path split-path logo-piece-3"
-              style={{ transformOrigin: '328px 194px' }}
-            />
-            <path 
-              d="M 183.137 316.443 L 410.625 316.222 L 353.087 400.362 L 241.446 400.15 L 183.137 316.443 Z" 
-              fill="var(--accent-primary)"
-              className="logo-path split-path logo-piece-4"
-              style={{ transformOrigin: '296px 358px' }}
-            />
+          <g className="split-group">
+            <path d="M 88.478 186.141 L 147.278 101.441 L 257.616 101.606 L 316.242 186.175 L 88.478 186.141 Z" fill="var(--accent-primary)" className="split-piece"/>
+            <path d="M 151.162 214.519 L 254.816 214.785 L 123.855 401.854 L 88.385 304.265 L 151.162 214.519 Z" fill="var(--accent-primary)" className="split-piece"/>
+            <path d="M 375.69 100 L 412.058 198.385 L 348.108 288.629 L 243.925 288.629 L 375.69 100 Z" fill="var(--accent-primary)" className="split-piece"/>
+            <path d="M 183.137 316.443 L 410.625 316.222 L 353.087 400.362 L 241.446 400.15 L 183.137 316.443 Z" fill="var(--accent-primary)" className="split-piece"/>
           </g>
         </svg>
       </div>
 
       <div 
-        className="logo-split logo-split-cyan"
+        className="split-layer split-secondary"
         style={{
-          transform: `translate(${mousePosition.x * -0.8}px, ${mousePosition.y * -1}px)`,
-          opacity: Math.min(0.12, Math.abs(mousePosition.x) * 0.08 + Math.abs(mousePosition.y) * 0.08)
+          transform: `translate(${mousePosition.x * -1.5}px, ${mousePosition.y * -2}px)`,
+          opacity: Math.min(0.15, Math.abs(mousePosition.x) * 0.3 + Math.abs(mousePosition.y) * 0.25)
         }}
       >
         <svg 
@@ -228,42 +278,21 @@ const GlitchLogo: React.FC<GlitchLogoProps> = ({ size = 200, className = '' }) =
           viewBox="0 0 500 500" 
           width={size} 
           height={size}
-          className="zonda-logo"
         >
-          <g>
-            <path 
-              d="M 88.478 186.141 L 147.278 101.441 L 257.616 101.606 L 316.242 186.175 L 88.478 186.141 Z" 
-              fill="var(--accent-cyan)"
-              className="logo-path split-path logo-piece-1"
-              style={{ transformOrigin: '202px 144px' }}
-            />
-            <path 
-              d="M 151.162 214.519 L 254.816 214.785 L 123.855 401.854 L 88.385 304.265 L 151.162 214.519 Z" 
-              fill="var(--accent-cyan)"
-              className="logo-path split-path logo-piece-2"
-              style={{ transformOrigin: '171px 308px' }}
-            />
-            <path 
-              d="M 375.69 100 L 412.058 198.385 L 348.108 288.629 L 243.925 288.629 L 375.69 100 Z" 
-              fill="var(--accent-cyan)"
-              className="logo-path split-path logo-piece-3"
-              style={{ transformOrigin: '328px 194px' }}
-            />
-            <path 
-              d="M 183.137 316.443 L 410.625 316.222 L 353.087 400.362 L 241.446 400.15 L 183.137 316.443 Z" 
-              fill="var(--accent-cyan)"
-              className="logo-path split-path logo-piece-4"
-              style={{ transformOrigin: '296px 358px' }}
-            />
+          <g className="split-group">
+            <path d="M 88.478 186.141 L 147.278 101.441 L 257.616 101.606 L 316.242 186.175 L 88.478 186.141 Z" fill="var(--accent-secondary)" className="split-piece"/>
+            <path d="M 151.162 214.519 L 254.816 214.785 L 123.855 401.854 L 88.385 304.265 L 151.162 214.519 Z" fill="var(--accent-secondary)" className="split-piece"/>
+            <path d="M 375.69 100 L 412.058 198.385 L 348.108 288.629 L 243.925 288.629 L 375.69 100 Z" fill="var(--accent-secondary)" className="split-piece"/>
+            <path d="M 183.137 316.443 L 410.625 316.222 L 353.087 400.362 L 241.446 400.15 L 183.137 316.443 Z" fill="var(--accent-secondary)" className="split-piece"/>
           </g>
         </svg>
       </div>
 
       <div 
-        className="logo-split logo-split-secondary"
+        className="split-layer split-accent"
         style={{
-          transform: `translate(${mousePosition.x * 0.5}px, ${mousePosition.y * -0.5}px)`,
-          opacity: Math.min(0.1, Math.abs(mousePosition.x) * 0.05 + Math.abs(mousePosition.y) * 0.05)
+          transform: `translate(${mousePosition.x * 1}px, ${mousePosition.y * -1}px)`,
+          opacity: Math.min(0.1, Math.abs(mousePosition.x) * 0.2 + Math.abs(mousePosition.y) * 0.15)
         }}
       >
         <svg 
@@ -271,33 +300,12 @@ const GlitchLogo: React.FC<GlitchLogoProps> = ({ size = 200, className = '' }) =
           viewBox="0 0 500 500" 
           width={size} 
           height={size}
-          className="zonda-logo"
         >
-          <g>
-            <path 
-              d="M 88.478 186.141 L 147.278 101.441 L 257.616 101.606 L 316.242 186.175 L 88.478 186.141 Z" 
-              fill="var(--accent-secondary)"
-              className="logo-path split-path logo-piece-1"
-              style={{ transformOrigin: '202px 144px' }}
-            />
-            <path 
-              d="M 151.162 214.519 L 254.816 214.785 L 123.855 401.854 L 88.385 304.265 L 151.162 214.519 Z" 
-              fill="var(--accent-secondary)"
-              className="logo-path split-path logo-piece-2"
-              style={{ transformOrigin: '171px 308px' }}
-            />
-            <path 
-              d="M 375.69 100 L 412.058 198.385 L 348.108 288.629 L 243.925 288.629 L 375.69 100 Z" 
-              fill="var(--accent-secondary)"
-              className="logo-path split-path logo-piece-3"
-              style={{ transformOrigin: '328px 194px' }}
-            />
-            <path 
-              d="M 183.137 316.443 L 410.625 316.222 L 353.087 400.362 L 241.446 400.15 L 183.137 316.443 Z" 
-              fill="var(--accent-secondary)"
-              className="logo-path split-path logo-piece-4"
-              style={{ transformOrigin: '296px 358px' }}
-            />
+          <g className="split-group">
+            <path d="M 88.478 186.141 L 147.278 101.441 L 257.616 101.606 L 316.242 186.175 L 88.478 186.141 Z" fill="var(--accent-orange)" className="split-piece"/>
+            <path d="M 151.162 214.519 L 254.816 214.785 L 123.855 401.854 L 88.385 304.265 L 151.162 214.519 Z" fill="var(--accent-orange)" className="split-piece"/>
+            <path d="M 375.69 100 L 412.058 198.385 L 348.108 288.629 L 243.925 288.629 L 375.69 100 Z" fill="var(--accent-orange)" className="split-piece"/>
+            <path d="M 183.137 316.443 L 410.625 316.222 L 353.087 400.362 L 241.446 400.15 L 183.137 316.443 Z" fill="var(--accent-orange)" className="split-piece"/>
           </g>
         </svg>
       </div>
