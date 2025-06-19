@@ -18,10 +18,29 @@ const GlitchLogo: React.FC<GlitchLogoProps> = ({ size = 200, className = '' }) =
         const centerX = rect.left + rect.width / 2;
         const centerY = rect.top + rect.height / 2;
         
-        const deltaX = (e.clientX - centerX) / (rect.width / 2);
-        const deltaY = (e.clientY - centerY) / (rect.height / 2);
+        // Calculate global mouse influence - no distance limitation
+        const viewportWidth = window.innerWidth;
+        const viewportHeight = window.innerHeight;
         
-        setMousePosition({ x: deltaX, y: deltaY });
+        // Normalize mouse position relative to viewport
+        const normalizedX = (e.clientX / viewportWidth) * 2 - 1; // -1 to 1
+        const normalizedY = (e.clientY / viewportHeight) * 2 - 1; // -1 to 1
+        
+        // Calculate direction vector from logo center to mouse
+        const directionX = (e.clientX - centerX) / viewportWidth;
+        const directionY = (e.clientY - centerY) / viewportHeight;
+        
+        // Calculate distance for intensity
+        const distance = Math.sqrt(
+          Math.pow(e.clientX - centerX, 2) + Math.pow(e.clientY - centerY, 2)
+        );
+        const maxDistance = Math.sqrt(viewportWidth * viewportWidth + viewportHeight * viewportHeight);
+        const intensity = 1 - (distance / maxDistance); // 0 to 1
+        
+        setMousePosition({ 
+          x: normalizedX * intensity * 2, 
+          y: normalizedY * intensity * 2 
+        });
       }
     };
 
@@ -67,19 +86,36 @@ const GlitchLogo: React.FC<GlitchLogoProps> = ({ size = 200, className = '' }) =
         <div 
           className="liquid-wave wave-primary"
           style={{
-            transform: `translate(${mousePosition.x * 8}px, ${mousePosition.y * 8}px)`
+            transform: `translate(${mousePosition.x * 25}px, ${mousePosition.y * 25}px) scale(${1 + Math.abs(mousePosition.x) * 0.2})`,
+            opacity: Math.max(0.04, Math.abs(mousePosition.x) * 0.15 + Math.abs(mousePosition.y) * 0.15)
           }}
         />
         <div 
           className="liquid-wave wave-secondary"
           style={{
-            transform: `translate(${mousePosition.x * 6}px, ${mousePosition.y * 6}px)`
+            transform: `translate(${mousePosition.x * 20}px, ${mousePosition.y * 18}px) scale(${1 + Math.abs(mousePosition.y) * 0.15})`,
+            opacity: Math.max(0.03, Math.abs(mousePosition.y) * 0.12 + Math.abs(mousePosition.x) * 0.08)
           }}
         />
         <div 
           className="liquid-wave wave-cyan"
           style={{
-            transform: `translate(${mousePosition.x * 4}px, ${mousePosition.y * 4}px)`
+            transform: `translate(${mousePosition.x * 15}px, ${mousePosition.y * 22}px) scale(${1 + Math.abs(mousePosition.x + mousePosition.y) * 0.1})`,
+            opacity: Math.max(0.02, Math.abs(mousePosition.x + mousePosition.y) * 0.1)
+          }}
+        />
+        <div 
+          className="liquid-wave wave-pink"
+          style={{
+            transform: `translate(${mousePosition.x * 12}px, ${mousePosition.y * 8}px) rotate(${mousePosition.x * 15}deg)`,
+            opacity: Math.max(0.02, Math.abs(mousePosition.x) * 0.08)
+          }}
+        />
+        <div 
+          className="liquid-wave wave-orange"
+          style={{
+            transform: `translate(${mousePosition.x * 18}px, ${mousePosition.y * -12}px) scale(${1 + Math.abs(mousePosition.y) * 0.12})`,
+            opacity: Math.max(0.01, Math.abs(mousePosition.y) * 0.06)
           }}
         />
       </div>
@@ -111,22 +147,26 @@ const GlitchLogo: React.FC<GlitchLogoProps> = ({ size = 200, className = '' }) =
             <path 
               d="M 88.478 186.141 L 147.278 101.441 L 257.616 101.606 L 316.242 186.175 L 88.478 186.141 Z" 
               fill="url(#logoGradient)"
-              className="logo-path main-path"
+              className="logo-path main-path logo-piece-1"
+              style={{ transformOrigin: '202px 144px' }}
             />
             <path 
               d="M 151.162 214.519 L 254.816 214.785 L 123.855 401.854 L 88.385 304.265 L 151.162 214.519 Z" 
               fill="url(#logoGradient)"
-              className="logo-path main-path"
+              className="logo-path main-path logo-piece-2"
+              style={{ transformOrigin: '171px 308px' }}
             />
             <path 
               d="M 375.69 100 L 412.058 198.385 L 348.108 288.629 L 243.925 288.629 L 375.69 100 Z" 
               fill="url(#logoGradient)"
-              className="logo-path main-path"
+              className="logo-path main-path logo-piece-3"
+              style={{ transformOrigin: '328px 194px' }}
             />
             <path 
               d="M 183.137 316.443 L 410.625 316.222 L 353.087 400.362 L 241.446 400.15 L 183.137 316.443 Z" 
               fill="url(#logoGradient)"
-              className="logo-path main-path"
+              className="logo-path main-path logo-piece-4"
+              style={{ transformOrigin: '296px 358px' }}
             />
           </g>
         </svg>
@@ -151,22 +191,26 @@ const GlitchLogo: React.FC<GlitchLogoProps> = ({ size = 200, className = '' }) =
             <path 
               d="M 88.478 186.141 L 147.278 101.441 L 257.616 101.606 L 316.242 186.175 L 88.478 186.141 Z" 
               fill="var(--accent-primary)"
-              className="logo-path split-path"
+              className="logo-path split-path logo-piece-1"
+              style={{ transformOrigin: '202px 144px' }}
             />
             <path 
               d="M 151.162 214.519 L 254.816 214.785 L 123.855 401.854 L 88.385 304.265 L 151.162 214.519 Z" 
               fill="var(--accent-primary)"
-              className="logo-path split-path"
+              className="logo-path split-path logo-piece-2"
+              style={{ transformOrigin: '171px 308px' }}
             />
             <path 
               d="M 375.69 100 L 412.058 198.385 L 348.108 288.629 L 243.925 288.629 L 375.69 100 Z" 
               fill="var(--accent-primary)"
-              className="logo-path split-path"
+              className="logo-path split-path logo-piece-3"
+              style={{ transformOrigin: '328px 194px' }}
             />
             <path 
               d="M 183.137 316.443 L 410.625 316.222 L 353.087 400.362 L 241.446 400.15 L 183.137 316.443 Z" 
               fill="var(--accent-primary)"
-              className="logo-path split-path"
+              className="logo-path split-path logo-piece-4"
+              style={{ transformOrigin: '296px 358px' }}
             />
           </g>
         </svg>
@@ -190,22 +234,26 @@ const GlitchLogo: React.FC<GlitchLogoProps> = ({ size = 200, className = '' }) =
             <path 
               d="M 88.478 186.141 L 147.278 101.441 L 257.616 101.606 L 316.242 186.175 L 88.478 186.141 Z" 
               fill="var(--accent-cyan)"
-              className="logo-path split-path"
+              className="logo-path split-path logo-piece-1"
+              style={{ transformOrigin: '202px 144px' }}
             />
             <path 
               d="M 151.162 214.519 L 254.816 214.785 L 123.855 401.854 L 88.385 304.265 L 151.162 214.519 Z" 
               fill="var(--accent-cyan)"
-              className="logo-path split-path"
+              className="logo-path split-path logo-piece-2"
+              style={{ transformOrigin: '171px 308px' }}
             />
             <path 
               d="M 375.69 100 L 412.058 198.385 L 348.108 288.629 L 243.925 288.629 L 375.69 100 Z" 
               fill="var(--accent-cyan)"
-              className="logo-path split-path"
+              className="logo-path split-path logo-piece-3"
+              style={{ transformOrigin: '328px 194px' }}
             />
             <path 
               d="M 183.137 316.443 L 410.625 316.222 L 353.087 400.362 L 241.446 400.15 L 183.137 316.443 Z" 
               fill="var(--accent-cyan)"
-              className="logo-path split-path"
+              className="logo-path split-path logo-piece-4"
+              style={{ transformOrigin: '296px 358px' }}
             />
           </g>
         </svg>
@@ -229,22 +277,26 @@ const GlitchLogo: React.FC<GlitchLogoProps> = ({ size = 200, className = '' }) =
             <path 
               d="M 88.478 186.141 L 147.278 101.441 L 257.616 101.606 L 316.242 186.175 L 88.478 186.141 Z" 
               fill="var(--accent-secondary)"
-              className="logo-path split-path"
+              className="logo-path split-path logo-piece-1"
+              style={{ transformOrigin: '202px 144px' }}
             />
             <path 
               d="M 151.162 214.519 L 254.816 214.785 L 123.855 401.854 L 88.385 304.265 L 151.162 214.519 Z" 
               fill="var(--accent-secondary)"
-              className="logo-path split-path"
+              className="logo-path split-path logo-piece-2"
+              style={{ transformOrigin: '171px 308px' }}
             />
             <path 
               d="M 375.69 100 L 412.058 198.385 L 348.108 288.629 L 243.925 288.629 L 375.69 100 Z" 
               fill="var(--accent-secondary)"
-              className="logo-path split-path"
+              className="logo-path split-path logo-piece-3"
+              style={{ transformOrigin: '328px 194px' }}
             />
             <path 
               d="M 183.137 316.443 L 410.625 316.222 L 353.087 400.362 L 241.446 400.15 L 183.137 316.443 Z" 
               fill="var(--accent-secondary)"
-              className="logo-path split-path"
+              className="logo-path split-path logo-piece-4"
+              style={{ transformOrigin: '296px 358px' }}
             />
           </g>
         </svg>

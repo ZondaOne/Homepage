@@ -75,9 +75,9 @@ const Home: React.FC = () => {
       >
         <div className="container">
           <div className="section-header">
-            <h2 className="section-title centered">Our Products</h2>
+            <h2 className="section-title centered animated-gradient-text-fast">Our Products</h2>
             <p className="section-subtitle">
-              Cutting-edge tools designed for the digital-first generation
+              Cutting-edge tools designed for the <span className="animated-gradient-subtle">digital-first generation</span>
             </p>
           </div>
 
@@ -143,7 +143,7 @@ const Home: React.FC = () => {
         <div className="container">
           <div className="content-grid">
             <div className="content-left">
-              <h2 className="section-title">
+              <h2 className="section-title animated-gradient-text">
                 Born Digital, Built for Tomorrow
               </h2>
               <p className="section-description">
@@ -197,7 +197,7 @@ const Home: React.FC = () => {
         <div className="container">
           <div className="contact-content">
             <div className="contact-left">
-              <h2 className="section-title">Let's Build Something Amazing</h2>
+              <h2 className="section-title animated-gradient-text-fast">Let's Build Something Amazing</h2>
               <p className="section-description">
                 Got an idea? Want to collaborate? Or just want to say hi? 
                 We're always excited to connect with fellow innovators, creators, 

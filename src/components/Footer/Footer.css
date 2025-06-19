@@ -36,11 +36,19 @@
 .footer-logo .logo-text {
   font-family: var(--font-title);
   font-size: 1.5rem;
-  background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-primary) 50%, var(--accent-secondary) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--text-primary) 0%,
+    var(--accent-primary) 30%,
+    var(--accent-secondary) 60%,
+    var(--text-primary) 100%
+  );
+  background-size: 300% 300%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   font-weight: bold;
+  animation: gradientShift 14s ease-in-out infinite;
 }
 
 .footer-description {
@@ -107,10 +115,17 @@
   text-transform: uppercase;
   letter-spacing: 0.1em;
   font-weight: 600;
-  background: linear-gradient(135deg, var(--text-primary), var(--accent-primary));
+  background: linear-gradient(
+    90deg,
+    var(--text-primary) 0%,
+    var(--accent-primary) 50%,
+    var(--accent-secondary) 100%
+  );
+  background-size: 200% 200%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  animation: gradientShift 16s ease-in-out infinite;
 }
 
 .footer-links {

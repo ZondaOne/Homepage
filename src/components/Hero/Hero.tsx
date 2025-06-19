@@ -60,11 +60,11 @@ const Hero: React.FC = () => {
       <div className="hero-container">
         <div className="hero-content">
           <div className="hero-logo-section">
-            <GlitchLogo size={240} />
+            <GlitchLogo size={320} />
           </div>
 
           <motion.h1 
-            className="hero-title"
+            className="hero-title animated-gradient-text"
             variants={titleVariants}
             initial="hidden"
             animate="visible"
@@ -80,7 +80,7 @@ const Hero: React.FC = () => {
           >
             Empowering the next generation of digital innovation.
             <br />
-            <span className="subtitle-highlight">We build software that shapes tomorrow.</span>
+            <span className="subtitle-highlight animated-gradient-subtle">We build software that shapes tomorrow.</span>
           </motion.p>
 
           <motion.div 

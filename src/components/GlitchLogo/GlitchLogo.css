@@ -46,6 +46,20 @@
   transform: translate(-50%, -50%) scale(0.6);
 }
 
+.wave-pink {
+  background: radial-gradient(circle, var(--accent-pink) 0%, transparent 85%);
+  animation: liquidFlow4 14s ease-in-out infinite;
+  transform: translate(-50%, -50%) scale(0.4);
+  opacity: 0.03;
+}
+
+.wave-orange {
+  background: radial-gradient(circle, var(--accent-orange) 0%, transparent 95%);
+  animation: liquidFlow5 16s ease-in-out infinite reverse;
+  transform: translate(-50%, -50%) scale(0.7);
+  opacity: 0.02;
+}
+
 /* Main Logo Container */
 .logo-main {
   position: relative;
@@ -54,8 +68,33 @@
 }
 
 .main-path {
-  transition: all 0.3s ease;
+  transition: all 0.4s ease;
   filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.1));
+}
+
+/* Individual Logo Pieces */
+.logo-piece-1 {
+  transform-origin: center;
+  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  animation: pieceFloat1 8s ease-in-out infinite;
+}
+
+.logo-piece-2 {
+  transform-origin: center;
+  transition: transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  animation: pieceFloat2 10s ease-in-out infinite;
+}
+
+.logo-piece-3 {
+  transform-origin: center;
+  transition: transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  animation: pieceFloat3 12s ease-in-out infinite;
+}
+
+.logo-piece-4 {
+  transform-origin: center;
+  transition: transform 0.85s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  animation: pieceFloat4 9s ease-in-out infinite;
 }
 
 /* RGB Split Layers */
@@ -111,6 +150,37 @@
   animation-duration: 6s;
 }
 
+.glitch-logo:hover .wave-pink {
+  opacity: 0.06;
+  animation-duration: 7s;
+}
+
+.glitch-logo:hover .wave-orange {
+  opacity: 0.05;
+  animation-duration: 8s;
+}
+
+/* Logo Piece Hover Rotations - SMOOTH VERSION */
+.glitch-logo:hover .logo-piece-1 {
+  animation: pieceFloat1Hover 8s ease-in-out infinite;
+  transition-delay: 0s;
+}
+
+.glitch-logo:hover .logo-piece-2 {
+  animation: pieceFloat2Hover 10s ease-in-out infinite;
+  transition-delay: 0.1s;
+}
+
+.glitch-logo:hover .logo-piece-3 {
+  animation: pieceFloat3Hover 12s ease-in-out infinite;
+  transition-delay: 0.2s;
+}
+
+.glitch-logo:hover .logo-piece-4 {
+  animation: pieceFloat4Hover 9s ease-in-out infinite;
+  transition-delay: 0.15s;
+}
+
 /* Liquid Flow Animations */
 @keyframes liquidFlow1 {
   0%, 100% {
@@ -158,6 +228,142 @@
   80% {
     transform: translate(-47%, -53%) scale(0.55) rotate(288deg);
     opacity: 0.08;
+  }
+}
+
+@keyframes liquidFlow4 {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(0.4) rotate(0deg);
+    opacity: 0.03;
+  }
+  30% {
+    transform: translate(-48%, -52%) scale(0.5) rotate(108deg);
+    opacity: 0.05;
+  }
+  70% {
+    transform: translate(-52%, -48%) scale(0.35) rotate(252deg);
+    opacity: 0.04;
+  }
+}
+
+@keyframes liquidFlow5 {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(0.7) rotate(0deg);
+    opacity: 0.02;
+  }
+  50% {
+    transform: translate(-45%, -55%) scale(0.8) rotate(180deg);
+    opacity: 0.04;
+  }
+}
+
+/* Individual Piece Float Animations */
+@keyframes pieceFloat1 {
+  0%, 100% {
+    transform: rotate(0deg) scale(1);
+  }
+  25% {
+    transform: rotate(0.5deg) scale(1.002);
+  }
+  50% {
+    transform: rotate(-0.3deg) scale(1);
+  }
+  75% {
+    transform: rotate(0.4deg) scale(1.001);
+  }
+}
+
+@keyframes pieceFloat2 {
+  0%, 100% {
+    transform: rotate(0deg) scale(1);
+  }
+  30% {
+    transform: rotate(-0.4deg) scale(1.001);
+  }
+  60% {
+    transform: rotate(0.6deg) scale(1.002);
+  }
+  90% {
+    transform: rotate(-0.2deg) scale(1);
+  }
+}
+
+@keyframes pieceFloat3 {
+  0%, 100% {
+    transform: rotate(0deg) scale(1);
+  }
+  40% {
+    transform: rotate(0.3deg) scale(1.001);
+  }
+  80% {
+    transform: rotate(-0.5deg) scale(1.002);
+  }
+}
+
+@keyframes pieceFloat4 {
+  0%, 100% {
+    transform: rotate(0deg) scale(1);
+  }
+  35% {
+    transform: rotate(-0.6deg) scale(1.002);
+  }
+  70% {
+    transform: rotate(0.2deg) scale(1.001);
+  }
+}
+
+/* Smooth Hover Animations - Keep floating while adding rotation */
+@keyframes pieceFloat1Hover {
+  0%, 100% {
+    transform: rotate(3deg) scale(1.01);
+  }
+  25% {
+    transform: rotate(3.5deg) scale(1.012);
+  }
+  50% {
+    transform: rotate(2.7deg) scale(1.01);
+  }
+  75% {
+    transform: rotate(3.4deg) scale(1.011);
+  }
+}
+
+@keyframes pieceFloat2Hover {
+  0%, 100% {
+    transform: rotate(-2deg) scale(1.01);
+  }
+  30% {
+    transform: rotate(-2.4deg) scale(1.011);
+  }
+  60% {
+    transform: rotate(-1.4deg) scale(1.012);
+  }
+  90% {
+    transform: rotate(-2.2deg) scale(1.01);
+  }
+}
+
+@keyframes pieceFloat3Hover {
+  0%, 100% {
+    transform: rotate(4deg) scale(1.01);
+  }
+  40% {
+    transform: rotate(4.3deg) scale(1.011);
+  }
+  80% {
+    transform: rotate(3.5deg) scale(1.012);
+  }
+}
+
+@keyframes pieceFloat4Hover {
+  0%, 100% {
+    transform: rotate(-3deg) scale(1.01);
+  }
+  35% {
+    transform: rotate(-3.6deg) scale(1.012);
+  }
+  70% {
+    transform: rotate(-2.8deg) scale(1.011);
   }
 }
 

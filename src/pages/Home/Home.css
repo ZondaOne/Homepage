@@ -131,7 +131,7 @@
     display: block;
     font-size: 2rem;
     font-weight: var(--font-weight-bold);
-    color: var(--accent-orange);
+    color: var(--accent-primary);
     margin-bottom: var(--space-xs);
   }
   
