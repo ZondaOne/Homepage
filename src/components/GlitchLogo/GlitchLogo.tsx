@@ -208,9 +208,9 @@ const GlitchLogo: React.FC<GlitchLogoProps> = ({ size = 200, className = '' }) =
         >
           <defs>
             <linearGradient id="mainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#ffffff" stopOpacity="0.95"/>
-              <stop offset="50%" stopColor="#f8f9fa" stopOpacity="0.9"/>
-              <stop offset="100%" stopColor="#e9ecef" stopOpacity="0.85"/>
+              <stop offset="0%" stopColor="var(--logo-color)" stopOpacity="0.95"/>
+              <stop offset="50%" stopColor="var(--logo-color)" stopOpacity="0.9"/>
+              <stop offset="100%" stopColor="var(--logo-color)" stopOpacity="0.85"/>
             </linearGradient>
             <filter id="logoGlow">
               <feGaussianBlur stdDeviation="3" result="coloredBlur"/>

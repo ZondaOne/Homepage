@@ -1,5 +1,5 @@
 :root {
-    /* Colors */
+    /* Dark Theme (Default) */
     --bg-primary: #0a0a0f;
     --bg-secondary: #121218;
     --bg-tertiary: #1a1a24;
@@ -8,19 +8,20 @@
     --text-primary: #ffffff;
     --text-secondary: #9ca3af;
     --text-muted: #6b7280;
-    --accent-primary: #6366f1;
-    --accent-secondary: #8b5cf6;
+    --accent-primary: #FF914D;
+    --accent-secondary: #FF3131;
     --accent-cyan: #06b6d4;
     --accent-pink: #ec4899;
-    --accent-orange: #f59e0b;
-    --accent-glow: rgba(99, 102, 241, 0.3);
+    --accent-orange: #FF914D;
+    --accent-glow: rgba(255, 145, 77, 0.3);
     --border-glass: rgba(255, 255, 255, 0.08);
     --border-subtle: rgba(255, 255, 255, 0.05);
+    --logo-color: #ffffff;
     
     /* RGB Glitch Colors */
-    --rgb-red: #ff0040;
-    --rgb-cyan: #00ffff;
-    --rgb-magenta: #ff00ff;
+    --rgb-red: #FF3131;
+    --rgb-cyan: #FF914D;
+    --rgb-magenta: #ff6b6b;
     
     /* Fonts */
     --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -46,5 +47,65 @@
     
     /* Shadows */
     --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.3);
-    --shadow-glow: 0 0 20px var(--accent-orange-glow);
+    --shadow-glow: 0 0 20px var(--accent-glow);
   }
+
+/* Light Theme */
+[data-theme="light"] {
+    --bg-primary: linear-gradient(135deg, #fef7f0 0%, #fff5f5 50%, #fef2f2 100%);
+    --bg-secondary: #ffffff;
+    --bg-tertiary: #fef7f0;
+    --bg-glass: rgba(0, 0, 0, 0.05);
+    --bg-glass-hover: rgba(0, 0, 0, 0.1);
+    --text-primary: #1a1a1a;
+    --text-secondary: #4a5568;
+    --text-muted: #718096;
+    --accent-primary: #FF914D;
+    --accent-secondary: #FF3131;
+    --accent-cyan: #0891b2;
+    --accent-pink: #be185d;
+    --accent-orange: #FF914D;
+    --accent-glow: rgba(255, 145, 77, 0.3);
+    --border-glass: rgba(0, 0, 0, 0.1);
+    --border-subtle: rgba(0, 0, 0, 0.08);
+    --logo-color: #000000;
+    
+    /* RGB Glitch Colors */
+    --rgb-red: #FF3131;
+    --rgb-cyan: #FF914D;
+    --rgb-magenta: #ff6b6b;
+    
+    /* Shadows */
+    --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.15);
+    --shadow-glow: 0 0 25px var(--accent-glow);
+}
+
+/* Old Theme (Purple/Blue) */
+[data-theme="old"] {
+    --bg-primary: #0a0a0f;
+    --bg-secondary: #121218;
+    --bg-tertiary: #1a1a24;
+    --bg-glass: rgba(255, 255, 255, 0.03);
+    --bg-glass-hover: rgba(255, 255, 255, 0.08);
+    --text-primary: #ffffff;
+    --text-secondary: #9ca3af;
+    --text-muted: #6b7280;
+    --accent-primary: #6366f1;
+    --accent-secondary: #8b5cf6;
+    --accent-cyan: #06b6d4;
+    --accent-pink: #ec4899;
+    --accent-orange: #f59e0b;
+    --accent-glow: rgba(99, 102, 241, 0.3);
+    --border-glass: rgba(255, 255, 255, 0.08);
+    --border-subtle: rgba(255, 255, 255, 0.05);
+    --logo-color: #ffffff;
+    
+    /* RGB Glitch Colors */
+    --rgb-red: #ff0040;
+    --rgb-cyan: #00ffff;
+    --rgb-magenta: #ff00ff;
+    
+    /* Shadows */
+    --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.3);
+    --shadow-glow: 0 0 20px var(--accent-glow);
+}

@@ -66,13 +66,14 @@
   background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
   color: white;
   border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
+  box-shadow: 0 4px 15px var(--accent-primary, 0.1);
 }
 
 .modern-button--primary:hover .button-border {
   opacity: 1;
   background: linear-gradient(135deg, var(--accent-secondary), var(--accent-primary));
   box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
 }
 
 /* Secondary Button */
