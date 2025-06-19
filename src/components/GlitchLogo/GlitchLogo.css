@@ -199,6 +199,27 @@
   filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
 }
 
+/* Individual Piece Separation on Hover */
+.glitch-logo:hover .logo-piece.piece-1 {
+  transform: translate(-3px, -3px) rotate(2deg) !important;
+  animation-play-state: paused;
+}
+
+.glitch-logo:hover .logo-piece.piece-2 {
+  transform: translate(-4px, 3px) rotate(-1.5deg) !important;
+  animation-play-state: paused;
+}
+
+.glitch-logo:hover .logo-piece.piece-3 {
+  transform: translate(3px, -2px) rotate(2.5deg) !important;
+  animation-play-state: paused;
+}
+
+.glitch-logo:hover .logo-piece.piece-4 {
+  transform: translate(2px, 3px) rotate(-2deg) !important;
+  animation-play-state: paused;
+}
+
 .glitch-logo:hover .liquid-particle {
   filter: blur(6px);
   opacity: 0.8;
