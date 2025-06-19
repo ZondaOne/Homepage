@@ -7,12 +7,20 @@ import Hero from '../../components/Hero/Hero';
 import AnimatedBackground from '../../components/Background/AnimatedBackground';
 import ProductCard from '../../components/ProductCard/ProductCard';
 import Button from '../../components/Button/Button';
+import Footer from '../../components/Footer/Footer';
 import './Home.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Home: React.FC = () => {
   const sectionsRef = useRef<HTMLElement[]>([]);
+
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   useEffect(() => {
     // Parallax scroll effects for sections
@@ -146,16 +154,16 @@ const Home: React.FC = () => {
               </p>
               <div className="stats-grid">
                 <div className="stat-item glass">
-                  <span className="stat-number">2025</span>
-                  <span className="stat-label">Founded</span>
+                  <span className="stat-number">3</span>
+                  <span className="stat-label">Products</span>
                 </div>
                 <div className="stat-item glass">
                   <span className="stat-number">100%</span>
                   <span className="stat-label">Remote</span>
                 </div>
                 <div className="stat-item glass">
-                  <span className="stat-number">∞</span>
-                  <span className="stat-label">Possibilities</span>
+                  <span className="stat-number">24/7</span>
+                  <span className="stat-label">Innovation</span>
                 </div>
               </div>
             </div>
@@ -240,33 +248,7 @@ const Home: React.FC = () => {
         </div>
       </section>
       
-      <footer className="footer">
-        <div className="container">
-          <div className="footer-content">
-            <div className="footer-left">
-              <div className="footer-logo">
-                <span className="logo-text">ZONDA</span>
-              </div>
-              <p>Empowering the next generation of digital innovation.</p>
-            </div>
-            <div className="footer-right">
-              <div className="footer-links">
-                <a href="#privacy">Privacy Policy</a>
-                <a href="#terms">Terms of Service</a>
-                <a href="#security">Security</a>
-              </div>
-              <div className="footer-social">
-                <a href="#" className="social-link glass glass-hover">LinkedIn</a>
-                <a href="#" className="social-link glass glass-hover">Twitter</a>
-                <a href="#" className="social-link glass glass-hover">GitHub</a>
-              </div>
-            </div>
-          </div>
-          <div className="footer-bottom">
-            <p>&copy; 2025 ZONDA. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
+      <Footer onNavigate={scrollToSection} />
     </div>
   );
 };

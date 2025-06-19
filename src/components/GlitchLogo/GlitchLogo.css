@@ -2,111 +2,188 @@
   position: relative;
   display: inline-block;
   cursor: pointer;
+  overflow: visible;
 }
 
+/* Liquid Metal Waves */
+.liquid-waves {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 120%;
+  height: 120%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.liquid-wave {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  opacity: 0.04;
+  filter: blur(12px);
+  transition: all 0.4s ease-out;
+}
+
+.wave-primary {
+  background: radial-gradient(circle, var(--accent-primary) 0%, transparent 70%);
+  animation: liquidFlow1 8s ease-in-out infinite;
+}
+
+.wave-secondary {
+  background: radial-gradient(circle, var(--accent-secondary) 0%, transparent 80%);
+  animation: liquidFlow2 10s ease-in-out infinite reverse;
+  transform: translate(-50%, -50%) scale(0.8);
+}
+
+.wave-cyan {
+  background: radial-gradient(circle, var(--accent-cyan) 0%, transparent 90%);
+  animation: liquidFlow3 12s ease-in-out infinite;
+  transform: translate(-50%, -50%) scale(0.6);
+}
+
+/* Main Logo Container */
 .logo-main {
   position: relative;
   z-index: 3;
   transition: transform 0.3s ease;
 }
 
-.logo-glitch {
+.main-path {
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.1));
+}
+
+/* RGB Split Layers */
+.logo-split {
   position: absolute;
   top: 0;
   left: 0;
   z-index: 1;
-  opacity: 0;
   mix-blend-mode: screen;
+  pointer-events: none;
+  transition: all 0.2s ease-out;
 }
 
-.logo-glitch-1 {
-  animation: glitch1 2s infinite linear alternate-reverse;
+.split-path {
+  filter: blur(0.5px);
 }
 
-.logo-glitch-2 {
-  animation: glitch2 2s infinite linear alternate-reverse;
+.logo-split-red {
+  z-index: 1;
 }
 
+.logo-split-cyan {
+  z-index: 2;
+}
+
+.logo-split-secondary {
+  z-index: 1;
+}
+
+/* Hover Effects */
 .glitch-logo:hover .logo-main {
-  transform: scale(1.05);
+  transform: scale(1.02);
 }
 
-.glitch-logo:hover .logo-glitch {
-  opacity: 0.8;
+.glitch-logo:hover .main-path {
+  filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.2));
 }
 
-.glitch-logo:hover .logo-glitch-1 {
-  animation: glitch1-hover 0.1s infinite linear alternate-reverse;
+.glitch-logo:hover .liquid-wave {
+  opacity: 0.08;
+  filter: blur(10px);
 }
 
-.glitch-logo:hover .logo-glitch-2 {
-  animation: glitch2-hover 0.1s infinite linear alternate-reverse;
+.glitch-logo:hover .wave-primary {
+  animation-duration: 4s;
 }
 
-@keyframes glitch1 {
-  0%, 14%, 15%, 49%, 50%, 99%, 100% {
-    opacity: 0;
-    transform: translate3d(0, 0, 0) scaleY(1);
-  }
-  1%, 2%, 42% {
-    opacity: 0.4;
-    transform: translate3d(-2px, 0, 0) scaleY(1);
-  }
-  43%, 44% {
-    opacity: 0.6;
-    transform: translate3d(-2px, 0, 0) scaleY(1.12);
-  }
-  16%, 17%, 18%, 19%, 20%, 21% {
-    opacity: 0.4;
-    transform: translate3d(-1px, 0, 0) scaleY(1);
-  }
+.glitch-logo:hover .wave-secondary {
+  animation-duration: 5s;
 }
 
-@keyframes glitch2 {
-  0%, 20%, 21%, 62%, 63%, 99%, 100% {
-    opacity: 0;
-    transform: translate3d(0, 0, 0) scaleX(1);
-  }
-  21% {
-    opacity: 0.5;
-    transform: translate3d(2px, 0, 0) scaleX(1);
-  }
-  22%, 23% {
-    opacity: 0.7;
-    transform: translate3d(2px, 0, 0) scaleX(1.08);
-  }
-  62% {
-    opacity: 0.3;
-    transform: translate3d(1px, 0, 0) scaleX(1);
-  }
+.glitch-logo:hover .wave-cyan {
+  animation-duration: 6s;
 }
 
-@keyframes glitch1-hover {
+/* Liquid Flow Animations */
+@keyframes liquidFlow1 {
   0%, 100% {
-    opacity: 0.6;
-    transform: translate3d(-3px, 1px, 0);
+    transform: translate(-50%, -50%) scale(1) rotate(0deg);
+    opacity: 0.1;
+  }
+  25% {
+    transform: translate(-45%, -55%) scale(1.1) rotate(90deg);
+    opacity: 0.15;
   }
   50% {
-    opacity: 0.8;
-    transform: translate3d(-1px, -1px, 0);
+    transform: translate(-55%, -50%) scale(0.9) rotate(180deg);
+    opacity: 0.12;
+  }
+  75% {
+    transform: translate(-50%, -45%) scale(1.05) rotate(270deg);
+    opacity: 0.18;
   }
 }
 
-@keyframes glitch2-hover {
+@keyframes liquidFlow2 {
   0%, 100% {
-    opacity: 0.5;
-    transform: translate3d(2px, -1px, 0);
+    transform: translate(-50%, -50%) scale(0.8) rotate(0deg);
+    opacity: 0.08;
   }
-  50% {
-    opacity: 0.7;
-    transform: translate3d(1px, 1px, 0);
+  33% {
+    transform: translate(-52%, -48%) scale(0.9) rotate(120deg);
+    opacity: 0.12;
+  }
+  66% {
+    transform: translate(-48%, -52%) scale(0.75) rotate(240deg);
+    opacity: 0.1;
   }
 }
 
-.zonda-logo .logo-path {
-  transition: all 0.3s ease;
+@keyframes liquidFlow3 {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(0.6) rotate(0deg);
+    opacity: 0.06;
+  }
+  40% {
+    transform: translate(-53%, -47%) scale(0.7) rotate(144deg);
+    opacity: 0.1;
+  }
+  80% {
+    transform: translate(-47%, -53%) scale(0.55) rotate(288deg);
+    opacity: 0.08;
+  }
 }
 
-.glitch-logo:hover .logo-main .zonda-logo .logo-path {
-  filter: drop-shadow(0 0 8px var(--accent-glow));
+/* Responsive Design */
+@media (max-width: 768px) {
+  .liquid-waves {
+    width: 110%;
+    height: 110%;
+  }
+  
+  .liquid-wave {
+    filter: blur(6px);
+  }
+  
+  .glitch-logo:hover .liquid-wave {
+    filter: blur(4px);
+  }
+}
+
+@media (max-width: 480px) {
+  .liquid-waves {
+    width: 105%;
+    height: 105%;
+  }
+  
+  .split-path {
+    filter: blur(0.3px);
+  }
 }
