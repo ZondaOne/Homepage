@@ -1,5 +1,5 @@
 import React from 'react';
-import { ExternalLink, Mail, Globe } from 'lucide-react';
+import { ExternalLink} from 'lucide-react';
 import Button from '../Button/Button';
 import './Footer.css';
 
