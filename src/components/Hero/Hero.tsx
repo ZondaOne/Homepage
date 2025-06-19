@@ -60,7 +60,7 @@ const Hero: React.FC = () => {
       <div className="hero-container">
         <div className="hero-content">
           <div className="hero-logo-section">
-            <GlitchLogo size={320} />
+            <GlitchLogo size={340} />
           </div>
 
           <motion.h1 

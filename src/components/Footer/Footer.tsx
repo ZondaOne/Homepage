@@ -82,9 +82,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 >
                   Contact
                 </button>
-                <a href="#careers" className="footer-link">
-                  Careers
-                </a>
+
               </div>
             </div>
             
@@ -99,24 +97,6 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   onClick={() => window.open('https://linkedin.com', '_blank')}
                 >
                   LinkedIn
-                </Button>
-                <Button 
-                  variant="ghost" 
-                  size="sm" 
-                  icon={ExternalLink} 
-                  iconPosition="left"
-                  onClick={() => window.open('https://twitter.com', '_blank')}
-                >
-                  Twitter
-                </Button>
-                <Button 
-                  variant="ghost" 
-                  size="sm" 
-                  icon={ExternalLink} 
-                  iconPosition="left"
-                  onClick={() => window.open('https://github.com', '_blank')}
-                >
-                  GitHub
                 </Button>
               </div>
             </div>

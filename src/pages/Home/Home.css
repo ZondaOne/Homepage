@@ -342,6 +342,52 @@
     transform: translateY(-2px);
   }
   
+  .form-success {
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    color: rgb(16, 185, 129);
+    padding: var(--space-sm);
+    border-radius: var(--radius-sm);
+    margin-bottom: var(--space-md);
+    text-align: center;
+    font-size: 0.9rem;
+  }
+  
+  .form-error {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: rgb(239, 68, 68);
+    padding: var(--space-sm);
+    border-radius: var(--radius-sm);
+    margin-bottom: var(--space-md);
+    text-align: center;
+    font-size: 0.9rem;
+  }
+  
+  .form-success-message {
+    text-align: center;
+    padding: var(--space-xl);
+    border-radius: var(--radius-md);
+  }
+  
+  .form-success-message h3 {
+    color: rgb(16, 185, 129);
+    margin-bottom: var(--space-sm);
+    font-size: 1.25rem;
+  }
+  
+  .form-success-message p {
+    color: var(--text-secondary);
+    opacity: 0.8;
+  }
+  
+  .validation-error {
+    color: rgb(239, 68, 68);
+    font-size: 0.8rem;
+    margin-top: 4px;
+    display: block;
+  }
+  
   
   /* Responsive Design */
   @media (max-width: 768px) {

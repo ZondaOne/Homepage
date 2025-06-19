@@ -12,6 +12,7 @@ interface ButtonProps {
   onClick?: () => void;
   disabled?: boolean;
   className?: string;
+  type?: 'button' | 'submit' | 'reset';
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -22,7 +23,8 @@ const Button: React.FC<ButtonProps> = ({
   iconPosition = 'left',
   onClick,
   disabled = false,
-  className = ''
+  className = '',
+  type = 'button'
 }) => {
   const buttonVariants = {
     hover: {
@@ -58,6 +60,7 @@ const Button: React.FC<ButtonProps> = ({
       whileTap="tap"
       onClick={onClick}
       disabled={disabled}
+      type={type}
     >
       {variant === 'neon' && (
         <motion.div 

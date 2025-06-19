@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Palette, Zap, Shield, Globe } from 'lucide-react';
+import { useForm, ValidationError } from '@formspree/react';
 import Navbar from '../../components/Navbar/Navbar';
 import Hero from '../../components/Hero/Hero';
 import AnimatedBackground from '../../components/Background/AnimatedBackground';
@@ -14,6 +15,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Home: React.FC = () => {
   const sectionsRef = useRef<HTMLElement[]>([]);
+  const [state, handleSubmit] = useForm(process.env.REACT_APP_FORMSPREE_ID!);
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -144,13 +146,13 @@ const Home: React.FC = () => {
           <div className="content-grid">
             <div className="content-left">
               <h2 className="section-title animated-gradient-text">
-                Born Digital, Built for Tomorrow
+                Built for Innovation, Tailored for You
               </h2>
               <p className="section-description">
-                We're a young, ambitious software startup on a mission to reshape how 
-                people interact with technology. Founded by passionate developers and 
-                designers, ZONDA combines cutting-edge AI, intuitive design, and 
-                lightning-fast performance to create tools that actually work.
+                We're a young startup focused on developing innovative applications and 
+                delivering custom solutions to individuals and companies. ZONDA specializes 
+                in creating powerful web applications using a diverse technological stack, 
+                adapting our approach to meet each project's unique needs and requirements.
               </p>
               <div className="stats-grid">
                 <div className="stat-item glass">
@@ -170,18 +172,18 @@ const Home: React.FC = () => {
             <div className="content-right">
               <div className="feature-card glass glass-hover">
                 <div className="feature-icon"><Zap size={24} /></div>
-                <h3>Rapid Innovation</h3>
-                <p>We ship fast, iterate quickly, and never stop improving</p>
+                <h3>Custom Solutions</h3>
+                <p>Tailored web applications designed to meet your specific business needs</p>
               </div>
               <div className="feature-card glass glass-hover">
                 <div className="feature-icon"><Globe size={24} /></div>
-                <h3>Global Mindset</h3>
-                <p>Building for users worldwide with localized experiences</p>
+                <h3>Tech Versatility</h3>
+                <p>Working with diverse technologies to choose the best stack for each project</p>
               </div>
               <div className="feature-card glass glass-hover">
                 <div className="feature-icon"><Shield size={24} /></div>
-                <h3>User-First</h3>
-                <p>Every decision is made with our users' best interests in mind</p>
+                <h3>Client-Focused</h3>
+                <p>From individuals to enterprises, we deliver solutions that drive results</p>
               </div>
             </div>
           </div>
@@ -207,42 +209,82 @@ const Home: React.FC = () => {
             </div>
             
             <div className="contact-right">
-              <form className="contact-form glass">
-                <div className="form-group">
-                  <input 
-                    type="text" 
-                    placeholder="Your Name" 
-                    className="form-input glass"
-                    required 
-                  />
+              {state.succeeded ? (
+                <div className="form-success-message glass">
+                  <h3>✓ Thank you for your message!</h3>
+                  <p>We've received your message and will get back to you soon.</p>
                 </div>
-                <div className="form-group">
-                  <input 
-                    type="email" 
-                    placeholder="Email Address" 
-                    className="form-input glass"
-                    required 
-                  />
-                </div>
-                <div className="form-group">
-                  <input 
-                    type="text" 
-                    placeholder="Company" 
-                    className="form-input glass"
-                  />
-                </div>
-                <div className="form-group">
-                  <textarea 
-                    placeholder="What's on your mind?" 
-                    className="form-textarea glass"
-                    rows={4}
-                    required
-                  ></textarea>
-                </div>
-                <Button variant="primary">
-                  Send Message
-                </Button>
-              </form>
+              ) : (
+                <form className="contact-form glass" onSubmit={handleSubmit}>
+                  <div className="form-group">
+                    <input 
+                      type="text" 
+                      name="name"
+                      placeholder="Your Name" 
+                      className="form-input glass"
+                      required 
+                    />
+                    <ValidationError 
+                      prefix="Name" 
+                      field="name"
+                      errors={state.errors}
+                      className="validation-error"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <input 
+                      type="email" 
+                      name="email"
+                      placeholder="Email Address" 
+                      className="form-input glass"
+                      required 
+                    />
+                    <ValidationError 
+                      prefix="Email" 
+                      field="email"
+                      errors={state.errors}
+                      className="validation-error"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <input 
+                      type="text" 
+                      name="company"
+                      placeholder="Company (optional)" 
+                      className="form-input glass"
+                    />
+                    <ValidationError 
+                      prefix="Company" 
+                      field="company"
+                      errors={state.errors}
+                      className="validation-error"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <textarea 
+                      name="message"
+                      placeholder="What's on your mind?" 
+                      className="form-textarea glass"
+                      rows={4}
+                      required
+                    ></textarea>
+                    <ValidationError 
+                      prefix="Message" 
+                      field="message"
+                      errors={state.errors}
+                      className="validation-error"
+                    />
+                  </div>
+                  
+                  <Button 
+                    variant="primary" 
+                    type="submit" 
+                    disabled={state.submitting}
+                  >
+                    {state.submitting ? 'Sending...' : 'Send Message'}
+                  </Button>
+                </form>
+              )}
             </div>
           </div>
         </div>
