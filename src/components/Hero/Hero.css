@@ -71,9 +71,7 @@
   transition: opacity 0.3s ease;
 }
 
-.hero-title:hover::after {
-  opacity: 1;
-}
+
 
 .hero-subtitle {
   font-size: 1.125rem;

@@ -129,8 +129,8 @@
   transform-origin: center;
 }
 
-/* Liquid Metal Split Layers */
-.liquid-split-layer {
+/* Logo Split Layers for RGB Effect */
+.logo-split-layer {
   position: absolute;
   top: 0;
   left: 0;
@@ -141,12 +141,13 @@
   mix-blend-mode: screen;
 }
 
-.liquid-split-particle {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(3px);
-  opacity: 0.7;
+.split-logo-svg {
+  filter: blur(0.5px);
   transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.split-logo-piece {
+  opacity: 1;
 }
 
 /* RGB Split Layers */

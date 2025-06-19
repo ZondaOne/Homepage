@@ -154,31 +154,47 @@ const GlitchLogo: React.FC<GlitchLogoProps> = ({ size = 200, className = '' }) =
         />
       </motion.div>
 
-      {/* Liquid Metal RGB Split Layers */}
+      {/* RGB Split Logo Layers */}
       <div 
-        className="liquid-split-layer"
+        className="logo-split-layer logo-split-primary"
         style={{
-          transform: `translate(${mousePosition.x * 3}px, ${mousePosition.y * 2}px)`,
-          opacity: Math.max(0.4, Math.min(0.8, Math.abs(mousePosition.x) * 0.5 + Math.abs(mousePosition.y) * 0.4))
+          transform: `translate(${mousePosition.x * 6}px, ${mousePosition.y * 4}px)`,
+          opacity: Math.max(0.4, Math.min(0.8, Math.abs(mousePosition.x) * 0.6 + Math.abs(mousePosition.y) * 0.5))
         }}
       >
-        <div className="liquid-split-particle particle-primary" style={{top: '30%', left: '20%', width: '35px', height: '35px', background: 'radial-gradient(circle, var(--accent-primary) 0%, transparent 60%)'}} />
-        <div className="liquid-split-particle particle-secondary" style={{top: '60%', left: '70%', width: '25px', height: '25px', background: 'radial-gradient(circle, var(--accent-primary) 0%, transparent 60%)'}} />
-        <div className="liquid-split-particle particle-accent" style={{top: '80%', left: '40%', width: '20px', height: '20px', background: 'radial-gradient(circle, var(--accent-primary) 0%, transparent 60%)'}} />
-        <div className="liquid-split-particle particle-pink" style={{top: '20%', left: '80%', width: '30px', height: '30px', background: 'radial-gradient(circle, var(--accent-primary) 0%, transparent 60%)'}} />
+        <svg 
+          xmlns="http://www.w3.org/2000/svg" 
+          viewBox="0 0 500 500" 
+          width={size} 
+          height={size}
+          className="split-logo-svg"
+        >
+          <path d="M 88.478 186.141 L 147.278 101.441 L 257.616 101.606 L 316.242 186.175 L 88.478 186.141 Z" fill="var(--accent-primary)" className="split-logo-piece" />
+          <path d="M 151.162 214.519 L 254.816 214.785 L 123.855 401.854 L 88.385 304.265 L 151.162 214.519 Z" fill="var(--accent-primary)" className="split-logo-piece" />
+          <path d="M 375.69 100 L 412.058 198.385 L 348.108 288.629 L 243.925 288.629 L 375.69 100 Z" fill="var(--accent-primary)" className="split-logo-piece" />
+          <path d="M 183.137 316.443 L 410.625 316.222 L 353.087 400.362 L 241.446 400.15 L 183.137 316.443 Z" fill="var(--accent-primary)" className="split-logo-piece" />
+        </svg>
       </div>
 
       <div 
-        className="liquid-split-layer"
+        className="logo-split-layer logo-split-secondary"
         style={{
-          transform: `translate(${mousePosition.x * -2}px, ${mousePosition.y * -2.5}px)`,
-          opacity: Math.max(0.3, Math.min(0.7, Math.abs(mousePosition.x) * 0.4 + Math.abs(mousePosition.y) * 0.3))
+          transform: `translate(${mousePosition.x * -4}px, ${mousePosition.y * -5}px)`,
+          opacity: Math.max(0.3, Math.min(0.7, Math.abs(mousePosition.x) * 0.5 + Math.abs(mousePosition.y) * 0.4))
         }}
       >
-        <div className="liquid-split-particle particle-primary" style={{top: '30%', left: '20%', width: '35px', height: '35px', background: 'radial-gradient(circle, var(--accent-secondary) 0%, transparent 60%)'}} />
-        <div className="liquid-split-particle particle-secondary" style={{top: '60%', left: '70%', width: '25px', height: '25px', background: 'radial-gradient(circle, var(--accent-secondary) 0%, transparent 60%)'}} />
-        <div className="liquid-split-particle particle-accent" style={{top: '80%', left: '40%', width: '20px', height: '20px', background: 'radial-gradient(circle, var(--accent-secondary) 0%, transparent 60%)'}} />
-        <div className="liquid-split-particle particle-pink" style={{top: '20%', left: '80%', width: '30px', height: '30px', background: 'radial-gradient(circle, var(--accent-secondary) 0%, transparent 60%)'}} />
+        <svg 
+          xmlns="http://www.w3.org/2000/svg" 
+          viewBox="0 0 500 500" 
+          width={size} 
+          height={size}
+          className="split-logo-svg"
+        >
+          <path d="M 88.478 186.141 L 147.278 101.441 L 257.616 101.606 L 316.242 186.175 L 88.478 186.141 Z" fill="var(--accent-secondary)" className="split-logo-piece" />
+          <path d="M 151.162 214.519 L 254.816 214.785 L 123.855 401.854 L 88.385 304.265 L 151.162 214.519 Z" fill="var(--accent-secondary)" className="split-logo-piece" />
+          <path d="M 375.69 100 L 412.058 198.385 L 348.108 288.629 L 243.925 288.629 L 375.69 100 Z" fill="var(--accent-secondary)" className="split-logo-piece" />
+          <path d="M 183.137 316.443 L 410.625 316.222 L 353.087 400.362 L 241.446 400.15 L 183.137 316.443 Z" fill="var(--accent-secondary)" className="split-logo-piece" />
+        </svg>
       </div>
 
       {/* Main Logo Pieces */}
