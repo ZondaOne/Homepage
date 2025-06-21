@@ -1,0 +1,43 @@
+.pixelperfect-logo {
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.pixelperfect-logo .logo-path {
+  fill: var(--accent-primary);
+  stroke: var(--accent-primary);
+  stroke-width: 2;
+  paint-order: stroke;
+  transition: all 0.3s ease;
+}
+
+/* Hover effects */
+.pixelperfect-logo:hover .logo-path {
+  fill: var(--accent-secondary);
+  stroke: var(--accent-secondary);
+  transform: scale(1.05);
+}
+
+/* Theme-dependent colors */
+[data-theme="light"] .pixelperfect-logo .logo-path {
+  fill: var(--accent-primary);
+  stroke: var(--accent-primary);
+}
+
+[data-theme="old"] .pixelperfect-logo .logo-path {
+  fill: var(--accent-primary);
+  stroke: var(--accent-primary);
+}
+
+/* Dark theme (default) */
+.pixelperfect-logo .logo-path {
+  fill: var(--accent-primary);
+  stroke: var(--accent-primary);
+}
+
+/* Animation for product cards */
+.product-card:hover .pixelperfect-logo .logo-path {
+  fill: var(--accent-secondary);
+  stroke: var(--accent-secondary);
+  filter: drop-shadow(0 0 8px var(--accent-glow));
+}

@@ -1,13 +1,15 @@
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Palette, Zap, Shield, Globe } from 'lucide-react';
+import { Zap, Shield, Globe } from 'lucide-react';
 import { useForm, ValidationError } from '@formspree/react';
 import Navbar from '../../components/Navbar/Navbar';
 import Hero from '../../components/Hero/Hero';
 import AnimatedBackground from '../../components/Background/AnimatedBackground';
 import ProductCard from '../../components/ProductCard/ProductCard';
 import Button from '../../components/Button/Button';
+import Reviews from '../../components/Reviews/Reviews';
+import PixelPerfectLogo from '../../components/PixelPerfectLogo/PixelPerfectLogo';
 import Footer from '../../components/Footer/Footer';
 import './Home.css';
 
@@ -96,7 +98,7 @@ const Home: React.FC = () => {
               ]}
               status="live"
               gradient="linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))"
-              icon={<Palette size={24} />}
+              icon={<PixelPerfectLogo size={24} />}
               onTryNow={() => window.open('https://pixelperfect.zonda.com', '_blank')}
               onLearnMore={() => console.log('Learn more about PixelPerfect')}
             />
@@ -190,6 +192,7 @@ const Home: React.FC = () => {
         </div>
       </section>
       
+      <Reviews />
       
       <section 
         id="contact" 
