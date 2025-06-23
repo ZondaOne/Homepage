@@ -99,7 +99,7 @@ const Home: React.FC = () => {
               status="live"
               gradient="linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))"
               icon={<PixelPerfectLogo size={24} />}
-              onTryNow={() => window.open('https://pixelperfect.zonda.com', '_blank')}
+              onTryNow={() => window.open('https://pixelperfect.zonda.one', '_blank')}
               onLearnMore={() => console.log('Learn more about PixelPerfect')}
             />
 
@@ -116,7 +116,7 @@ const Home: React.FC = () => {
               status="beta"
               gradient="linear-gradient(135deg, var(--accent-cyan), var(--accent-primary))"
               icon={<Zap size={24} />}
-              onTryNow={() => window.open('https://flow.zonda.com', '_blank')}
+              onTryNow={() => window.open('https://flow.zonda.one', '_blank')}
               onLearnMore={() => console.log('Learn more about ZondaFlow')}
             />
 
