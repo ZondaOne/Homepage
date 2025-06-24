@@ -82,7 +82,12 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 >
                   Contact
                 </button>
-
+                <a 
+                  href="mailto:team@zonda.one" 
+                  className="footer-link"
+                >
+                  team@zonda.one
+                </a>
               </div>
             </div>
             
@@ -94,7 +99,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   size="sm" 
                   icon={ExternalLink} 
                   iconPosition="left"
-                  onClick={() => window.open('https://linkedin.com', '_blank')}
+                  onClick={() => window.open('https://www.linkedin.com/company/zonda-one/ ', '_blank')}
                 >
                   LinkedIn
                 </Button>

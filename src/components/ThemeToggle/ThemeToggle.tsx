@@ -9,12 +9,12 @@ interface ThemeToggleProps {
 type Theme = 'light' | 'dark' | 'old' | 'system';
 
 const ThemeToggle: React.FC<ThemeToggleProps> = ({ className = '' }) => {
-  const [theme, setTheme] = useState<Theme>('dark');
+  const [theme, setTheme] = useState<Theme>('system');
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    // Get theme from localStorage or default to 'dark'
-    const savedTheme = localStorage.getItem('theme') as Theme || 'dark';
+    // Get theme from localStorage or default to 'system'
+    const savedTheme = localStorage.getItem('theme') as Theme || 'system';
     setTheme(savedTheme);
     applyTheme(savedTheme);
   }, []);

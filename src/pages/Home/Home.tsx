@@ -8,7 +8,7 @@ import Hero from '../../components/Hero/Hero';
 import AnimatedBackground from '../../components/Background/AnimatedBackground';
 import ProductCard from '../../components/ProductCard/ProductCard';
 import Button from '../../components/Button/Button';
-import Reviews from '../../components/Reviews/Reviews';
+// import Reviews from '../../components/Reviews/Reviews';
 import PixelPerfectLogo from '../../components/PixelPerfectLogo/PixelPerfectLogo';
 import Footer from '../../components/Footer/Footer';
 import './Home.css';
@@ -192,7 +192,7 @@ const Home: React.FC = () => {
         </div>
       </section>
       
-      <Reviews />
+      {/* <Reviews /> */}
       
       <section 
         id="contact" 

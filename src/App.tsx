@@ -9,7 +9,7 @@ function App() {
     <Router>
       <div className="App">
         {/* Debug Theme Toggle */}
-        <ThemeToggle className="debug" />
+        {/* <ThemeToggle className="debug" /> */}
         
         <Routes>
           <Route path="/" element={<Home />} />
