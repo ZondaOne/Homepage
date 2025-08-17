@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Zap, Shield, Globe } from 'lucide-react';
@@ -18,6 +19,8 @@ gsap.registerPlugin(ScrollTrigger);
 const Home: React.FC = () => {
   const sectionsRef = useRef<HTMLElement[]>([]);
   const [state, handleSubmit] = useForm(process.env.REACT_APP_FORMSPREE_ID!);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -25,6 +28,17 @@ const Home: React.FC = () => {
       element.scrollIntoView({ behavior: 'smooth' });
     }
   };
+
+  // Handle hash-based navigation
+  useEffect(() => {
+    if (location.hash) {
+      const sectionId = location.hash.replace('#', '');
+      // Wait a bit for the page to render
+      setTimeout(() => {
+        scrollToSection(sectionId);
+      }, 300);
+    }
+  }, [location.hash]);
 
   useEffect(() => {
     // Parallax scroll effects for sections
@@ -96,44 +110,43 @@ const Home: React.FC = () => {
                 "Batch processing capabilities",
                 "Cloud-based collaboration"
               ]}
-              status="live"
+              status="beta"
               gradient="linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))"
               icon={<PixelPerfectLogo size={24} />}
               onTryNow={() => window.open('https://pixelperfect.zonda.one', '_blank')}
-              onLearnMore={() => console.log('Learn more about PixelPerfect')}
+              onLearnMore={() => navigate('/products/pixelperfect')}
             />
 
             <ProductCard
-              title="ZondaFlow"
-              description="Next-generation workflow automation platform that streamlines business processes with intelligent orchestration."
+              title="Comerzia"
+              description="Web app for managing orders and clients with dashboard for insights and automatic notification via email or SMS."
               features={[
-                "Visual workflow builder",
-                "API integrations",
-                "Real-time monitoring",
-                "Custom triggers & actions",
-                "Analytics dashboard"
+                "Order management system",
+                "Client database",
+                "Analytics dashboard",
+                "Email notifications",
+                "SMS notifications"
               ]}
               status="beta"
               gradient="linear-gradient(135deg, var(--accent-cyan), var(--accent-primary))"
               icon={<Zap size={24} />}
-              onTryNow={() => window.open('https://flow.zonda.one', '_blank')}
-              onLearnMore={() => console.log('Learn more about ZondaFlow')}
+              onLearnMore={() => navigate('/products/comerzia')}
             />
 
             <ProductCard
-              title="SecureVault"
-              description="Enterprise-grade security platform providing comprehensive protection for digital assets and sensitive data."
+              title="ComChat"
+              description="A fully customizable chatbot for commerces and companies. Can be text or multimodal, have specific context for any type of activity and delegate to professional technical for help when necessary. Support for local LLMs for maximum privacy if required."
               features={[
-                "End-to-end encryption",
-                "Multi-factor authentication",
-                "Threat detection",
-                "Compliance reporting",
-                "Zero-trust architecture"
+                "Text and multimodal support",
+                "Customizable for any business",
+                "Professional technical delegation",
+                "Local LLM support",
+                "Maximum privacy protection"
               ]}
-              status="coming-soon"
+              status="beta"
               gradient="linear-gradient(135deg, var(--accent-pink), var(--accent-secondary))"
               icon={<Shield size={24} />}
-              onLearnMore={() => console.log('Learn more about SecureVault')}
+              onLearnMore={() => navigate('/products/comchat')}
             />
           </div>
         </div>
