@@ -10,6 +10,7 @@ import ProductCard from '../../components/ProductCard/ProductCard';
 import Button from '../../components/Button/Button';
 // import Reviews from '../../components/Reviews/Reviews';
 import PixelPerfectLogo from '../../components/PixelPerfectLogo/PixelPerfectLogo';
+import ComerziaLogo from '../../components/ComerziaLogo/ComerziaLogo';
 import Footer from '../../components/Footer/Footer';
 import './Home.css';
 
@@ -110,7 +111,7 @@ const Home: React.FC = () => {
               title="Comerzia"
               subtitle="Business management that works"
               gradient="linear-gradient(135deg, #007AFF, #FF914D)"
-              icon={<Zap size={64} />}
+              icon={<ComerziaLogo size={64} />}
               onLearnMore={() => navigate('/products/comerzia')}
             />
 

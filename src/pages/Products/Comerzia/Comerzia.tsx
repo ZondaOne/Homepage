@@ -11,19 +11,13 @@ import {
   Zap,
   ArrowRight,
   ExternalLink,
-  Database,
-  Smartphone,
-  Shield,
-  Workflow,
   Bell,
   TrendingUp,
-  Package,
-  Calendar
+  Brain
 } from 'lucide-react';
 import Navbar from '../../../components/Navbar/Navbar';
-import AnimatedBackground from '../../../components/Background/AnimatedBackground';
-import ParallaxCarousel from '../../../components/ParallaxCarousel/ParallaxCarousel';
 import Button from '../../../components/Button/Button';
+import ComerziaLogo from '../../../components/ComerziaLogo/ComerziaLogo';
 import Footer from '../../../components/Footer/Footer';
 import './Comerzia.css';
 
@@ -78,109 +72,31 @@ const Comerzia: React.FC = () => {
     }
   };
 
-  const carouselImages = [
-    {
-      src: "/comerzia/homepage.png",
-      alt: "Comerzia Homepage",
-      title: "Welcome Dashboard",
-      description: "Clean and modern interface for business management"
-    },
-    {
-      src: "/comerzia/dashboard.png",
-      alt: "Comerzia Dashboard Overview",
-      title: "Comprehensive Dashboard",
-      description: "Get real-time insights into your business performance"
-    },
-    {
-      src: "/comerzia/orders-table.png",
-      alt: "Order Management Interface",
-      title: "Order Management",
-      description: "Streamlined workflow for processing and tracking orders"
-    },
-    {
-      src: "/comerzia/clients.png",
-      alt: "Client Database",
-      title: "Client Management",
-      description: "Organize and manage your customer relationships"
-    }
-  ];
-
-  const architectureComponents = [
-    {
-      icon: <Database size={32} />,
-      title: "Customer Database",
-      description: "Centralized customer data management with advanced search and segmentation",
-      tech: "PostgreSQL, Redis"
-    },
-    {
-      icon: <Workflow size={32} />,
-      title: "Order Processing Engine",
-      description: "Automated workflow system for order lifecycle management",
-      tech: "Node.js, Bull Queue"
-    },
-    {
-      icon: <Bell size={32} />,
-      title: "Notification Service",
-      description: "Multi-channel communication system with smart triggers",
-      tech: "Twilio, SendGrid"
-    },
-    {
-      icon: <Shield size={32} />,
-      title: "Security & Analytics",
-      description: "Real-time analytics with enterprise-grade security",
-      tech: "Elasticsearch, JWT"
-    }
-  ];
-
   const features = [
     {
-      icon: <ShoppingCart size={24} />,
-      title: "Order Management System",
-      description: "Complete order lifecycle management from creation to fulfillment with real-time status tracking and automated workflows.",
-      benefits: ["Order tracking", "Status automation", "Fulfillment management"]
+      icon: <Users size={32} />,
+      title: "Client Management",
+      description: "Organize and track all your customers in one place. View contact details, order history, and important notes."
     },
     {
-      icon: <Users size={24} />,
-      title: "Client Database",
-      description: "Comprehensive customer relationship management with detailed profiles, purchase history, and segmentation tools.",
-      benefits: ["Customer profiles", "Purchase history", "Smart segmentation"]
+      icon: <ShoppingCart size={32} />,
+      title: "Order Tracking",
+      description: "Manage orders from start to finish. Track status, update details, and keep everything organized."
     },
     {
-      icon: <BarChart3 size={24} />,
-      title: "Analytics Dashboard",
-      description: "Real-time business insights with customizable reports, sales analytics, and performance metrics.",
-      benefits: ["Real-time insights", "Custom reports", "Performance tracking"]
+      icon: <BarChart3 size={32} />,
+      title: "Dashboard & Insights",
+      description: "Visual charts and reports to understand your business. See sales trends, customer patterns, and key metrics."
     },
     {
-      icon: <Mail size={24} />,
+      icon: <Mail size={32} />,
       title: "Email Notifications",
-      description: "Automated email communication system with customizable templates and trigger-based messaging.",
-      benefits: ["Automated emails", "Custom templates", "Smart triggers"]
-    },
-    {
-      icon: <MessageSquare size={24} />,
-      title: "SMS Notifications",
-      description: "Direct SMS communication for urgent updates, order confirmations, and customer engagement.",
-      benefits: ["Instant delivery", "Order updates", "Customer engagement"]
-    },
-    {
-      icon: <TrendingUp size={24} />,
-      title: "Business Intelligence",
-      description: "Advanced analytics and forecasting tools to help you make data-driven business decisions.",
-      benefits: ["Sales forecasting", "Trend analysis", "ROI tracking"]
+      description: "Automatically notify clients about their orders via email. Customizable templates for different scenarios."
     }
-  ];
-
-  const stats = [
-    { number: "99.9%", label: "Uptime" },
-    { number: "50%", label: "Time Saved" },
-    { number: "24/7", label: "Support" },
-    { number: "< 2s", label: "Response Time" }
   ];
 
   return (
     <div className="comerzia-page">
-      <AnimatedBackground />
       <Navbar />
       
       {/* Hero Section */}
@@ -192,191 +108,67 @@ const Comerzia: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <div className="hero-icon">
-              <Zap size={64} />
+            <div className="hero-visual">
+              <ComerziaLogo size={80} />
             </div>
-            <h1 className="hero-title animated-gradient-text-fast">Comerzia</h1>
-            <p className="hero-subtitle">
-              Web app for managing orders and clients with dashboard for insights and 
-              <span className="animated-gradient-subtle"> automatic notification</span> via email or SMS
+            <h1 className="section-title">Comerzia</h1>
+            <p className="hero-description">
+              Business management app for handling clients and orders. 
+              Get insights through dashboard charts and automatically notify customers about their orders.
             </p>
-            <div className="hero-status">
-              <span className="status-badge beta">Beta</span>
-            </div>
             <div className="hero-actions">
               <Button
-                variant="neon"
+                variant="primary"
                 size="lg"
                 icon={ExternalLink}
                 iconPosition="right"
-                onClick={() => console.log('Join Beta')}
+                onClick={() => window.open('#', '_blank')}
               >
-                Join Beta Program
+                Try Comerzia
               </Button>
               <Button
-                variant="ghost"
+                variant="secondary"
                 size="lg"
                 icon={ArrowRight}
                 iconPosition="right"
                 onClick={() => scrollToSection('features')}
               >
-                Explore Features
+                See Features
               </Button>
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Stats Section */}
+      {/* What it does Section */}
       <section 
-        id="stats" 
-        className="section stats-section" 
-        ref={addToRefs}
-      >
-        <div className="container">
-          <div className="stats-grid">
-            {stats.map((stat, index) => (
-              <motion.div
-                key={index}
-                className="stat-card glass glass-hover"
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <div className="stat-number animated-gradient-text">{stat.number}</div>
-                <div className="stat-label">{stat.label}</div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Overview Section */}
-      <section 
-        id="overview" 
-        className="section overview-section" 
-        ref={addToRefs}
-      >
-        <div className="container">
-          <div className="overview-content">
-            <div className="overview-text">
-              <h2 className="section-title animated-gradient-text">Complete Business Management Solution</h2>
-              <p className="section-description">
-                Comerzia streamlines your entire business operation with intelligent order management, 
-                comprehensive client database, and actionable insights. From order creation to customer 
-                communication, everything you need is unified in one powerful platform.
-              </p>
-              <div className="overview-highlights">
-                <div className="highlight-item">
-                  <Package size={20} />
-                  <span>Streamlined order processing</span>
-                </div>
-                <div className="highlight-item">
-                  <Users size={20} />
-                  <span>Centralized customer management</span>
-                </div>
-                <div className="highlight-item">
-                  <Calendar size={20} />
-                  <span>Automated notifications</span>
-                </div>
-              </div>
-            </div>
-            <div className="overview-visual">
-              <div className="feature-showcase glass">
-                <div className="showcase-header">
-                  <h3>Dashboard Preview</h3>
-                </div>
-                <div className="showcase-content">
-                  <div className="metric-row">
-                    <span>Orders Today</span>
-                    <span className="metric-value">127</span>
-                  </div>
-                  <div className="metric-row">
-                    <span>New Customers</span>
-                    <span className="metric-value">23</span>
-                  </div>
-                  <div className="metric-row">
-                    <span>Revenue</span>
-                    <span className="metric-value">$12,450</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Product Gallery */}
-      <section 
-        id="gallery" 
-        className="section gallery-section" 
-        ref={addToRefs}
-      >
-        <div className="container">
-          <ParallaxCarousel
-            images={carouselImages}
-            title="Experience Comerzia in Action"
-            subtitle="Discover how intelligent automation and insightful analytics transform your business operations"
-          />
-        </div>
-      </section>
-
-      {/* Architecture Section */}
-      <section 
-        id="architecture" 
-        className="section architecture-section" 
+        id="about" 
+        className="section about-section" 
         ref={addToRefs}
       >
         <div className="container">
           <div className="section-header">
-            <h2 className="section-title animated-gradient-text">Built for Scale & Performance</h2>
-            <p className="section-subtitle">
-              Enterprise-grade architecture designed to grow with your business while maintaining peak performance
+            <h2 className="section-title">What it does</h2>
+            <p className="section-description">
+              Comerzia helps small to medium businesses organize their operations. 
+              Track customers, manage orders, and stay connected with automatic notifications.
             </p>
           </div>
 
-          <div className="architecture-grid">
-            {architectureComponents.map((component, index) => (
-              <motion.div
-                key={index}
-                className="architecture-card glass glass-hover"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <div className="arch-icon">
-                  {component.icon}
-                </div>
-                <h3>{component.title}</h3>
-                <p>{component.description}</p>
-                <div className="tech-stack">
-                  <span className="tech-badge">{component.tech}</span>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          <div className="integration-flow glass">
-            <h3>Integration Ecosystem</h3>
-            <div className="integration-grid">
-              <div className="integration-item">
-                <Mail size={24} />
-                <span>Email Services</span>
-              </div>
-              <div className="integration-item">
-                <Smartphone size={24} />
-                <span>SMS Gateway</span>
-              </div>
-              <div className="integration-item">
-                <ShoppingCart size={24} />
-                <span>E-commerce</span>
-              </div>
-              <div className="integration-item">
-                <BarChart3 size={24} />
-                <span>Analytics</span>
-              </div>
+          <div className="about-stats">
+            <div className="stat-card">
+              <div className="stat-number">Web</div>
+              <div className="stat-label">Application</div>
+            </div>
+            <div className="stat-divider"></div>
+            <div className="stat-card">
+              <div className="stat-number">Live</div>
+              <div className="stat-label">Deployed</div>
+            </div>
+            <div className="stat-divider"></div>
+            <div className="stat-card">
+              <div className="stat-number">4</div>
+              <div className="stat-label">Core features</div>
             </div>
           </div>
         </div>
@@ -390,9 +182,9 @@ const Comerzia: React.FC = () => {
       >
         <div className="container">
           <div className="section-header">
-            <h2 className="section-title animated-gradient-text">Comprehensive Feature Set</h2>
-            <p className="section-subtitle">
-              Everything you need to manage orders, customers, and communications in one integrated platform
+            <h2 className="section-title">Features</h2>
+            <p className="section-description">
+              Essential tools for managing your business operations efficiently.
             </p>
           </div>
 
@@ -400,68 +192,72 @@ const Comerzia: React.FC = () => {
             {features.map((feature, index) => (
               <motion.div
                 key={index}
-                className="feature-card glass glass-hover"
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
+                className="feature-card"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
-                <div className="feature-header">
-                  <div className="feature-icon">
-                    {feature.icon}
-                  </div>
-                  <h3>{feature.title}</h3>
+                <div className="feature-accent"></div>
+                <div className="feature-icon">
+                  {feature.icon}
                 </div>
+                <h3 className="feature-title">{feature.title}</h3>
                 <p className="feature-description">{feature.description}</p>
-                <ul className="feature-benefits">
-                  {feature.benefits.map((benefit, benefitIndex) => (
-                    <li key={benefitIndex}>{benefit}</li>
-                  ))}
-                </ul>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* Status Section */}
       <section 
-        id="cta" 
-        className="section cta-section" 
+        id="status" 
+        className="section status-section" 
         ref={addToRefs}
       >
         <div className="container">
-          <motion.div 
-            className="cta-content glass"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="cta-title animated-gradient-text-fast">Ready to Streamline Your Business?</h2>
-            <p className="cta-description">
-              Join the beta program and be among the first to experience the future of business management. 
-              Get exclusive access to cutting-edge features and help shape the product roadmap.
+          <div className="status-content">
+            <h2 className="section-title">Development Status</h2>
+            <p className="status-description">
+              Comerzia is actively developed with regular updates and new features.
             </p>
-            <div className="cta-actions">
+            
+            <div className="status-grid">
+              <div className="status-item">
+                <div className="status-indicator complete"></div>
+                <span>App created and deployed</span>
+              </div>
+              <div className="status-item">
+                <div className="status-indicator complete"></div>
+                <span>Email notifications working</span>
+              </div>
+              <div className="status-item">
+                <div className="status-indicator in-progress"></div>
+                <span>SMS notifications (Next)</span>
+              </div>
+              <div className="status-item">
+                <div className="status-indicator planned"></div>
+                <span>WhatsApp notifications</span>
+              </div>
+              <div className="status-item">
+                <div className="status-indicator planned"></div>
+                <span>Smart suggestions</span>
+              </div>
+            </div>
+
+            <div className="try-now">
               <Button
-                variant="neon"
+                variant="primary"
                 size="lg"
                 icon={ExternalLink}
                 iconPosition="right"
-                onClick={() => console.log('Join Beta')}
+                onClick={() => window.open('#', '_blank')}
               >
-                Join Beta Program
-              </Button>
-              <Button
-                variant="ghost"
-                size="lg"
-                onClick={() => scrollToSection('contact')}
-              >
-                Schedule Demo
+                Try Comerzia
               </Button>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 

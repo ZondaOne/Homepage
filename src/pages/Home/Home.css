@@ -72,7 +72,7 @@
   
   .products-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 32px;
     margin-top: 72px;
     max-width: 1200px;
@@ -88,13 +88,12 @@
 
   @media (min-width: 1024px) {
     .products-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  @media (min-width: 1400px) {
-    .products-grid {
       grid-template-columns: repeat(3, 1fr);
+      max-width: 1350px;
+      gap: 40px;
+    }
+    
+    .products-section .container {
       max-width: 1400px;
     }
   }
