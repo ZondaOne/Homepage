@@ -46,7 +46,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
     >
-      <div className="product-card-visual" style={{ background: gradient }}>
+      <div className="product-card-visual">
         <div className="product-visual-icon">
           {icon}
         </div>
@@ -58,11 +58,17 @@ const ProductCard: React.FC<ProductCardProps> = ({
           <p className="product-subtitle">{subtitle}</p>
         </div>
 
-        {onLearnMore && (
+        {onLearnMore && !isComingSoon && (
           <button className="product-learn-more" onClick={onLearnMore}>
-            {isComingSoon ? 'Coming Soon' : 'Learn more'}
+            Learn more
             <ArrowRight />
           </button>
+        )}
+        
+        {isComingSoon && (
+          <div className="product-learn-more">
+            Coming Soon
+          </div>
         )}
       </div>
     </motion.div>
