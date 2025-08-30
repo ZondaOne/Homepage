@@ -57,31 +57,32 @@ const Hero: React.FC = () => {
 
   return (
     <div className="hero">
+      <div className="hero-blob"></div>
+      <div className="hero-blob"></div>
+      <div className="hero-blob"></div>
+      <div className="hero-blob"></div>
+      
       <div className="hero-container">
         <div className="hero-content">
           <div className="hero-logo-section">
-            <GlitchLogo size={340} />
+            <GlitchLogo size={450} />
+            <motion.h1 
+              className="hero-title"
+              variants={titleVariants}
+              initial="hidden"
+              animate="visible"
+            >
+              ZONDA
+            </motion.h1>
+            <motion.p 
+              className="hero-tagline"
+              variants={subtitleVariants}
+              initial="hidden"
+              animate="visible"
+            >
+              Code. Solve. Deliver.
+            </motion.p>
           </div>
-
-          <motion.h1 
-            className="hero-title animated-gradient-text"
-            variants={titleVariants}
-            initial="hidden"
-            animate="visible"
-          >
-            ZONDA
-          </motion.h1>
-
-          <motion.p 
-            className="hero-subtitle"
-            variants={subtitleVariants}
-            initial="hidden"
-            animate="visible"
-          >
-            Empowering the next generation of digital innovation.
-            <br />
-            <span className="subtitle-highlight animated-gradient-subtle">We build software that shapes tomorrow.</span>
-          </motion.p>
 
           <motion.div 
             className="hero-cta"
@@ -99,7 +100,7 @@ const Hero: React.FC = () => {
                 if (element) element.scrollIntoView({ behavior: 'smooth' });
               }}
             >
-              Discover Our Vision
+              Learn More
             </Button>
             
             <Button 
@@ -112,7 +113,7 @@ const Hero: React.FC = () => {
                 if (element) element.scrollIntoView({ behavior: 'smooth' });
               }}
             >
-              Our Products
+              View Products
             </Button>
           </motion.div>
         </div>

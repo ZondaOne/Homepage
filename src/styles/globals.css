@@ -53,19 +53,20 @@ body {
 /* Glassmorphism utility classes */
 .glass {
   background: var(--bg-glass);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--border-glass);
+  border-radius: var(--radius-lg);
 }
 
 .glass-hover {
-  transition: all 0.3s ease;
+  transition: all 0.25s cubic-bezier(0.4, 0.0, 0.2, 1);
 }
 
 .glass-hover:hover {
   background: var(--bg-glass-hover);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-glass);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
 }
 
 /* Animation utilities */
@@ -87,17 +88,17 @@ body {
 /* Animated Gradient Text */
 .animated-gradient-text {
   background: linear-gradient(
-    45deg,
+    135deg,
     var(--text-primary) 0%,
-    var(--accent-primary) 30%,
-    var(--accent-secondary) 60%,
+    var(--accent-primary) 40%,
+    var(--accent-secondary) 80%,
     var(--text-primary) 100%
   );
-  background-size: 300% 300%;
+  background-size: 200% 200%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: gradientShift 12s ease-in-out infinite;
+  animation: gradientShift 15s ease-in-out infinite;
 }
 
 .animated-gradient-text-fast {
@@ -111,22 +112,21 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: gradientShift 8s ease-in-out infinite;
+  animation: gradientShift 10s ease-in-out infinite;
 }
 
 .animated-gradient-subtle {
   background: linear-gradient(
     135deg,
-    var(--text-primary) 0%,
-    var(--accent-primary) 40%,
-    var(--text-primary) 60%,
-    var(--accent-secondary) 100%
+    var(--text-primary) 20%,
+    var(--accent-primary) 50%,
+    var(--accent-secondary) 80%
   );
-  background-size: 400% 400%;
+  background-size: 150% 150%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: gradientShift 16s ease-in-out infinite;
+  animation: gradientShift 20s ease-in-out infinite;
 }
 
 @keyframes gradientShift {

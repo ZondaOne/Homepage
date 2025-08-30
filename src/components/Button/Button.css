@@ -63,17 +63,22 @@
 
 /* Primary Button */
 .modern-button--primary {
-  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-  color: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px var(--accent-primary, 0.1);
+  background: rgba(255, 255, 255, 0.95);
+  color: #FF6B35;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  font-weight: 600;
+  backdrop-filter: blur(10px);
+}
+
+.modern-button--primary:hover {
+  background: rgba(255, 255, 255, 1);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
 }
 
 .modern-button--primary:hover .button-border {
-  opacity: 1;
-  background: linear-gradient(135deg, var(--accent-secondary), var(--accent-primary));
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.2);
-  transition: all 0.3s ease;
+  opacity: 0;
 }
 
 /* Secondary Button */
@@ -93,16 +98,19 @@
 
 /* Ghost Button */
 .modern-button--ghost {
-  background: transparent;
-  color: var(--text-secondary);
-  border: 1px solid transparent;
-  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
 }
 
 .modern-button--ghost:hover {
-  color: var(--text-primary);
-  background: var(--bg-glass);
-  border-color: var(--border-glass);
+  color: rgba(255, 255, 255, 1);
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
 }
 
 /* Neon Button */
@@ -124,21 +132,21 @@
 
 /* Sizes */
 .modern-button--sm {
-  padding: 0.5rem 1rem;
+  padding: 0.75rem 1.25rem;
   font-size: 0.875rem;
-  min-height: 36px;
+  min-height: 40px;
 }
 
 .modern-button--md {
-  padding: 0.75rem 1.5rem;
+  padding: 1rem 1.75rem;
   font-size: 1rem;
-  min-height: 44px;
+  min-height: 48px;
 }
 
 .modern-button--lg {
-  padding: 1rem 2rem;
+  padding: 1.25rem 2.5rem;
   font-size: 1.125rem;
-  min-height: 52px;
+  min-height: 56px;
 }
 
 /* Icon animations */

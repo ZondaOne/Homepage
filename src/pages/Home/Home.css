@@ -4,31 +4,32 @@
   }
   
   .section {
-    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
-    padding: 6rem 0;
+    padding: var(--space-3xl) 0;
     scroll-margin-top: 80px;
+    min-height: 80vh;
   }
   
   .container {
-    max-width: 1200px;
+    max-width: 1000px;
     margin: 0 auto;
-    padding: 0 var(--space-lg);
+    padding: 0 var(--space-xl);
     width: 100%;
   }
   
   .section-title {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    margin-bottom: var(--space-lg);
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    margin-bottom: var(--space-xl);
     background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-primary) 50%, var(--accent-secondary) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    font-weight: var(--font-weight-bold);
-    line-height: 1.2;
+    font-weight: var(--font-weight-semibold);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
   }
   
   .section-title.centered {
@@ -54,30 +55,32 @@
   
   /* Products Section */
   .products-section {
-    background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
-    padding: 6rem 0;
+    background: var(--bg-secondary);
+    padding: var(--space-3xl) 0;
   }
   
   /* About Section */
   .about-section {
     background: var(--bg-primary);
+    padding: var(--space-3xl) 0;
   }
   
   .section-header {
     text-align: center;
-    margin-bottom: 4rem;
+    margin-bottom: var(--space-3xl);
   }
   
   .products-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 2rem;
-    margin-top: 3rem;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--space-xl);
+    margin-top: var(--space-2xl);
   }
   
   /* Contact Section */
   .contact-section {
-    background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--bg-secondary) 100%);
+    background: var(--bg-tertiary);
+    padding: var(--space-3xl) 0;
   }
   
   

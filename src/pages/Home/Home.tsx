@@ -6,7 +6,6 @@ import { Zap, Shield, Globe } from 'lucide-react';
 import { useForm, ValidationError } from '@formspree/react';
 import Navbar from '../../components/Navbar/Navbar';
 import Hero from '../../components/Hero/Hero';
-import AnimatedBackground from '../../components/Background/AnimatedBackground';
 import ProductCard from '../../components/ProductCard/ProductCard';
 import Button from '../../components/Button/Button';
 // import Reviews from '../../components/Reviews/Reviews';
@@ -79,7 +78,6 @@ const Home: React.FC = () => {
 
   return (
     <div className="home">
-      <AnimatedBackground />
       <Navbar />
       
       <section id="home">
@@ -93,22 +91,22 @@ const Home: React.FC = () => {
       >
         <div className="container">
           <div className="section-header">
-            <h2 className="section-title centered animated-gradient-text-fast">Our Products</h2>
+            <h2 className="section-title centered animated-gradient-text-fast">Products</h2>
             <p className="section-subtitle">
-              Cutting-edge tools designed for the <span className="animated-gradient-subtle">digital-first generation</span>
+              Web applications built to solve <span className="animated-gradient-subtle">real business problems</span>
             </p>
           </div>
 
           <div className="products-grid">
             <ProductCard
               title="PixelPerfect"
-              description="AI-powered image editing tool that revolutionizes creative workflows with intelligent automation and professional-grade results."
+              description="Web-based image editor with background removal, batch processing, and automated enhancements. Built for creators who need quick, professional results."
               features={[
-                "AI-driven auto-enhancement",
-                "Background removal & replacement",
-                "Smart object recognition",
-                "Batch processing capabilities",
-                "Cloud-based collaboration"
+                "Remove backgrounds automatically",
+                "Enhance images with one click",
+                "Process multiple images at once",
+                "Generate images with AI",
+                "Export in various formats"
               ]}
               status="beta"
               gradient="linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))"
@@ -119,13 +117,13 @@ const Home: React.FC = () => {
 
             <ProductCard
               title="Comerzia"
-              description="Web app for managing orders and clients with dashboard for insights and automatic notification via email or SMS."
+              description="Business management dashboard for tracking orders and clients. View analytics, manage inventory, and send automated notifications via email and SMS."
               features={[
-                "Order management system",
-                "Client database",
-                "Analytics dashboard",
-                "Email notifications",
-                "SMS notifications"
+                "Track orders and clients",
+                "Business analytics dashboard",
+                "Inventory management",
+                "Email and SMS notifications",
+                "Export reports and data"
               ]}
               status="beta"
               gradient="linear-gradient(135deg, var(--accent-cyan), var(--accent-primary))"
@@ -135,13 +133,13 @@ const Home: React.FC = () => {
 
             <ProductCard
               title="ComChat"
-              description="A fully customizable chatbot for commerces and companies. Can be text or multimodal, have specific context for any type of activity and delegate to professional technical for help when necessary. Support for local LLMs for maximum privacy if required."
+              description="Custom chatbot for your business website. Handles customer questions, escalates to human support when needed, and can work with your existing data and documents."
               features={[
-                "Text and multimodal support",
-                "Customizable for any business",
-                "Professional technical delegation",
-                "Local LLM support",
-                "Maximum privacy protection"
+                "Custom training on your content",
+                "Escalate to human support",
+                "Multiple chat channels",
+                "Analytics and reporting",
+                "Privacy-focused options"
               ]}
               status="beta"
               gradient="linear-gradient(135deg, var(--accent-pink), var(--accent-secondary))"
@@ -161,13 +159,12 @@ const Home: React.FC = () => {
           <div className="content-grid">
             <div className="content-left">
               <h2 className="section-title animated-gradient-text">
-                Built for Innovation, Tailored for You
+                About ZONDA
               </h2>
               <p className="section-description">
-                We're a young startup focused on developing innovative applications and 
-                delivering custom solutions to individuals and companies. ZONDA specializes 
-                in creating powerful web applications using a diverse technological stack, 
-                adapting our approach to meet each project's unique needs and requirements.
+                We develop web applications for businesses and individuals. 
+                Our team builds practical tools that help you manage your work more efficiently. 
+                From image editing to business management, we create software that solves real problems.
               </p>
               <div className="stats-grid">
                 <div className="stat-item glass">
@@ -175,30 +172,30 @@ const Home: React.FC = () => {
                   <span className="stat-label">Products</span>
                 </div>
                 <div className="stat-item glass">
-                  <span className="stat-number">100%</span>
-                  <span className="stat-label">Remote</span>
+                  <span className="stat-number">2024</span>
+                  <span className="stat-label">Founded</span>
                 </div>
                 <div className="stat-item glass">
-                  <span className="stat-number">24/7</span>
-                  <span className="stat-label">Innovation</span>
+                  <span className="stat-number">Remote</span>
+                  <span className="stat-label">Team</span>
                 </div>
               </div>
             </div>
             <div className="content-right">
               <div className="feature-card glass glass-hover">
                 <div className="feature-icon"><Zap size={24} /></div>
-                <h3>Custom Solutions</h3>
-                <p>Tailored web applications designed to meet your specific business needs</p>
+                <h3>Web Applications</h3>
+                <p>Custom web apps built for your specific business requirements</p>
               </div>
               <div className="feature-card glass glass-hover">
                 <div className="feature-icon"><Globe size={24} /></div>
-                <h3>Tech Versatility</h3>
-                <p>Working with diverse technologies to choose the best stack for each project</p>
+                <h3>Modern Technology</h3>
+                <p>Using current web technologies and best practices for reliable results</p>
               </div>
               <div className="feature-card glass glass-hover">
                 <div className="feature-icon"><Shield size={24} /></div>
-                <h3>Client-Focused</h3>
-                <p>From individuals to enterprises, we deliver solutions that drive results</p>
+                <h3>Support Included</h3>
+                <p>Ongoing maintenance and support for all our applications</p>
               </div>
             </div>
           </div>
@@ -215,11 +212,10 @@ const Home: React.FC = () => {
         <div className="container">
           <div className="contact-content">
             <div className="contact-left">
-              <h2 className="section-title animated-gradient-text-fast">Let's Build Something Amazing</h2>
+              <h2 className="section-title animated-gradient-text-fast">Get in Touch</h2>
               <p className="section-description">
-                Got an idea? Want to collaborate? Or just want to say hi? 
-                We're always excited to connect with fellow innovators, creators, 
-                and dreamers. Drop us a line and let's start the conversation.
+                Need a custom web application or have questions about our products? 
+                We'd love to hear from you. Send us a message and we'll get back to you soon.
               </p>
             
             </div>

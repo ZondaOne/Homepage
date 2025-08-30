@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ExternalLink } from 'lucide-react';
 import Button from '../Button/Button';
 import './Navbar.css';
 
@@ -41,15 +40,12 @@ const Navbar: React.FC = () => {
   };
 
   const navVariants = {
-    hidden: { y: -100, opacity: 0 },
+    hidden: { opacity: 0 },
     visible: {
-      y: 0,
       opacity: 1,
       transition: {
-        type: "spring" as const,
-        stiffness: 100,
-        damping: 15,
-        delay: 0.5
+        duration: 0.8,
+        delay: 0.2
       }
     }
   };
@@ -86,11 +82,9 @@ const Navbar: React.FC = () => {
           <Button 
             variant="primary" 
             size="sm"
-            icon={ExternalLink}
-            iconPosition="right"
-            onClick={() => navigateToSection('contact')}
+            onClick={() => navigateToSection('products')}
           >
-            Get Started
+            View Work
           </Button>
         </div>
       </div>
