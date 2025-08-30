@@ -152,9 +152,7 @@ const Home: React.FC = () => {
             
             <div className="founders-placeholder">
               <div className="founders-image">
-                <div className="image-placeholder">
-                  <span>Founders Photo</span>
-                </div>
+                <img src="/founders.png" alt="Founders" className="founders-photo" />
               </div>
             </div>
             
@@ -180,20 +178,19 @@ const Home: React.FC = () => {
       
       {/* <Reviews /> */}
       
-      <section 
-        id="contact" 
-        className="section contact-section" 
-        ref={addToRefs}
-      >
+      <section id="contact" className="contact-section" ref={addToRefs}>
         <div className="container">
           <div className="contact-content">
-            <h2 className="section-title centered">Get in Touch</h2>
-            <p className="contact-subtitle">
-              Ready to build something great together?
-            </p>
+            <div className="contact-header">
+              <h2 className="section-title centered">Let's create something together.</h2>
+              <p className="contact-subtitle">
+                Ready to bring your vision to life? Let's start the conversation.
+              </p>
+            </div>
             
             {state.succeeded ? (
               <div className="contact-success">
+                <div className="success-icon">✓</div>
                 <h3>Message sent successfully</h3>
                 <p>We'll get back to you within 24 hours.</p>
               </div>
@@ -201,57 +198,51 @@ const Home: React.FC = () => {
               <form className="contact-form" onSubmit={handleSubmit}>
                 <div className="form-row">
                   <div className="form-field">
+                    <label htmlFor="name">Name</label>
                     <input 
                       type="text" 
-                      name="name"
-                      placeholder="Name" 
+                      id="name"
+                      name="name" 
                       className="form-input"
                       required 
-                    />
-                    <ValidationError 
-                      prefix="Name" 
-                      field="name"
-                      errors={state.errors}
                     />
                   </div>
                   <div className="form-field">
+                    <label htmlFor="email">Email</label>
                     <input 
                       type="email" 
-                      name="email"
-                      placeholder="Email" 
+                      id="email"
+                      name="email" 
                       className="form-input"
                       required 
-                    />
-                    <ValidationError 
-                      prefix="Email" 
-                      field="email"
-                      errors={state.errors}
                     />
                   </div>
                 </div>
                 
                 <div className="form-field">
+                  <label htmlFor="message">Message</label>
                   <textarea 
+                    id="message"
                     name="message"
-                    placeholder="Tell us about your project" 
                     className="form-textarea"
-                    rows={5}
+                    rows={4}
                     required
                   ></textarea>
-                  <ValidationError 
-                    prefix="Message" 
-                    field="message"
-                    errors={state.errors}
-                  />
                 </div>
                 
-                <button 
-                  type="submit" 
-                  className="form-submit"
+                <Button 
+                  type="submit"
                   disabled={state.submitting}
+                  className="contact-submit-button"
                 >
                   {state.submitting ? 'Sending...' : 'Send Message'}
-                </button>
+                </Button>
+                
+                <div className="form-validation">
+                  <ValidationError prefix="Name" field="name" errors={state.errors} />
+                  <ValidationError prefix="Email" field="email" errors={state.errors} />
+                  <ValidationError prefix="Message" field="message" errors={state.errors} />
+                </div>
               </form>
             )}
           </div>

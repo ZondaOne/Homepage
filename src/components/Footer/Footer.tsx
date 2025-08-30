@@ -21,24 +21,10 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
     <footer className="footer">
       <div className="container">
         <div className="footer-content">
-          <div className="footer-links">
-            <button onClick={() => scrollToSection('about')} className="footer-link">
-              About
-            </button>
-            <button onClick={() => scrollToSection('products')} className="footer-link">
-              Products
-            </button>
-            <button onClick={() => scrollToSection('contact')} className="footer-link">
-              Contact
-            </button>
-            <a href="mailto:team@zonda.one" className="footer-link">
-              team@zonda.one
-            </a>
-          </div>
-          
-          <div className="footer-bottom">
-            <p>© 2025 ZONDA</p>
-          </div>
+          <a href="mailto:team@zonda.one" className="footer-email">
+            team@zonda.one
+          </a>
+          <p className="footer-copyright">© 2025 ZONDA</p>
         </div>
       </div>
     </footer>
