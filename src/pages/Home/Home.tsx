@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Zap, Shield, Globe } from 'lucide-react';
+import { MessageSquare } from 'lucide-react';
 import { useForm, ValidationError } from '@formspree/react';
 import Navbar from '../../components/Navbar/Navbar';
 import Hero from '../../components/Hero/Hero';
@@ -119,7 +119,7 @@ const Home: React.FC = () => {
               title="ComChat"
               subtitle="Customer service, automated"
               gradient="linear-gradient(135deg, #FF2D92, #FF3131)"
-              icon={<Shield size={64} />}
+              icon={<MessageSquare size={64} />}
               onLearnMore={() => navigate('/products/comchat')}
             />
           </div>
@@ -150,7 +150,7 @@ const Home: React.FC = () => {
             
             <div className="about-stats">
               <div className="stat">
-                <span className="stat-number">4</span>
+                <span className="stat-number">3</span>
                 <span className="stat-label">Products</span>
               </div>
               <div className="stat-divider"></div>

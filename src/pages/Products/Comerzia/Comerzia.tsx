@@ -109,7 +109,7 @@ const Comerzia: React.FC = () => {
             transition={{ duration: 0.8 }}
           >
             <div className="hero-visual">
-              <ComerziaLogo size={80} />
+              <ComerziaLogo size={140} />
             </div>
             <h1 className="section-title">Comerzia</h1>
             <p className="hero-description">
@@ -153,6 +153,41 @@ const Comerzia: React.FC = () => {
               Comerzia helps small to medium businesses organize their operations. 
               Track customers, manage orders, and stay connected with automatic notifications.
             </p>
+          </div>
+
+          <div className="about-visual">
+            <div className="chart-container">
+              <div className="chart-title">Business Growth</div>
+              <div className="line-chart">
+                <svg width="400" height="200" viewBox="0 0 400 200">
+                  <defs>
+                    <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stopColor="var(--accent-primary)" />
+                      <stop offset="100%" stopColor="var(--accent-secondary)" />
+                    </linearGradient>
+                  </defs>
+                  
+                  <g className="chart-grid">
+                    <line x1="40" y1="20" x2="40" y2="160" stroke="var(--border-subtle)" strokeWidth="1"/>
+                    <line x1="40" y1="160" x2="360" y2="160" stroke="var(--border-subtle)" strokeWidth="1"/>
+                  </g>
+                  
+                  <path 
+                    className="chart-line"
+                    d="M 40 140 Q 120 120, 160 100 Q 240 80, 280 90 Q 320 100, 360 70"
+                    fill="none"
+                    stroke="url(#lineGradient)"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                  />
+                  
+                  <circle className="chart-dot" cx="40" cy="140" r="4" fill="var(--accent-primary)" />
+                  <circle className="chart-dot" cx="160" cy="100" r="4" fill="var(--accent-primary)" />
+                  <circle className="chart-dot" cx="280" cy="90" r="4" fill="var(--accent-primary)" />
+                  <circle className="chart-dot" cx="360" cy="70" r="4" fill="var(--accent-secondary)" />
+                </svg>
+              </div>
+            </div>
           </div>
 
           <div className="about-stats">

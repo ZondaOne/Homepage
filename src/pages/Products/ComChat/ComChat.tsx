@@ -5,7 +5,6 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { 
   MessageCircle, 
   Brain, 
-  Shield, 
   FileText,
   Lock,
   Server,
@@ -113,7 +112,7 @@ const ComChat: React.FC = () => {
             transition={{ duration: 0.8 }}
           >
             <div className="hero-visual">
-              <Shield size={80} />
+              <MessageCircle size={80} />
             </div>
             <h1 className="section-title">ComChat</h1>
             <p className="hero-description">
@@ -157,6 +156,63 @@ const ComChat: React.FC = () => {
               ComChat creates intelligent conversational AI that understands your business context. 
               Train on your data, deploy securely, and maintain complete control over customer interactions.
             </p>
+          </div>
+
+          <div className="chat-demo">
+            <div className="chat-container">
+              <div className="chat-header">
+                <div className="chat-status">
+                  <div className="status-dot"></div>
+                  <span>Customer Support</span>
+                </div>
+              </div>
+              
+              <div className="chat-messages">
+                <div className="message user-message">
+                  <div className="message-avatar user-avatar"></div>
+                  <div className="message-bubble user-bubble">
+                    <p>Hi! I'm looking for a refund on my order from last week.</p>
+                  </div>
+                </div>
+                
+                <div className="message bot-message">
+                  <div className="message-bubble bot-bubble">
+                    <p>I'd be happy to help with that! Let me pull up your recent orders. What's the email address on your account?</p>
+                  </div>
+                  <div className="message-avatar bot-avatar"></div>
+                </div>
+                
+                <div className="message user-message">
+                  <div className="message-avatar user-avatar"></div>
+                  <div className="message-bubble user-bubble">
+                    <p>sarah.chen@email.com</p>
+                  </div>
+                </div>
+                
+                <div className="message bot-message">
+                  <div className="message-bubble bot-bubble">
+                    <p>Perfect! I see your order #4729 from March 15th. I can process that refund for you right away.</p>
+                  </div>
+                  <div className="message-avatar bot-avatar"></div>
+                </div>
+                
+                <div className="message user-message">
+                  <div className="message-avatar user-avatar"></div>
+                  <div className="message-bubble user-bubble">
+                    <p>Wow, that was fast! Thank you!</p>
+                  </div>
+                </div>
+                
+                <div className="typing-indicator">
+                  <div className="typing-dots">
+                    <div className="dot"></div>
+                    <div className="dot"></div>
+                    <div className="dot"></div>
+                  </div>
+                  <span>Bot is typing...</span>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div className="about-stats">
