@@ -122,7 +122,7 @@ const Comerzia: React.FC = () => {
                 size="lg"
                 icon={ExternalLink}
                 iconPosition="right"
-                onClick={() => window.open('#', '_blank')}
+                onClick={() => window.open('https://comerzia.zonda.one', '_blank')}
               >
                 Try Comerzia
               </Button>
@@ -252,7 +252,7 @@ const Comerzia: React.FC = () => {
                 size="lg"
                 icon={ExternalLink}
                 iconPosition="right"
-                onClick={() => window.open('#', '_blank')}
+                onClick={() => window.open('https://comerzia.zonda.one', '_blank')}
               >
                 Try Comerzia
               </Button>

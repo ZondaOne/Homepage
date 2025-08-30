@@ -126,7 +126,7 @@ const ComChat: React.FC = () => {
                 size="lg"
                 icon={ExternalLink}
                 iconPosition="right"
-                onClick={() => window.open('#', '_blank')}
+                onClick={() => window.open('https://comchat.zonda.one', '_blank')}
               >
                 Request Demo
               </Button>
@@ -252,7 +252,7 @@ const ComChat: React.FC = () => {
                 size="lg"
                 icon={ExternalLink}
                 iconPosition="right"
-                onClick={() => window.open('#', '_blank')}
+                onClick={() => window.open('https://comchat.zonda.one', '_blank')}
               >
                 Request Demo
               </Button>
