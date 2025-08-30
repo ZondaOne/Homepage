@@ -100,51 +100,35 @@ const Home: React.FC = () => {
           <div className="products-grid">
             <ProductCard
               title="PixelPerfect"
-              description="An image editor for when you need clean product photos or social media content. Upload your images, remove backgrounds, and get results that look professional."
-              features={[
-                "Remove image backgrounds",
-                "Basic image enhancements",
-                "Handle multiple images at once",
-                "Generate simple graphics",
-                "Download in different formats"
-              ]}
-              status="beta"
-              gradient="linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))"
-              icon={<PixelPerfectLogo size={24} />}
-              onTryNow={() => window.open('https://pixelperfect.zonda.one', '_blank')}
+              subtitle="Professional image editing made simple"
+              gradient="linear-gradient(135deg, #FF914D, #FF3131)"
+              icon={<PixelPerfectLogo size={64} />}
               onLearnMore={() => navigate('/products/pixelperfect')}
             />
 
             <ProductCard
               title="Comerzia"
-              description="Keep track of your orders and customers in one place. See what's selling, manage your inventory, and send updates to customers when you need to."
-              features={[
-                "Order and customer tracking",
-                "Simple business reports",
-                "Track what you have in stock",
-                "Send email and text updates",
-                "Export your data"
-              ]}
-              status="beta"
-              gradient="linear-gradient(135deg, var(--accent-cyan), var(--accent-primary))"
-              icon={<Zap size={24} />}
+              subtitle="Business management that works"
+              gradient="linear-gradient(135deg, #007AFF, #FF914D)"
+              icon={<Zap size={64} />}
               onLearnMore={() => navigate('/products/comerzia')}
             />
 
             <ProductCard
               title="ComChat"
-              description="A chatbot that learns about your business and helps answer customer questions on your website. When it can't help, it passes the conversation to you."
-              features={[
-                "Learns from your website and documents",
-                "Hands off complex questions to you",
-                "Works across different chat platforms",
-                "Shows you how conversations are going",
-                "Keeps customer data private"
-              ]}
-              status="beta"
-              gradient="linear-gradient(135deg, var(--accent-pink), var(--accent-secondary))"
-              icon={<Shield size={24} />}
+              subtitle="Customer service, automated"
+              gradient="linear-gradient(135deg, #FF2D92, #FF3131)"
+              icon={<Shield size={64} />}
               onLearnMore={() => navigate('/products/comchat')}
+            />
+
+            <ProductCard
+              title="Distant"
+              subtitle="The future of remote collaboration"
+              gradient="linear-gradient(135deg, #333, #555)"
+              icon={<Globe size={64} />}
+              isComingSoon={true}
+              onLearnMore={() => {}}
             />
           </div>
         </div>
@@ -156,46 +140,38 @@ const Home: React.FC = () => {
         ref={addToRefs}
       >
         <div className="container">
-          <div className="content-grid">
-            <div className="content-left">
-              <h2 className="section-title">
-                About ZONDA
-              </h2>
-              <p className="section-description">
-                We build web apps that help people get things done. 
-                Whether you need to edit images, track your business, or chat with customers, 
-                we make tools that work the way you think.
-              </p>
-              <div className="stats-grid">
-                <div className="stat-item glass">
-                  <span className="stat-number">3</span>
-                  <span className="stat-label">Products</span>
-                </div>
-                <div className="stat-item glass">
-                  <span className="stat-number">2024</span>
-                  <span className="stat-label">Founded</span>
-                </div>
-                <div className="stat-item glass">
-                  <span className="stat-number">Remote</span>
-                  <span className="stat-label">Team</span>
+          <div className="about-content">
+            <h2 className="section-title centered">About Us</h2>
+            <p className="about-headline">
+              We build tools that solve real problems.
+            </p>
+            <p className="about-description">
+              Simple, powerful apps that help you work better. 
+              No complexity, no confusion. Just tools that work.
+            </p>
+            
+            <div className="founders-placeholder">
+              <div className="founders-image">
+                <div className="image-placeholder">
+                  <span>Founders Photo</span>
                 </div>
               </div>
             </div>
-            <div className="content-right">
-              <div className="feature-card glass glass-hover">
-                <div className="feature-icon"><Zap size={24} /></div>
-                <h3>Web Applications</h3>
-                <p>Custom web apps built for your specific business requirements</p>
+            
+            <div className="about-stats">
+              <div className="stat">
+                <span className="stat-number">4</span>
+                <span className="stat-label">Products</span>
               </div>
-              <div className="feature-card glass glass-hover">
-                <div className="feature-icon"><Globe size={24} /></div>
-                <h3>Modern Technology</h3>
-                <p>Using current web technologies and best practices for reliable results</p>
+              <div className="stat-divider"></div>
+              <div className="stat">
+                <span className="stat-number">2025</span>
+                <span className="stat-label">Founded</span>
               </div>
-              <div className="feature-card glass glass-hover">
-                <div className="feature-icon"><Shield size={24} /></div>
-                <h3>Support Included</h3>
-                <p>Ongoing maintenance and support for all our applications</p>
+              <div className="stat-divider"></div>
+              <div className="stat">
+                <span className="stat-number">Remote</span>
+                <span className="stat-label">Team</span>
               </div>
             </div>
           </div>
@@ -211,93 +187,73 @@ const Home: React.FC = () => {
       >
         <div className="container">
           <div className="contact-content">
-            <div className="contact-left">
-              <h2 className="section-title">Get in Touch</h2>
-              <p className="section-description">
-                Have a project in mind or questions about our tools? 
-                Drop us a line and we'll get back to you.
-              </p>
+            <h2 className="section-title centered">Get in Touch</h2>
+            <p className="contact-subtitle">
+              Ready to build something great together?
+            </p>
             
-            </div>
-            
-            <div className="contact-right">
-              {state.succeeded ? (
-                <div className="form-success-message glass">
-                  <h3>✓ Thank you for your message!</h3>
-                  <p>We've received your message and will get back to you soon.</p>
-                </div>
-              ) : (
-                <form className="contact-form glass" onSubmit={handleSubmit}>
-                  <div className="form-group">
+            {state.succeeded ? (
+              <div className="contact-success">
+                <h3>Message sent successfully</h3>
+                <p>We'll get back to you within 24 hours.</p>
+              </div>
+            ) : (
+              <form className="contact-form" onSubmit={handleSubmit}>
+                <div className="form-row">
+                  <div className="form-field">
                     <input 
                       type="text" 
                       name="name"
-                      placeholder="Your Name" 
-                      className="form-input glass"
+                      placeholder="Name" 
+                      className="form-input"
                       required 
                     />
                     <ValidationError 
                       prefix="Name" 
                       field="name"
                       errors={state.errors}
-                      className="validation-error"
                     />
                   </div>
-                  <div className="form-group">
+                  <div className="form-field">
                     <input 
                       type="email" 
                       name="email"
-                      placeholder="Email Address" 
-                      className="form-input glass"
+                      placeholder="Email" 
+                      className="form-input"
                       required 
                     />
                     <ValidationError 
                       prefix="Email" 
                       field="email"
                       errors={state.errors}
-                      className="validation-error"
                     />
                   </div>
-                  <div className="form-group">
-                    <input 
-                      type="text" 
-                      name="company"
-                      placeholder="Company (optional)" 
-                      className="form-input glass"
-                    />
-                    <ValidationError 
-                      prefix="Company" 
-                      field="company"
-                      errors={state.errors}
-                      className="validation-error"
-                    />
-                  </div>
-                  <div className="form-group">
-                    <textarea 
-                      name="message"
-                      placeholder="What's on your mind?" 
-                      className="form-textarea glass"
-                      rows={4}
-                      required
-                    ></textarea>
-                    <ValidationError 
-                      prefix="Message" 
-                      field="message"
-                      errors={state.errors}
-                      className="validation-error"
-                    />
-                  </div>
-                  
-                  <Button 
-                    variant="primary" 
-                    type="submit" 
-                    disabled={state.submitting}
-                  >
-                    {state.submitting ? 'Sending...' : 'Send Message'}
-                  </Button>
-                </form>
-              )}
-            </div>
+                </div>
+                
+                <div className="form-field">
+                  <textarea 
+                    name="message"
+                    placeholder="Tell us about your project" 
+                    className="form-textarea"
+                    rows={5}
+                    required
+                  ></textarea>
+                  <ValidationError 
+                    prefix="Message" 
+                    field="message"
+                    errors={state.errors}
+                  />
+                </div>
+                
+                <button 
+                  type="submit" 
+                  className="form-submit"
+                  disabled={state.submitting}
+                >
+                  {state.submitting ? 'Sending...' : 'Send Message'}
+                </button>
+              </form>
+            )}
           </div>
         </div>
       </section>

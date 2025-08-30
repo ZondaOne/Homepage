@@ -72,15 +72,144 @@
   
   .products-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 40px;
     margin-top: 60px;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @media (min-width: 1200px) {
+    .products-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
   
   /* Contact Section */
   .contact-section {
     background: #f9f9f9;
     padding: 120px 0;
+  }
+
+  .contact-section .container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .contact-content {
+    text-align: center;
+  }
+
+  .contact-subtitle {
+    font-size: 20px;
+    color: var(--text-secondary);
+    margin: 24px 0 40px 0;
+    font-weight: 400;
+  }
+
+  .contact-form {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .form-field {
+    width: 100%;
+  }
+
+  .form-input {
+    width: 100%;
+    padding: 16px 20px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    background: white;
+    color: var(--text-primary);
+    font-size: 16px;
+    font-family: var(--font-primary);
+    transition: border-color 0.2s ease;
+    outline: none;
+    box-sizing: border-box;
+  }
+
+  .form-textarea {
+    width: 100%;
+    padding: 16px 20px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    background: white;
+    color: var(--text-primary);
+    font-size: 16px;
+    font-family: var(--font-primary);
+    transition: border-color 0.2s ease;
+    outline: none;
+    box-sizing: border-box;
+    resize: vertical;
+    min-height: 120px;
+    margin-bottom: 20px;
+  }
+
+  .form-input:focus,
+  .form-textarea:focus {
+    border-color: var(--accent-primary);
+  }
+
+  .form-input::placeholder,
+  .form-textarea::placeholder {
+    color: var(--text-secondary);
+  }
+
+  .form-submit {
+    background: var(--accent-primary);
+    color: white;
+    border: none;
+    padding: 16px 32px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: var(--font-primary);
+    display: block;
+    margin: 0 auto;
+  }
+
+  .form-submit:hover:not(:disabled) {
+    background: var(--accent-secondary);
+    transform: translateY(-1px);
+  }
+
+  .form-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .contact-success {
+    text-align: center;
+    padding: 40px 20px;
+    background: rgba(16, 185, 129, 0.1);
+    border-radius: 16px;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+  }
+
+  .contact-success h3 {
+    font-size: 24px;
+    font-weight: 600;
+    color: rgb(16, 185, 129);
+    margin: 0 0 8px 0;
+  }
+
+  .contact-success p {
+    font-size: 16px;
+    color: var(--text-secondary);
+    margin: 0;
   }
   
   
@@ -101,47 +230,93 @@
   
   /* About Section */
   .about-section {
-    padding: var(--space-2xl) 0;
+    padding: 120px 0;
   }
   
-  .content-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-2xl);
-    align-items: start;
-  }
-  
-  .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-md);
-    margin-top: var(--space-xl);
-  }
-  
-  .stat-item {
-    padding: var(--space-md);
-    border-radius: var(--radius-md);
+  .about-content {
     text-align: center;
-    transition: all 0.3s ease;
+    max-width: 800px;
+    margin: 0 auto;
   }
-  
-  .stat-item:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-glass);
+
+  .about-headline {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 40px 0 24px 0;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
   }
-  
+
+  .about-description {
+    font-size: 20px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: 60px;
+    font-weight: 400;
+  }
+
+  .about-stats {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 60px;
+    margin-top: 60px;
+  }
+
+  .stat {
+    text-align: center;
+  }
+
   .stat-number {
     display: block;
-    font-size: 2rem;
-    font-weight: var(--font-weight-bold);
-    color: var(--accent-primary);
-    margin-bottom: var(--space-xs);
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
   }
   
   .stat-label {
-    font-size: 0.875rem;
+    font-size: 16px;
     color: var(--text-secondary);
-    font-weight: var(--font-weight-medium);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .stat-divider {
+    width: 1px;
+    height: 40px;
+    background: rgba(0, 0, 0, 0.1);
+  }
+
+  .founders-placeholder {
+    margin: 60px 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  .founders-image {
+    width: 200px;
+    height: 200px;
+  }
+
+  .image-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed rgba(0, 0, 0, 0.1);
+  }
+
+  .image-placeholder span {
+    color: var(--text-secondary);
+    font-size: 14px;
+    font-weight: 500;
   }
   
   .content-right {
@@ -394,22 +569,41 @@
   
   /* Responsive Design */
   @media (max-width: 768px) {
-    .content-grid,
-    .contact-content {
-      grid-template-columns: 1fr;
-      gap: var(--space-xl);
+    .about-stats {
+      flex-direction: column;
+      gap: 40px;
     }
     
-    .stats-grid {
-      grid-template-columns: 1fr;
-      gap: var(--space-sm);
+    .stat-divider {
+      width: 40px;
+      height: 1px;
     }
     
-    .services-grid {
-      grid-template-columns: 1fr;
-      gap: var(--space-lg);
+    .about-headline {
+      font-size: clamp(1.5rem, 4vw, 2rem);
     }
     
+    .about-description {
+      font-size: 18px;
+    }
+    
+    .form-row {
+      grid-template-columns: 1fr;
+      gap: 0;
+      margin-bottom: 0;
+    }
+    
+    .form-field {
+      margin-bottom: 20px;
+    }
+    
+    .contact-subtitle {
+      font-size: 18px;
+    }
+    
+    .contact-success {
+      padding: 32px 20px;
+    }
     
     .section {
       padding: var(--space-xl) 0;
