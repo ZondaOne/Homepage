@@ -59,10 +59,6 @@ const Navbar: React.FC = () => {
       animate="visible"
     >
       <div className="navbar-container">
-        <div className="navbar-logo" onClick={() => navigateToSection('home')}>
-          <span className="logo-text">ZONDA</span>
-        </div>
-        
         <div className="navbar-menu">
           <button onClick={() => navigateToSection('home')} className="navbar-link">
             Home
@@ -79,13 +75,6 @@ const Navbar: React.FC = () => {
         </div>
 
         <div className="navbar-cta">
-          <Button 
-            variant="primary" 
-            size="sm"
-            onClick={() => navigateToSection('products')}
-          >
-            View Work
-          </Button>
         </div>
       </div>
     </motion.nav>

@@ -91,22 +91,22 @@ const Home: React.FC = () => {
       >
         <div className="container">
           <div className="section-header">
-            <h2 className="section-title centered animated-gradient-text-fast">Products</h2>
+            <h2 className="section-title centered">Our Work</h2>
             <p className="section-subtitle">
-              Web applications built to solve <span className="animated-gradient-subtle">real business problems</span>
+              Tools we've built to make work easier
             </p>
           </div>
 
           <div className="products-grid">
             <ProductCard
               title="PixelPerfect"
-              description="Web-based image editor with background removal, batch processing, and automated enhancements. Built for creators who need quick, professional results."
+              description="An image editor for when you need clean product photos or social media content. Upload your images, remove backgrounds, and get results that look professional."
               features={[
-                "Remove backgrounds automatically",
-                "Enhance images with one click",
-                "Process multiple images at once",
-                "Generate images with AI",
-                "Export in various formats"
+                "Remove image backgrounds",
+                "Basic image enhancements",
+                "Handle multiple images at once",
+                "Generate simple graphics",
+                "Download in different formats"
               ]}
               status="beta"
               gradient="linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))"
@@ -117,13 +117,13 @@ const Home: React.FC = () => {
 
             <ProductCard
               title="Comerzia"
-              description="Business management dashboard for tracking orders and clients. View analytics, manage inventory, and send automated notifications via email and SMS."
+              description="Keep track of your orders and customers in one place. See what's selling, manage your inventory, and send updates to customers when you need to."
               features={[
-                "Track orders and clients",
-                "Business analytics dashboard",
-                "Inventory management",
-                "Email and SMS notifications",
-                "Export reports and data"
+                "Order and customer tracking",
+                "Simple business reports",
+                "Track what you have in stock",
+                "Send email and text updates",
+                "Export your data"
               ]}
               status="beta"
               gradient="linear-gradient(135deg, var(--accent-cyan), var(--accent-primary))"
@@ -133,13 +133,13 @@ const Home: React.FC = () => {
 
             <ProductCard
               title="ComChat"
-              description="Custom chatbot for your business website. Handles customer questions, escalates to human support when needed, and can work with your existing data and documents."
+              description="A chatbot that learns about your business and helps answer customer questions on your website. When it can't help, it passes the conversation to you."
               features={[
-                "Custom training on your content",
-                "Escalate to human support",
-                "Multiple chat channels",
-                "Analytics and reporting",
-                "Privacy-focused options"
+                "Learns from your website and documents",
+                "Hands off complex questions to you",
+                "Works across different chat platforms",
+                "Shows you how conversations are going",
+                "Keeps customer data private"
               ]}
               status="beta"
               gradient="linear-gradient(135deg, var(--accent-pink), var(--accent-secondary))"
@@ -158,13 +158,13 @@ const Home: React.FC = () => {
         <div className="container">
           <div className="content-grid">
             <div className="content-left">
-              <h2 className="section-title animated-gradient-text">
+              <h2 className="section-title">
                 About ZONDA
               </h2>
               <p className="section-description">
-                We develop web applications for businesses and individuals. 
-                Our team builds practical tools that help you manage your work more efficiently. 
-                From image editing to business management, we create software that solves real problems.
+                We build web apps that help people get things done. 
+                Whether you need to edit images, track your business, or chat with customers, 
+                we make tools that work the way you think.
               </p>
               <div className="stats-grid">
                 <div className="stat-item glass">
@@ -212,10 +212,10 @@ const Home: React.FC = () => {
         <div className="container">
           <div className="contact-content">
             <div className="contact-left">
-              <h2 className="section-title animated-gradient-text-fast">Get in Touch</h2>
+              <h2 className="section-title">Get in Touch</h2>
               <p className="section-description">
-                Need a custom web application or have questions about our products? 
-                We'd love to hear from you. Send us a message and we'll get back to you soon.
+                Have a project in mind or questions about our tools? 
+                Drop us a line and we'll get back to you.
               </p>
             
             </div>

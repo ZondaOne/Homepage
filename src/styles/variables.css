@@ -24,8 +24,8 @@
     --rgb-magenta: #FF2D92;
     
     /* Fonts */
-    --font-primary: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', sans-serif;
-    --font-title: 'AwareBold', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+    --font-primary: 'Poppins', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+    --font-title: 'AwareBold', 'Poppins', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
     --font-weight-light: 300;
     --font-weight-normal: 400;
     --font-weight-medium: 500;

@@ -8,9 +8,8 @@
     align-items: center;
     justify-content: center;
     position: relative;
-    padding: var(--space-3xl) 0;
+    padding: 120px 0;
     scroll-margin-top: 80px;
-    min-height: 80vh;
   }
   
   .container {
@@ -21,13 +20,14 @@
   }
   
   .section-title {
-    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-size: clamp(2.5rem, 5vw, 3.5rem) !important;
     margin-bottom: var(--space-xl);
-    background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-primary) 50%, var(--accent-secondary) 100%);
+    font-family: var(--font-primary) !important;
+    background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    font-weight: var(--font-weight-semibold);
+    font-weight: var(--font-weight-bold) !important;
     line-height: 1.1;
     letter-spacing: -0.02em;
   }
@@ -55,32 +55,32 @@
   
   /* Products Section */
   .products-section {
-    background: var(--bg-secondary);
-    padding: var(--space-3xl) 0;
+    background: #fafafa;
+    padding: 120px 0;
   }
   
   /* About Section */
   .about-section {
     background: var(--bg-primary);
-    padding: var(--space-3xl) 0;
+    padding: 120px 0;
   }
   
   .section-header {
     text-align: center;
-    margin-bottom: var(--space-3xl);
+    margin-bottom: 80px;
   }
   
   .products-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: var(--space-xl);
-    margin-top: var(--space-2xl);
+    gap: 40px;
+    margin-top: 60px;
   }
   
   /* Contact Section */
   .contact-section {
-    background: var(--bg-tertiary);
-    padding: var(--space-3xl) 0;
+    background: #f9f9f9;
+    padding: 120px 0;
   }
   
   
