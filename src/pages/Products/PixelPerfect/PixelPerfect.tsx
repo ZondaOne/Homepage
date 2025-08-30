@@ -3,22 +3,15 @@ import { motion } from 'framer-motion';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { 
-  Image, 
-  Wand2, 
-  Layers, 
-  Zap, 
-  Cloud, 
-  Users, 
-  ArrowRight,
+  Scissors, 
+  Eraser,
+  Maximize2, 
+  Expand, 
+  Wand2,
   ExternalLink,
-  Cpu,
-  Database,
-  Shield,
-  Workflow
+  ArrowRight
 } from 'lucide-react';
 import Navbar from '../../../components/Navbar/Navbar';
-import AnimatedBackground from '../../../components/Background/AnimatedBackground';
-import ParallaxCarousel from '../../../components/ParallaxCarousel/ParallaxCarousel';
 import Button from '../../../components/Button/Button';
 import PixelPerfectLogo from '../../../components/PixelPerfectLogo/PixelPerfectLogo';
 import Footer from '../../../components/Footer/Footer';
@@ -37,7 +30,6 @@ const PixelPerfect: React.FC = () => {
   };
 
   useEffect(() => {
-    // Scroll to top when component mounts
     window.scrollTo(0, 0);
     
     sectionsRef.current.forEach((section) => {
@@ -75,84 +67,36 @@ const PixelPerfect: React.FC = () => {
     }
   };
 
-  const carouselImages = [
-    {
-      src: "/pixelperfect/homepage.png",
-      alt: "PixelPerfect Homepage Interface",
-      title: "AI-Powered Interface",
-      description: "Clean and intuitive interface for professional image editing"
-    },
-    {
-      src: "/pixelperfect/background-removal.png",
-      alt: "Background Removal Tool",
-      title: "Smart Background Removal",
-      description: "Precise object detection for seamless background replacement"
-    },
-    {
-      src: "/pixelperfect/image-generation.png",
-      alt: "AI Image Generation",
-      title: "AI Image Generation",
-      description: "Create stunning images from text descriptions using AI"
-    }
-  ];
-
-  const architectureComponents = [
-    {
-      icon: <Cpu size={32} />,
-      title: "AI Processing Engine",
-      description: "Advanced neural networks for image analysis and enhancement",
-      tech: "TensorFlow, PyTorch"
-    },
-    {
-      icon: <Database size={32} />,
-      title: "Cloud Storage",
-      description: "Secure, scalable storage with global CDN distribution",
-      tech: "AWS S3, CloudFront"
-    },
-    {
-      icon: <Shield size={32} />,
-      title: "Security Layer",
-      description: "End-to-end encryption and privacy protection",
-      tech: "AES-256, OAuth 2.0"
-    },
-    {
-      icon: <Workflow size={32} />,
-      title: "Processing Pipeline",
-      description: "Optimized workflow for real-time image processing",
-      tech: "Node.js, Redis"
-    }
-  ];
-
   const features = [
     {
-      icon: <Wand2 size={24} />,
-      title: "AI-Driven Auto-Enhancement",
-      description: "Automatically improve brightness, contrast, and saturation with machine learning algorithms that understand your content.",
-      benefits: ["50% faster editing", "Professional results", "One-click enhancement"]
+      icon: <Scissors size={32} />,
+      title: "Background Removal",
+      description: "Remove backgrounds from photos with one click. Perfect for product shots and portraits."
     },
     {
-      icon: <Layers size={24} />,
-      title: "Background Removal & Replacement",
-      description: "Precise object detection and segmentation for seamless background manipulation and creative compositing.",
-      benefits: ["Pixel-perfect edges", "Smart object detection", "Creative freedom"]
+      icon: <Eraser size={32} />,
+      title: "Object Removal",
+      description: "Remove unwanted objects, people, or text from your images seamlessly."
     },
     {
-      icon: <Zap size={24} />,
-      title: "Batch Processing",
-      description: "Process hundreds of images simultaneously with consistent quality and automated workflows.",
-      benefits: ["Bulk operations", "Time efficiency", "Consistent results"]
+      icon: <Maximize2 size={32} />,
+      title: "Image Upscaling",
+      description: "Enhance image quality with 2x and 4x upscaling. Make small images crisp and clear."
     },
     {
-      icon: <Cloud size={24} />,
-      title: "Cloud-Based Collaboration",
-      description: "Real-time collaboration tools with version control and shared workspaces for creative teams.",
-      benefits: ["Team workflows", "Version history", "Global access"]
+      icon: <Expand size={32} />,
+      title: "Image Enlarger",
+      description: "Expand images beyond their borders. Generates new content to fill extended areas."
+    },
+    {
+      icon: <Wand2 size={32} />,
+      title: "Generate Images",
+      description: "Create new images from text descriptions. Turn ideas into visuals instantly."
     }
   ];
 
   return (
     <div className="pixelperfect-page">
-      <AnimatedBackground />
       <Navbar />
       
       {/* Hero Section */}
@@ -164,16 +108,16 @@ const PixelPerfect: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <div className="hero-icon">
-              <PixelPerfectLogo size={64} />
+            <div className="hero-visual">
+              <PixelPerfectLogo size={80} />
             </div>
-            <h1 className="hero-title animated-gradient-text-fast">PixelPerfect</h1>
-            <p className="hero-subtitle">
-              AI-powered image editing tool that revolutionizes creative workflows with 
-              intelligent automation and <span className="animated-gradient-subtle">professional-grade results</span>
+            <h1 className="section-title">PixelPerfect</h1>
+            <p className="hero-description">
+              Professional image editing powered by advanced technology. Remove backgrounds, 
+              upscale images, and generate content with precision and ease.
             </p>
             <div className="hero-status">
-              <span className="status-badge beta">Beta</span>
+              <span className="status-badge">Beta</span>
             </div>
             <div className="hero-actions">
               <Button
@@ -183,136 +127,51 @@ const PixelPerfect: React.FC = () => {
                 iconPosition="right"
                 onClick={() => window.open('https://pixelperfect.zonda.one', '_blank')}
               >
-                Try Beta Version
+                Try Beta
               </Button>
               <Button
-                variant="ghost"
+                variant="secondary"
                 size="lg"
                 icon={ArrowRight}
                 iconPosition="right"
                 onClick={() => scrollToSection('features')}
               >
-                Explore Features
+                See Features
               </Button>
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Overview Section */}
+      {/* What it does Section */}
       <section 
-        id="overview" 
-        className="section overview-section" 
+        id="about" 
+        className="section about-section" 
         ref={addToRefs}
       >
         <div className="container">
           <div className="section-header">
-            <h2 className="section-title animated-gradient-text">Redefining Image Editing</h2>
-            <p className="section-subtitle">
-              PixelPerfect combines the power of artificial intelligence with intuitive design 
-              to deliver professional-grade image editing capabilities that adapt to your creative vision.
+            <h2 className="section-title">What it does</h2>
+            <p className="section-description">
+              Five powerful image editing tools in one platform. From background removal 
+              to image generation, everything you need for professional results.
             </p>
           </div>
 
-          <div className="overview-grid">
-            <div className="overview-card glass glass-hover">
-              <div className="card-icon">
-                <Image size={32} />
-              </div>
-              <h3>Smart Enhancement</h3>
-              <p>AI algorithms analyze and enhance your images automatically, understanding context and content for optimal results.</p>
+          <div className="about-stats">
+            <div className="stat-card">
+              <div className="stat-number">5</div>
+              <div className="stat-label">Core tools</div>
             </div>
-            <div className="overview-card glass glass-hover">
-              <div className="card-icon">
-                <Users size={32} />
-              </div>
-              <h3>Team Collaboration</h3>
-              <p>Built-in collaboration tools enable seamless teamwork with real-time editing, comments, and version control.</p>
+            <div className="stat-divider"></div>
+            <div className="stat-card">
+              <div className="stat-number">4K</div>
+              <div className="stat-label">Max resolution</div>
             </div>
-            <div className="overview-card glass glass-hover">
-              <div className="card-icon">
-                <Zap size={32} />
-              </div>
-              <h3>Lightning Fast</h3>
-              <p>Optimized processing pipeline ensures rapid editing and rendering, even for high-resolution images and batch operations.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Product Gallery */}
-      <section 
-        id="gallery" 
-        className="section gallery-section" 
-        ref={addToRefs}
-      >
-        <div className="container">
-          <ParallaxCarousel
-            images={carouselImages}
-            title="See PixelPerfect in Action"
-            subtitle="Explore the interface and discover how AI-powered editing transforms your creative workflow"
-          />
-        </div>
-      </section>
-
-      {/* Architecture Section */}
-      <section 
-        id="architecture" 
-        className="section architecture-section" 
-        ref={addToRefs}
-      >
-        <div className="container">
-          <div className="section-header">
-            <h2 className="section-title animated-gradient-text">Technical Architecture</h2>
-            <p className="section-subtitle">
-              Built on modern, scalable infrastructure designed for performance, reliability, and security
-            </p>
-          </div>
-
-          <div className="architecture-grid">
-            {architectureComponents.map((component, index) => (
-              <motion.div
-                key={index}
-                className="architecture-card glass glass-hover"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <div className="arch-icon">
-                  {component.icon}
-                </div>
-                <h3>{component.title}</h3>
-                <p>{component.description}</p>
-                <div className="tech-stack">
-                  <span className="tech-badge">{component.tech}</span>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          <div className="architecture-diagram glass">
-            <h3>System Flow</h3>
-            <div className="flow-container">
-              <div className="flow-step">
-                <div className="step-circle">1</div>
-                <span>Image Upload</span>
-              </div>
-              <div className="flow-arrow">→</div>
-              <div className="flow-step">
-                <div className="step-circle">2</div>
-                <span>AI Analysis</span>
-              </div>
-              <div className="flow-arrow">→</div>
-              <div className="flow-step">
-                <div className="step-circle">3</div>
-                <span>Processing</span>
-              </div>
-              <div className="flow-arrow">→</div>
-              <div className="flow-step">
-                <div className="step-circle">4</div>
-                <span>Enhanced Output</span>
-              </div>
+            <div className="stat-divider"></div>
+            <div className="stat-card">
+              <div className="stat-number">Free</div>
+              <div className="stat-label">Basic plan</div>
             </div>
           </div>
         </div>
@@ -326,9 +185,9 @@ const PixelPerfect: React.FC = () => {
       >
         <div className="container">
           <div className="section-header">
-            <h2 className="section-title animated-gradient-text">Powerful Features</h2>
-            <p className="section-subtitle">
-              Every tool designed to enhance your creative workflow and deliver professional results
+            <h2 className="section-title">Features</h2>
+            <p className="section-description">
+              Professional-grade tools that deliver precise results every time.
             </p>
           </div>
 
@@ -336,50 +195,58 @@ const PixelPerfect: React.FC = () => {
             {features.map((feature, index) => (
               <motion.div
                 key={index}
-                className="feature-card glass glass-hover"
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
+                className="feature-card"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
-                <div className="feature-header">
-                  <div className="feature-icon">
-                    {feature.icon}
-                  </div>
-                  <h3>{feature.title}</h3>
+                <div className="feature-accent"></div>
+                <div className="feature-icon">
+                  {feature.icon}
                 </div>
+                <h3 className="feature-title">{feature.title}</h3>
                 <p className="feature-description">{feature.description}</p>
-                <ul className="feature-benefits">
-                  {feature.benefits.map((benefit, benefitIndex) => (
-                    <li key={benefitIndex}>{benefit}</li>
-                  ))}
-                </ul>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* Status Section */}
       <section 
-        id="cta" 
-        className="section cta-section" 
+        id="status" 
+        className="section status-section" 
         ref={addToRefs}
       >
         <div className="container">
-          <motion.div 
-            className="cta-content glass"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="cta-title animated-gradient-text-fast">Ready to Transform Your Images?</h2>
-            <p className="cta-description">
-              Join the beta and experience the future of AI-powered image editing. 
-              Get early access to cutting-edge features and help shape the product.
+          <div className="status-content">
+            <h2 className="section-title">Development Status</h2>
+            <p className="status-description">
+              All core services are implemented and currently being deployed. 
+              API access and public release coming soon.
             </p>
-            <div className="cta-actions">
+            
+            <div className="status-grid">
+              <div className="status-item">
+                <div className="status-indicator complete"></div>
+                <span>All 5 core services implemented</span>
+              </div>
+              <div className="status-item">
+                <div className="status-indicator in-progress"></div>
+                <span>Currently deploying services</span>
+              </div>
+              <div className="status-item">
+                <div className="status-indicator planned"></div>
+                <span>API and batch processing (Next)</span>
+              </div>
+              <div className="status-item">
+                <div className="status-indicator planned"></div>
+                <span>Public release (Coming soon)</span>
+              </div>
+            </div>
+
+            <div className="try-now">
               <Button
                 variant="primary"
                 size="lg"
@@ -387,17 +254,10 @@ const PixelPerfect: React.FC = () => {
                 iconPosition="right"
                 onClick={() => window.open('https://pixelperfect.zonda.one', '_blank')}
               >
-                Start Free Beta
-              </Button>
-              <Button
-                variant="ghost"
-                size="lg"
-                onClick={() => scrollToSection('contact')}
-              >
-                Contact Sales
+                Try Beta Access
               </Button>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
