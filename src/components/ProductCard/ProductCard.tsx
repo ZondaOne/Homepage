@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import Button from '../Button/Button';
 import './ProductCard.css';
 
 interface ProductCardProps {
@@ -46,6 +47,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
     >
+      <div className="product-card-accent" style={{ background: gradient }}></div>
       <div className="product-card-visual">
         <div className="product-visual-icon">
           {icon}
@@ -59,14 +61,20 @@ const ProductCard: React.FC<ProductCardProps> = ({
         </div>
 
         {onLearnMore && !isComingSoon && (
-          <button className="product-learn-more" onClick={onLearnMore}>
+          <Button 
+            variant="primary" 
+            size="md"
+            icon={ArrowRight}
+            iconPosition="right"
+            onClick={onLearnMore}
+            className="product-learn-more-btn"
+          >
             Learn more
-            <ArrowRight />
-          </button>
+          </Button>
         )}
         
         {isComingSoon && (
-          <div className="product-learn-more">
+          <div className="product-learn-more coming-soon-text">
             Coming Soon
           </div>
         )}

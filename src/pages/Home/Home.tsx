@@ -121,15 +121,6 @@ const Home: React.FC = () => {
               icon={<Shield size={64} />}
               onLearnMore={() => navigate('/products/comchat')}
             />
-
-            <ProductCard
-              title="Distant"
-              subtitle="The future of remote collaboration"
-              gradient="linear-gradient(135deg, #333, #555)"
-              icon={<Globe size={64} />}
-              isComingSoon={true}
-              onLearnMore={() => {}}
-            />
           </div>
         </div>
       </section>
