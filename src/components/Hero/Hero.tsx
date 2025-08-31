@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import GlitchLogo from '../GlitchLogo/GlitchLogo';
@@ -6,6 +6,26 @@ import Button from '../Button/Button';
 import './Hero.css';
 
 const Hero: React.FC = () => {
+  const [logoSize, setLogoSize] = useState(450);
+
+  useEffect(() => {
+    const updateLogoSize = () => {
+      const width = window.innerWidth;
+      if (width < 480) {
+        setLogoSize(Math.min(250, width * 0.65));
+      } else if (width < 768) {
+        setLogoSize(Math.min(300, width * 0.7));
+      } else if (width < 1024) {
+        setLogoSize(350);
+      } else {
+        setLogoSize(450);
+      }
+    };
+
+    updateLogoSize();
+    window.addEventListener('resize', updateLogoSize);
+    return () => window.removeEventListener('resize', updateLogoSize);
+  }, []);
   const titleVariants = {
     hidden: { 
       opacity: 0, 
@@ -65,7 +85,7 @@ const Hero: React.FC = () => {
       <div className="hero-container">
         <div className="hero-content">
           <div className="hero-logo-section">
-            <GlitchLogo size={450} />
+            <GlitchLogo size={logoSize} />
             <motion.h1 
               className="hero-title"
               variants={titleVariants}

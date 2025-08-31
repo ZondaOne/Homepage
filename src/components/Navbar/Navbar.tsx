@@ -1,12 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import Button from '../Button/Button';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Menu, X } from 'lucide-react';
 import './Navbar.css';
 
 const Navbar: React.FC = () => {
   const navRef = useRef<HTMLElement>(null);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -20,6 +21,8 @@ const Navbar: React.FC = () => {
   }, []);
 
   const navigateToSection = (sectionId: string) => {
+    setIsMobileMenuOpen(false); // Close mobile menu when navigating
+    
     if (location.pathname === '/') {
       // If we're on the home page, scroll to section
       const element = document.getElementById(sectionId);
@@ -50,6 +53,25 @@ const Navbar: React.FC = () => {
     }
   };
 
+  const mobileMenuVariants = {
+    closed: {
+      opacity: 0,
+      height: 0,
+      transition: {
+        duration: 0.3,
+        ease: [0.4, 0, 0.2, 1] as const
+      }
+    },
+    open: {
+      opacity: 1,
+      height: "auto" as const,
+      transition: {
+        duration: 0.3,
+        ease: [0.4, 0, 0.2, 1] as const
+      }
+    }
+  };
+
   return (
     <motion.nav 
       className={`navbar ${isScrolled ? 'navbar-scrolled' : ''}`} 
@@ -59,6 +81,12 @@ const Navbar: React.FC = () => {
       animate="visible"
     >
       <div className="navbar-container">
+        {/* Mobile Logo (only visible on mobile) */}
+        <button onClick={() => navigateToSection('home')} className="navbar-logo mobile-only">
+          <span className="logo-text">ZONDA</span>
+        </button>
+
+        {/* Desktop Menu */}
         <div className="navbar-menu">
           <button onClick={() => navigateToSection('home')} className="navbar-link">
             Home
@@ -74,9 +102,43 @@ const Navbar: React.FC = () => {
           </button>
         </div>
 
-        <div className="navbar-cta">
-        </div>
+        {/* Mobile Menu Button */}
+        <button 
+          className="mobile-menu-toggle"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label="Toggle mobile menu"
+        >
+          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
       </div>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            className="mobile-menu"
+            variants={mobileMenuVariants}
+            initial="closed"
+            animate="open"
+            exit="closed"
+          >
+            <div className="mobile-menu-content">
+              <button onClick={() => navigateToSection('home')} className="mobile-menu-link">
+                Home
+              </button>
+              <button onClick={() => navigateToSection('products')} className="mobile-menu-link">
+                Products
+              </button>
+              <button onClick={() => navigateToSection('about')} className="mobile-menu-link">
+                About
+              </button>
+              <button onClick={() => navigateToSection('contact')} className="mobile-menu-link">
+                Contact
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.nav>
   );
 };
