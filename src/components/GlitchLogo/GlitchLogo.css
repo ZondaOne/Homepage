@@ -3,9 +3,9 @@
   display: inline-block;
   cursor: pointer;
   overflow: visible;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-/* Liquid Metal Container */
 .liquid-container {
   position: absolute;
   top: 0;
@@ -17,93 +17,11 @@
   overflow: visible;
 }
 
-/* Liquid Metal Particles */
-.liquid-particle {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(8px);
-  mix-blend-mode: screen;
-  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  will-change: transform, opacity;
-}
-
-.particle-primary {
-  width: 40px;
-  height: 40px;
-  background: radial-gradient(
-    circle,
-    var(--accent-primary) 0%,
-    transparent 70%
-  );
-  top: 30%;
-  left: 20%;
-}
-
-.particle-secondary {
-  width: 30px;
-  height: 30px;
-  background: radial-gradient(
-    circle,
-    var(--accent-secondary) 0%,
-    transparent 70%
-  );
-  top: 60%;
-  left: 70%;
-}
-
-.particle-accent {
-  width: 25px;
-  height: 25px;
-  background: radial-gradient(
-    circle,
-    var(--accent-orange) 0%,
-    transparent 70%
-  );
-  top: 80%;
-  left: 40%;
-}
-
-.particle-pink {
-  width: 35px;
-  height: 35px;
-  background: radial-gradient(
-    circle,
-    var(--accent-pink) 0%,
-    transparent 70%
-  );
-  top: 20%;
-  left: 80%;
-}
-
-.particle-extra-1 {
-  width: 20px;
-  height: 20px;
-  background: radial-gradient(
-    circle,
-    var(--accent-primary) 0%,
-    transparent 80%
-  );
-  top: 45%;
-  left: 15%;
-}
-
-.particle-extra-2 {
-  width: 28px;
-  height: 28px;
-  background: radial-gradient(
-    circle,
-    var(--accent-secondary) 0%,
-    transparent 75%
-  );
-  top: 70%;
-  left: 25%;
-}
-
-/* Individual Logo Pieces */
 .logo-piece {
   transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.05));
   animation-fill-mode: both;
+  fill: white;
 }
 
 .logo-piece.piece-1 {
@@ -129,7 +47,6 @@
   transform-origin: center;
 }
 
-/* Logo Split Layers for RGB Effect */
 .logo-split-layer {
   position: absolute;
   top: 0;
@@ -150,7 +67,6 @@
   opacity: 1;
 }
 
-/* RGB Split Layers */
 .split-layer {
   position: absolute;
   top: 0;
@@ -178,7 +94,6 @@
   z-index: 1;
 }
 
-/* Logo Pieces Container */
 .logo-pieces {
   position: relative;
   z-index: 5;
@@ -189,7 +104,6 @@
   transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-/* Hover Effects - Simplified */
 .glitch-logo:hover .main-logo-svg {
   transform: scale(1.1);
   filter: drop-shadow(0 0 25px rgba(255, 255, 255, 0.4));
@@ -200,7 +114,6 @@
   filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
 }
 
-/* Individual Piece Separation on Hover */
 .glitch-logo:hover .logo-piece.piece-1 {
   transform: translate(-3px, -3px) rotate(2deg) !important;
   animation-play-state: paused;
@@ -221,13 +134,34 @@
   animation-play-state: paused;
 }
 
-.glitch-logo:hover .liquid-particle {
-  filter: blur(6px);
-  opacity: 0.8;
-  transform: scale(1.2);
+.glitch-logo::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  border-radius: 8px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: -1;
 }
 
-/* Keyframe Animations */
+
+
+@keyframes borderGlow {
+  0% {
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+  }
+  100% {
+    box-shadow: 
+      0 0 10px rgba(255, 255, 255, 0.4),
+      0 0 20px rgba(255, 255, 255, 0.2),
+      0 0 30px rgba(255, 255, 255, 0.1);
+  }
+}
 
 @keyframes subtleFloat1 {
   0%, 100% {
@@ -283,7 +217,6 @@
   }
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
   .liquid-container {
     width: 120%;
@@ -318,7 +251,6 @@
   }
 }
 
-/* Clean and Modern Aesthetic */
 .glitch-logo * {
   will-change: transform, opacity;
 }
@@ -328,7 +260,6 @@
   vector-effect: non-scaling-stroke;
 }
 
-/* Performance Optimizations */
 .liquid-stream,
 .split-layer {
   backface-visibility: hidden;

@@ -1,153 +1,95 @@
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { ArrowRight, Sparkles } from 'lucide-react';
-import GlitchLogo from '../GlitchLogo/GlitchLogo';
-import Button from '../Button/Button';
-import './Hero.css';
+import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import Wave from "../HeroWave/HeroWave";
+import "./Hero.css";
 
 const Hero: React.FC = () => {
-  const [logoSize, setLogoSize] = useState(450);
+  const words = ["revolution", "evolution", "transformation", "innovation", "future"];
+  const [index, setIndex] = useState(0);
 
   useEffect(() => {
-    const updateLogoSize = () => {
-      const width = window.innerWidth;
-      if (width < 480) {
-        setLogoSize(Math.min(250, width * 0.65));
-      } else if (width < 768) {
-        setLogoSize(Math.min(300, width * 0.7));
-      } else if (width < 1024) {
-        setLogoSize(350);
-      } else {
-        setLogoSize(450);
-      }
-    };
-
-    updateLogoSize();
-    window.addEventListener('resize', updateLogoSize);
-    return () => window.removeEventListener('resize', updateLogoSize);
+    const interval = setInterval(() => {
+      setIndex((prev) => (prev + 1) % words.length);
+    }, 2000); // cambia cada 2 segundos
+    return () => clearInterval(interval);
   }, []);
-  const titleVariants = {
-    hidden: { 
-      opacity: 0, 
-      y: 50,
-      scale: 0.8
-    },
+
+  const mainTextVariants = {
+    hidden: { opacity: 0, y: 40 },
     visible: {
       opacity: 1,
       y: 0,
+      transition: { delay: 0.4, duration: 0.8, type: "spring" as const, stiffness: 100 },
+    },
+  };
+
+  const subTextVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { delay: 1.0, duration: 0.7 },
+    },
+  };
+
+  // 🔧 Fix: no animamos `y` para evitar conflicto con transform del layout
+  const ctaVariants = {
+    hidden: { opacity: 0, scale: 0.98 },
+    visible: {
+      opacity: 1,
       scale: 1,
-      transition: {
-        delay: 0.8,
-        duration: 0.8,
-        type: "spring" as const,
-        stiffness: 100
-      }
-    }
-  };
-
-  const subtitleVariants = {
-    hidden: { 
-      opacity: 0, 
-      y: 30 
+      transition: { delay: 1.2, duration: 0.5 },
     },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        delay: 1.2,
-        duration: 0.6
-      }
-    }
-  };
-
-  const buttonVariants = {
-    hidden: { 
-      opacity: 0, 
-      y: 20 
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        delay: 1.6,
-        duration: 0.5
-      }
-    }
   };
 
   return (
     <div className="hero">
-      <div className="hero-blob"></div>
-      <div className="hero-blob"></div>
-      <div className="hero-blob"></div>
-      <div className="hero-blob"></div>
-      
+      <Wave />
+
+      {/* Texto a la izquierda (centrado vertical por el flex del contenedor .hero) */}
       <div className="hero-container">
-        <div className="hero-content">
-          <div className="hero-logo-section">
-            <GlitchLogo size={logoSize} />
-            <motion.h1 
-              className="hero-title"
-              variants={titleVariants}
-              initial="hidden"
-              animate="visible"
-            >
-              ZONDA
-            </motion.h1>
-            <motion.p 
-              className="hero-tagline"
-              variants={subtitleVariants}
-              initial="hidden"
-              animate="visible"
-            >
-              Code. Solve. Deliver.
-            </motion.p>
-          </div>
-
-          <motion.div 
-            className="hero-cta"
-            variants={buttonVariants}
-            initial="hidden"
-            animate="visible"
-          >
-            <Button 
-              variant="primary" 
-              size="lg" 
-              icon={Sparkles} 
-              iconPosition="left"
-              onClick={() => {
-                const element = document.getElementById('about');
-                if (element) element.scrollIntoView({ behavior: 'smooth' });
-              }}
-            >
-              Learn More
-            </Button>
-            
-            <Button 
-              variant="ghost" 
-              size="lg" 
-              icon={ArrowRight} 
-              iconPosition="right"
-              onClick={() => {
-                const element = document.getElementById('products');
-                if (element) element.scrollIntoView({ behavior: 'smooth' });
-              }}
-            >
-              View Products
-            </Button>
-          </motion.div>
-        </div>
-
-        {/* <motion.div 
-          className="scroll-indicator"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 2, duration: 0.5 }}
+        <motion.h1
+          className="hero-main-title"
+          variants={mainTextVariants}
+          initial="hidden"
+          animate="visible"
         >
-          <div className="scroll-line"></div>
-          <span className="scroll-text">Explore</span>
-        </motion.div> */}
+          The <span className="keyword">visual</span> and{" "}
+          <span className="keyword">digital</span>{" "}
+          <motion.span
+            key={index}
+            className="keyword"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.5 }}
+          >
+            {words[index]}
+          </motion.span>{" "}
+          your brand <span className="keyword">deserves</span>
+        </motion.h1>
+
+        <motion.p
+          className="hero-subtitle"
+          variants={subTextVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          We craft <span className="keyword">impactful</span> experiences through{" "}
+          <span className="keyword">design</span> and{" "}
+          <span className="keyword">technology</span>.
+        </motion.p>
       </div>
+
+      {/* CTA a la derecha (centrado vertical por el flex del contenedor .hero) */}
+      <motion.div
+        className="hero-cta"
+        variants={ctaVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        <button>Learn More</button>
+      </motion.div>
     </div>
   );
 };

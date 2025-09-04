@@ -8,8 +8,8 @@
     --text-primary: #1d1d1f;
     --text-secondary: #6e6e73;
     --text-muted: #86868b;
-    --accent-primary: #FF914D;
-    --accent-secondary: #FF3131;
+    --accent-primary: #000000;
+    --accent-secondary: #000000;
     --accent-cyan: #007AFF;
     --accent-pink: #FF2D92;
     --accent-orange: #FF914D;
@@ -69,7 +69,7 @@
     --accent-secondary: #FF3131;
     --accent-cyan: #06b6d4;
     --accent-pink: #ec4899;
-    --accent-orange: #FF914D;
+    --accent-orange: #000000;
     --accent-glow: rgba(255, 107, 53, 0.3);
     --border-glass: rgba(255, 255, 255, 0.08);
     --border-subtle: rgba(255, 255, 255, 0.05);
@@ -95,11 +95,11 @@
     --text-primary: #1a1a1a;
     --text-secondary: #4a5568;
     --text-muted: #718096;
-    --accent-primary: #FF914D;
+    --accent-primary: #040404;
     --accent-secondary: #FF3131;
     --accent-cyan: #0891b2;
     --accent-pink: #be185d;
-    --accent-orange: #FF914D;
+    --accent-orange: #000000;
     --accent-glow: rgba(255, 107, 53, 0.2);
     --border-glass: rgba(255, 107, 53, 0.08);
     --border-subtle: rgba(0, 0, 0, 0.08);

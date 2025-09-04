@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
+import GlitchLogo from '../GlitchLogo/GlitchLogo';
 import './Navbar.css';
 
 const Navbar: React.FC = () => {
@@ -12,64 +13,33 @@ const Navbar: React.FC = () => {
   const location = useLocation();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const navigateToSection = (sectionId: string) => {
-    setIsMobileMenuOpen(false); // Close mobile menu when navigating
-    
+    setIsMobileMenuOpen(false);
     if (location.pathname === '/') {
-      // If we're on the home page, scroll to section
       const element = document.getElementById(sectionId);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
+      if (element) element.scrollIntoView({ behavior: 'smooth' });
     } else {
-      // If we're on another page, navigate to home with hash
       navigate(`/#${sectionId}`);
-      // Small delay to ensure navigation completes before scrolling
       setTimeout(() => {
         const element = document.getElementById(sectionId);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }
+        if (element) element.scrollIntoView({ behavior: 'smooth' });
       }, 100);
     }
   };
 
   const navVariants = {
     hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        duration: 0.8,
-        delay: 0.2
-      }
-    }
+    visible: { opacity: 1, transition: { duration: 0.8, delay: 0.2 } }
   };
 
   const mobileMenuVariants = {
-    closed: {
-      opacity: 0,
-      height: 0,
-      transition: {
-        duration: 0.3,
-        ease: [0.4, 0, 0.2, 1] as const
-      }
-    },
-    open: {
-      opacity: 1,
-      height: "auto" as const,
-      transition: {
-        duration: 0.3,
-        ease: [0.4, 0, 0.2, 1] as const
-      }
-    }
+    closed: { opacity: 0, height: 0, transition: { duration: 0.3, ease: [0.4, 0, 0.2, 1] as const } },
+    open: { opacity: 1, height: "auto" as const, transition: { duration: 0.3, ease: [0.4, 0, 0.2, 1] as const } }
   };
 
   return (
@@ -80,26 +50,23 @@ const Navbar: React.FC = () => {
       initial="hidden"
       animate="visible"
     >
-      <div className="navbar-container">
-        {/* Mobile Logo (only visible on mobile) */}
-        <button onClick={() => navigateToSection('home')} className="navbar-logo mobile-only">
+      {/* Logo + ZONDA pegado a la izquierda */}
+      <div className="navbar-left">
+        <button onClick={() => navigateToSection('home')} className="navbar-logo">
+          <div className="navbar-logo-wrapper">
+            <GlitchLogo />
+          </div>
           <span className="logo-text">ZONDA</span>
         </button>
+      </div>
 
-        {/* Desktop Menu */}
+      {/* Contenedor principal del menú centrado */}
+      <div className="navbar-container">
         <div className="navbar-menu">
-          <button onClick={() => navigateToSection('home')} className="navbar-link">
-            Home
-          </button>
-          <button onClick={() => navigateToSection('products')} className="navbar-link">
-            Products
-          </button>
-          <button onClick={() => navigateToSection('about')} className="navbar-link">
-            About
-          </button>
-          <button onClick={() => navigateToSection('contact')} className="navbar-link">
-            Contact
-          </button>
+          <button onClick={() => navigateToSection('home')} className="navbar-link">Home</button>
+          <button onClick={() => navigateToSection('products')} className="navbar-link">Products</button>
+          <button onClick={() => navigateToSection('about')} className="navbar-link">About</button>
+          <button onClick={() => navigateToSection('contact')} className="navbar-link">Contact</button>
         </div>
 
         {/* Mobile Menu Button */}
@@ -123,18 +90,10 @@ const Navbar: React.FC = () => {
             exit="closed"
           >
             <div className="mobile-menu-content">
-              <button onClick={() => navigateToSection('home')} className="mobile-menu-link">
-                Home
-              </button>
-              <button onClick={() => navigateToSection('products')} className="mobile-menu-link">
-                Products
-              </button>
-              <button onClick={() => navigateToSection('about')} className="mobile-menu-link">
-                About
-              </button>
-              <button onClick={() => navigateToSection('contact')} className="mobile-menu-link">
-                Contact
-              </button>
+              <button onClick={() => navigateToSection('home')} className="mobile-menu-link">Home</button>
+              <button onClick={() => navigateToSection('products')} className="mobile-menu-link">Products</button>
+              <button onClick={() => navigateToSection('about')} className="mobile-menu-link">About</button>
+              <button onClick={() => navigateToSection('contact')} className="mobile-menu-link">Contact</button>
             </div>
           </motion.div>
         )}
