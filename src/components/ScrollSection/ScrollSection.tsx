@@ -1,51 +1,44 @@
 import React, { useEffect, useState } from 'react';
 import './ScrollSection.css';
 
-interface Review {
+interface Pillar {
   id: number;
-  name: string;
-  company: string;
-  rating: number;
+  title: string;
   text: string;
-  avatar: string;
 }
 
 const ScrollSection: React.FC = () => {
-  const [visibleReviews, setVisibleReviews] = useState<Set<number>>(new Set());
+  const [visiblePillars, setVisiblePillars] = useState<Set<number>>(new Set());
   const [titleInView, setTitleInView] = useState(false);
 
-  const reviews: Review[] = [
+  const pillars: Pillar[] = [
     {
       id: 1,
-      name: "María García",
-      company: "Tech Solutions",
-      rating: 5,
-      text: "Incredible service and attention to detail. They transformed our vision into reality with exceptional professionalism.",
-      avatar: "MG"
+      title: "Innovation",
+      text: "At Zonda, we merge creativity and technology to craft next-generation solutions that shape the future.",
     },
     {
       id: 2,
-      name: "Carlos Rodríguez",
-      company: "Innovation Labs",
-      rating: 5,
-      text: "Outstanding quality and creativity. The team exceeded our expectations in every aspect of the project.",
-      avatar: "CR"
+      title: "Scalability",
+      text: "We design platforms engineered to evolve and grow alongside your business — without limits.",
     },
     {
       id: 3,
-      name: "Ana López",
-      company: "Digital Ventures",
-      rating: 5,
-      text: "Professional, reliable, and innovative. They delivered exactly what we needed, on time and within budget.",
-      avatar: "AL"
+      title: "Trust",
+      text: "Partnerships built on transparency and accountability. Your mission becomes our mission.",
+    },
+    {
+      id: 4,
+      title: "Impact",
+      text: "Our solutions create measurable change — empowering industries, communities, and people worldwide.",
     },
   ];
 
   useEffect(() => {
     const handleScroll = () => {
-      const reviewElements = document.querySelectorAll('.review-card');
+      const pillarElements = document.querySelectorAll('.pillar-block');
       const titleElement = document.querySelector('.main-title') as HTMLElement;
-      const newVisibleReviews = new Set<number>();
+      const newVisiblePillars = new Set<number>();
       const windowHeight = window.innerHeight;
 
       if (titleElement) {
@@ -57,14 +50,14 @@ const ScrollSection: React.FC = () => {
         }
       }
 
-      reviewElements.forEach((element, index) => {
+      pillarElements.forEach((element, index) => {
         const rect = element.getBoundingClientRect();
         if (rect.top <= windowHeight * 0.8 && rect.bottom >= windowHeight * 0.2) {
-          newVisibleReviews.add(index);
+          newVisiblePillars.add(index);
         }
       });
 
-      setVisibleReviews(newVisibleReviews);
+      setVisiblePillars(newVisiblePillars);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -76,48 +69,28 @@ const ScrollSection: React.FC = () => {
   return (
     <section className="scroll-section">
 
-      {/* Sticky background title */}
-      <div className="background-text">
-        <h1 className={`main-title ${titleInView ? 'glow' : ''}`}>
-          What Makes Us Different
-        </h1>
-      </div>
+     
 
-      {/* Contenido scrollable */}
+      {/* Scrollable content */}
       <div className="scroll-section-content">
         <div className="spacer-top"></div>
 
-        {reviews.map((review, index) => (
-          <React.Fragment key={review.id}>
-            <div
-              className={`review-wrapper ${
-                index % 3 === 0
-                  ? 'review-left'
-                  : index % 3 === 1
-                  ? 'review-right'
-                  : 'review-center'
-              }`}
-            >
-              <div className={`review-card ${visibleReviews.has(index) ? 'visible' : ''}`}>
-                <div className="review-header">
-                  <div className="avatar">{review.avatar}</div>
-                  <div className="review-info">
-                    <h3 className="reviewer-name">{review.name}</h3>
-                    <p className="reviewer-company">{review.company}</p>
-                    <div className="rating">
-                      {[...Array(5)].map((_, i) => (
-                        <span key={i} className={`star ${i < review.rating ? 'filled' : ''}`}>
-                          ★
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-                <p className="review-text">"{review.text}"</p>
-              </div>
+        {pillars.map((pillar, index) => (
+          <div
+            key={pillar.id}
+            className={`pillar-wrapper ${
+              index % 3 === 0
+                ? 'pillar-left'
+                : index % 3 === 1
+                ? 'pillar-right'
+                : 'pillar-center'
+            }`}
+          >
+            <div className={`pillar-block ${visiblePillars.has(index) ? 'visible' : ''}`}>
+              <h3 className="pillar-title">{pillar.title}</h3>
+              <p className="pillar-text">{pillar.text}</p>
             </div>
-            {index < reviews.length - 1 && <div className="spacer-between"></div>}
-          </React.Fragment>
+          </div>
         ))}
 
         <div className="spacer-bottom"></div>

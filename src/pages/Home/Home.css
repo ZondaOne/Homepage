@@ -553,3 +553,8 @@ h2.section-title::after {
   outline: 2px solid #007AFF;
   outline-offset: 2px;
 }
+
+section:not(.hero) canvas {
+  width: 100vw;
+  margin: 0;
+}

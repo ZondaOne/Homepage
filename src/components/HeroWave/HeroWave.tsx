@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 
-const HeroWave: React.FC = () => {
+const PremiumEnterpriseHero: React.FC = () => {
   const mountRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -10,162 +10,214 @@ const HeroWave: React.FC = () => {
     const width = mountRef.current.clientWidth;
     const height = mountRef.current.clientHeight;
 
-    // Configuración inicial responsive
-    const isMobile = width < 768;
-    const initialDotSize = isMobile ? 6.0 : 8.0;
+    // Scene setup with optimized settings
     const scene = new THREE.Scene();
     const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
 
     const renderer = new THREE.WebGLRenderer({ 
       antialias: true, 
-      alpha: true,
-      powerPreference: "high-performance" // Mejor rendimiento en móvil
+      alpha: false,
+      powerPreference: "high-performance",
+      precision: "highp"
     });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Limitar pixelRatio en móvil
-    renderer.setSize(width, height);
+    
+    // Responsive pixel ratio optimization
+    const pixelRatio = Math.min(window.devicePixelRatio, 2);
+    renderer.setPixelRatio(pixelRatio);
+    renderer.setSize(window.innerWidth, window.innerHeight);
     mountRef.current.appendChild(renderer.domElement);
 
     const geometry = new THREE.PlaneGeometry(2, 2);
 
     const material = new THREE.ShaderMaterial({
-      uniforms: {
-        u_time: { value: 0 },
-        u_resolution: { value: new THREE.Vector2(width, height) },
-        u_dotSize: { value: initialDotSize },
-        u_bgColor: { value: new THREE.Color(0x000000) }, // Negro
-        u_dotColor: { value: new THREE.Color(0xff6600) }, // Naranja
-        u_opacity: { value: 1.0 }, // Opacidad aumentada
-        u_contrast: { value: 1.2 }, // Contraste aumentado
-        u_glitch: { value: 0.5 }, // Efecto glitch
-        u_pulse: { value: 3.0 }, // Efecto pulso
-        u_twist: { value: 1.9 }, // Efecto twist/rotación
-      },
-      vertexShader: `
-        varying vec2 vUv;
-        void main() {
-          vUv = uv;
-          gl_Position = vec4(position, 1.0);
-        }
-      `,
-      fragmentShader: `
-        precision highp float;
-        uniform float u_time;
-        uniform vec2 u_resolution;
-        uniform float u_dotSize;
-        uniform vec3 u_bgColor;
-        uniform vec3 u_dotColor;
-        uniform float u_opacity;
-        uniform float u_contrast;
-        uniform float u_glitch;
-        uniform float u_pulse;
-        uniform float u_twist;
-        varying vec2 vUv;
+  uniforms: {
+    u_time: { value: 0 },
+    u_resolution: { value: new THREE.Vector2(width, height) },
+    u_pixelRatio: { value: pixelRatio },
+    // Premium brand color palette
+    u_brandOrange:   { value: new THREE.Color(0xff5500) }, // Main brand orange
+    u_lightOrange:   { value: new THREE.Color(0xff8533) }, // Lighter orange
+    u_warmOrange:    { value: new THREE.Color(0xff751a) },
+    u_goldAccent:    { value: new THREE.Color(0xff9900) }, // Strong golden accent
+    u_neutralWarm:   { value: new THREE.Color(0xffe0b3) }, // Warm neutral (más dorado, menos pastel)
+    u_backgroundBase:{ value: new THREE.Color(0xfafafa) }, // Clean base
+    u_backgroundTop: { value: new THREE.Color(0xffffff) }, // Pure white top
 
-        float wave(vec2 uv, float freq, float speed, float amplitude, float phase, float yOffset){
-          return sin(uv.x * freq + u_time * speed + phase) * amplitude + yOffset;
-        }
+    // Animation controls (intensidades subidas)
+    u_waveIntensity:   { value: 20.0 }, // MUY fuerte
+    u_waveSpeed:       { value: 0.2 },   // más rápida
+    u_gradientStrength:{ value: 0.2}    // gradiente más marcado
+  },
+  vertexShader: `
+    varying vec2 vUv;
+    void main() {
+      vUv = uv;
+      gl_Position = vec4(position, 1.0);
+    }
+  `,
+  fragmentShader: `
+    precision highp float;
+    
+    uniform float u_time;
+    uniform vec2 u_resolution;
+    uniform float u_pixelRatio;
+    uniform vec3 u_brandOrange;
+    uniform vec3 u_lightOrange;
+    uniform vec3 u_warmOrange;
+    uniform vec3 u_goldAccent;
+    uniform vec3 u_neutralWarm;
+    uniform vec3 u_backgroundBase;
+    uniform vec3 u_backgroundTop;
+    uniform float u_waveIntensity;
+    uniform float u_waveSpeed;
+    uniform float u_gradientStrength;
+    varying vec2 vUv;
 
-        float glow(float dist, float intensity) {
-          return exp(-dist*dist*intensity);
-        }
+    // Smooth noise functions for premium texture
+    float hash(vec2 p) {
+      return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
+    }
 
-        float halftone(vec2 uv, float intensity) {
-          // Crear grid de puntos con efecto twist (más lento)
-          float angle = length(uv - vec2(0.5)) * u_twist + u_time * 0.3;
-          vec2 rotUV = vec2(
-            cos(angle) * (uv.x - 0.5) - sin(angle) * (uv.y - 0.5) + 0.5,
-            sin(angle) * (uv.x - 0.5) + cos(angle) * (uv.y - 0.5) + 0.5
-          );
-          
-          vec2 gridUV = rotUV * u_resolution / u_dotSize;
-          vec2 gridPos = fract(gridUV);
-          
-          // Efecto glitch random (más lento)
-          float glitchNoise = sin(gridUV.x * 127.1 + gridUV.y * 311.7 + u_time * 6.0) * 0.5 + 0.5;
-          float glitchEffect = step(0.95, glitchNoise) * u_glitch;
-          gridPos += vec2(glitchEffect * 0.3);
-          
-          // Distancia desde el centro del punto
-          float dist = distance(fract(gridPos), vec2(0.5));
-          
-          // Tamaño del punto con pulso (más lento)
-          float pulse = sin(u_time * 2.0) * 0.1 + 1.0;
-          float dotRadius = intensity * 0.45 * pulse * u_pulse;
-          
-          // Crear el punto con anti-aliasing
-          return 1.0 - smoothstep(dotRadius - 0.02, dotRadius + 0.02, dist);
-        }
+    float smoothNoise(vec2 p) {
+      vec2 i = floor(p);
+      vec2 f = fract(p);
+      f = f * f * (3.0 - 2.0 * f);
+      
+      float a = hash(i);
+      float b = hash(i + vec2(1.0, 0.0));
+      float c = hash(i + vec2(0.0, 1.0));
+      float d = hash(i + vec2(1.0, 1.0));
+      
+      return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);
+    }
 
-        void main() {
-          vec2 uv = vUv;
-          uv = uv * 2.0 - 1.0;
-          uv.x *= u_resolution.x / u_resolution.y;
+    // Multi-octave noise for sophisticated texture
+    float fbm(vec2 p, int octaves) {
+      float value = 0.0;
+      float amplitude = 0.5;
+      float frequency = 1.0;
+      
+      for(int i = 0; i < 6; i++) {
+        if(i >= octaves) break;
+        value += amplitude * smoothNoise(p * frequency);
+        frequency *= 2.0;
+        amplitude *= 0.5;
+      }
+      return value;
+    }
 
-          // Efecto de distorsión temporal (más lento)
-          float timeWarp = sin(u_time * 1.2) * 0.1;
-          uv *= 1.0 + timeWarp;
+    // Premium wave function with multiple harmonics
+    float premiumWave(vec2 uv, float time) {
+      vec2 pos = uv * 2.0 - 1.0;
+      pos.x *= u_resolution.x / u_resolution.y;
+      
+      float wave1 = sin(pos.x * 1.5 + time * u_waveSpeed * 0.8) * 0.9; // antes 0.3
+      float wave2 = sin(pos.x * 2.2 - time * u_waveSpeed * 0.6) * 0.7;
+      float wave3 = sin(pos.x * 0.8 + pos.y * 0.3 + time * u_waveSpeed * 0.4) * 0.3; // antes 0.15
+      
+      float harmonic1 = sin(pos.x * 4.1 + time * u_waveSpeed * 1.2) * 0.08;
+      float harmonic2 = sin(pos.x * 6.3 - time * u_waveSpeed * 0.9) * 0.05;
+      
+      return (wave1 + wave2 + wave3 + harmonic1 + harmonic2) * u_waveIntensity;
+    }
 
-          float intensity = 0.0;
+    // Enterprise-grade gradient background
+    vec3 createEnterpriseGradient(vec2 uv) {
+      vec3 topColor = u_backgroundTop;
+      vec3 midColor = mix(u_backgroundBase, u_neutralWarm, 0.3);
+      vec3 bottomColor = u_backgroundBase;
+      
+      float gradientY = smoothstep(0.0, 1.0, uv.y);
+      gradientY = gradientY * gradientY * (3.0 - 2.0 * gradientY);
+      
+      vec3 gradient;
+      if(gradientY < 0.5) {
+        gradient = mix(bottomColor, midColor, gradientY * 2.0);
+      } else {
+        gradient = mix(midColor, topColor, (gradientY - 0.5) * 2.0);
+      }
+      
+      float horizontalVar = sin(uv.x * 3.14159) * 0.02;
+      gradient = mix(gradient, u_neutralWarm, horizontalVar);
+      
+      return gradient;
+    }
 
-          // Ondas con más caos y variación (velocidades reducidas)
-          float w1 = wave(uv, 3.0 + sin(u_time * 0.3) * 0.5, 0.3, 0.25, 0.0, 0.5);
-          float w2 = wave(uv, 2.5 + cos(u_time * 0.4) * 0.3, 0.35, 0.2, 1.0, -0.4);
-          float w3 = wave(uv, 4.0 + sin(u_time * 0.2) * 0.7, 0.25, 0.15, 2.0, 0.2);
-          float w4 = wave(uv, 3.5 + cos(u_time * 0.5) * 0.4, 0.28, 0.18, 3.0, -0.2);
-          
-          // Ondas adicionales para más locura (más lentas)
-          float w5 = wave(uv, 6.0 + sin(u_time * 0.7) * 0.8, 0.4, 0.1, 4.0, 0.1);
-          float w6 = wave(uv, 1.5 + cos(u_time * 0.35) * 0.2, 0.2, 0.3, 5.0, -0.3);
+    // Professional wave rendering with advanced blending
+    vec3 renderPremiumWaves(vec2 uv, vec3 background) {
+      float time = u_time;
+      vec2 pos = uv * 2.0 - 1.0;
+      pos.x *= u_resolution.x / u_resolution.y;
+      
+      float totalIntensity = 0.0;
+      vec3 waveColor = vec3(0.0);
+      
+      for(int i = 0; i < 4; i++) {
+        float layerOffset = float(i) * 0.5;
+        float frequency = 1.2 + float(i) * 0.4;
+        float amplitude = 0.25 - float(i) * 0.04;
+        float speed = u_waveSpeed * (1.0 + float(i) * 0.2);
+        
+        float wave = sin(pos.x * frequency + time * speed + layerOffset) * amplitude;
+        wave += sin(pos.x * frequency * 1.6 - time * speed * 0.8 + layerOffset) * amplitude * 0.6;
+        
+        float dist = abs(pos.y - wave);
+        float intensity = exp(-dist * (15.0 + float(i) * 5.0)) * (1.0 - float(i) * 0.15);
+        
+        totalIntensity += intensity;
+        
+        vec3 layerColor;
+        if(i == 0) layerColor = u_brandOrange;
+        else if(i == 1) layerColor = u_lightOrange;
+        else if(i == 2) layerColor = u_warmOrange;
+        else layerColor = u_goldAccent;
+        
+        waveColor += layerColor * intensity;
+      }
+      
+      float edgeFade = smoothstep(-1.4, 1.2, pos.x) * smoothstep(1.4, -1.2, pos.x);
+      totalIntensity *= edgeFade;
+      
+      float centerClear = smoothstep(0.15, 0.8, length(pos));
+      totalIntensity *= mix(0.25, 1.0, centerClear);
+      
+      return mix(background, waveColor, clamp(totalIntensity, 0.0, 0.6));
+    }
 
-          // Desvanecimiento más dinámico
-          float fade1 = smoothstep(-1.5, 1.2, uv.x) * smoothstep(1.5, -1.2, uv.x);
-          float fade2 = smoothstep(-1.4, 1.1, uv.x) * smoothstep(1.4, -1.1, uv.x);
-          float fade3 = smoothstep(-1.3, 1.3, uv.x) * smoothstep(1.3, -1.3, uv.x);
-          float fade4 = smoothstep(-1.6, 1.0, uv.x) * smoothstep(1.6, -1.0, uv.x);
+    void main() {
+      vec2 uv = vUv;
+      
+      vec3 background = createEnterpriseGradient(uv);
+      
+      float texture = fbm(uv * 12.0 + u_time * 0.02, 3) * 0.015;
+      background += vec3(texture);
+      
+      vec3 finalColor = renderPremiumWaves(uv, background);
+      
+      finalColor = pow(finalColor, vec3(0.95));
+      
+      float vignette = 1.0 - length(uv - vec2(0.5)) * 0.2;
+      vignette = smoothstep(0.6, 1.0, vignette);
+      finalColor *= vignette;
+      
+      finalColor = mix(finalColor, finalColor * vec3(1.05, 1.0, 0.95), 0.1);
+      
+      finalColor = clamp(finalColor, vec3(0.0), vec3(1.0));
+      
+      gl_FragColor = vec4(finalColor, 1.0);
+    }
+  `,
+  transparent: false,
+});
 
-          intensity += glow(abs(uv.y - w1), 200.0 + sin(u_time * 1.2) * 50.0) * fade1;
-          intensity += glow(abs(uv.y - w2), 180.0 + cos(u_time * 0.9) * 40.0) * fade2;
-          intensity += glow(abs(uv.y - w3), 150.0 + sin(u_time * 1.8) * 60.0) * fade3;
-          intensity += glow(abs(uv.y - w4), 170.0 + cos(u_time * 1.5) * 45.0) * fade4;
-          intensity += glow(abs(uv.y - w5), 300.0) * fade1 * 0.5;
-          intensity += glow(abs(uv.y - w6), 250.0) * fade2 * 0.4;
 
-          // Reducir intensidad general y crear zona central más suave
-          intensity = clamp(intensity * u_contrast, 0.0, 1.0);
-          
-          // Crear una zona central más tenue para el texto (más sutil)
-          vec2 center = vec2(0.0, 0.0);
-          float distFromCenter = length(uv - center);
-          float centerFade = smoothstep(0.2, 1.0, distFromCenter);
-          intensity *= mix(0.5, 1.0, centerFade); // Mínimo 50% en el centro
-
-          // Múltiples capas de halftone con diferentes efectos
-          float dotsOrange = halftone(vUv, intensity) * u_opacity;
-          float dotsWhite = halftone(vUv + vec2(0.3, 0.3), intensity * 0.6) * u_opacity;
-          float dotsGlow = halftone(vUv + vec2(-0.2, 0.4), intensity * 0.8) * u_opacity * 0.3;
-          
-          // Colores más dinámicos con variación temporal
-          float colorShift = sin(u_time * 1.5) * 0.1 + 1.0;
-          vec3 orange = vec3(1.0 * colorShift, 0.4, 0.0);
-          vec3 white = vec3(1.0, 1.0 * colorShift, 1.0);
-          vec3 glow = vec3(1.0, 0.8, 0.2); // Amarillo dorado
-          
-          vec3 finalColor = u_bgColor;
-          finalColor = mix(finalColor, orange, dotsOrange);
-          finalColor = mix(finalColor, white, dotsWhite * 0.4);
-          finalColor = mix(finalColor, glow, dotsGlow);
-          
-          gl_FragColor = vec4(finalColor, 1.0);
-        }
-      `,
-      transparent: false,
-    });
 
     const plane = new THREE.Mesh(geometry, material);
     scene.add(plane);
 
     const clock = new THREE.Clock();
 
+    // Optimized animation loop
     const animate = () => {
       requestAnimationFrame(animate);
       material.uniforms.u_time.value = clock.getElapsedTime();
@@ -174,29 +226,40 @@ const HeroWave: React.FC = () => {
 
     animate();
 
+    // Responsive handling with performance optimization
     const handleResize = () => {
       const w = mountRef.current?.clientWidth || width;
       const h = mountRef.current?.clientHeight || height;
-      renderer.setSize(w, h);
-      material.uniforms.u_resolution.value.set(w, h);
       
-      // Ajustar tamaño de puntos según el dispositivo
+      const newPixelRatio = Math.min(window.devicePixelRatio, 2);
+      renderer.setPixelRatio(newPixelRatio);
+      renderer.setSize(w, h);
+      
+      material.uniforms.u_resolution.value.set(w, h);
+      material.uniforms.u_pixelRatio.value = newPixelRatio;
+      
+      // Adjust wave intensity based on screen size
       const isMobile = w < 768;
-      material.uniforms.u_dotSize.value = isMobile ? 6.0 : 8.0;
+      material.uniforms.u_waveIntensity.value = isMobile ? 0.5 : 0.7;
+      material.uniforms.u_waveSpeed.value = isMobile ? 0.3 : 0.4;
     };
 
     window.addEventListener('resize', handleResize);
+    handleResize(); // Initial setup
 
     return () => {
       window.removeEventListener('resize', handleResize);
       mountRef.current?.removeChild(renderer.domElement);
+      geometry.dispose();
+      material.dispose();
+      renderer.dispose();
     };
   }, []);
 
   return (
     <div
       ref={mountRef}
-      className="hero-canvas"
+      className="premium-hero-canvas"
       style={{ 
         position: 'absolute', 
         top: 0, 
@@ -204,10 +267,10 @@ const HeroWave: React.FC = () => {
         width: '100%', 
         height: '100%', 
         zIndex: 0,
-        touchAction: 'none' // Prevenir zoom en móvil
+        touchAction: 'none'
       }}
     />
   );
 };
 
-export default HeroWave;
+export default PremiumEnterpriseHero;

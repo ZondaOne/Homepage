@@ -1,39 +1,47 @@
 /* Hero principal */
 .hero {
   position: relative;
-  background-color: #000;
   min-height: 100vh;
   font-family: 'Inter', sans-serif;
   overflow: hidden;
-  color: #fff;
+  color: #000;
 
   display: flex;
   justify-content: space-between; /* 🔹 espacio entre texto y CTA */
   align-items: center;            /* 🔹 centro vertical */
-  padding: 0 3rem;
+
+  /* 🔹 Borde finito (margen lateral) */
+  margin: 0 6px;
+  
 }
 
 /* Contenedor de texto (izquierda) */
 .hero-container {
-  max-width: 1000px;
+  width: 550px;              /* ancho fijo */
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* 🔹 alineado a la izquierda */
-  gap: 0.75rem;
+  align-items: flex-start;   /* 🔹 alinea el contenido dentro */
   z-index: 10;
-  padding: 0 2rem;
+
+  margin: 0;                
+  padding: 0 2rem;           
 }
 
+
+
+
 .hero-main-title {
-  font-size: 4rem;
+  font-size: 3.6rem;
   font-weight: 200;
   line-height: 1.2;
+  color: #000000;
 }
 
 .hero-subtitle {
   font-size: 1.25rem;
   line-height: 1.5;
   max-width: 500px;
+  color: #747373;
 }
 
 /* CTA (derecha, centrado) */
@@ -45,9 +53,9 @@
 }
 
 .hero-cta button {
-  background: rgba(255, 255, 255, 0.08); /* transparente con un toque de glass */
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.08); /* transparente oscuro para contraste */
+  color: #000;
+  border: 1px solid rgba(0, 0, 0, 0.2);
   padding: 1rem 3rem; /* grande y alargado */
   font-weight: 600;
   font-family: inherit;
@@ -57,16 +65,16 @@
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   transition: all 0.3s ease;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
   z-index: 10; /* sobre el canvas */
   margin-right: 3rem; /* más espacio a la derecha */
 }
 
 .hero-cta button:hover {
-  background: rgba(255, 255, 255, 0.12); /* solo un sutil cambio */
-  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(0, 0, 0, 0.12); /* solo un sutil cambio */
+  border-color: rgba(0, 0, 0, 0.3);
   transform: none; /* sin movimiento */
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25); /* igual que el normal */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); /* sombra más visible */
 }
 
 
